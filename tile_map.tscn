@@ -1,7 +1,7 @@
 [gd_scene load_steps=46 format=3 uid="uid://b7jnwmxqfabup"]
 
 [ext_resource type="Texture2D" uid="uid://c1bj2qll7pgq4" path="res://Assets/Sprite/Tilemap/tilemap_packed.png" id="1_t105r"]
-[ext_resource type="PackedScene" uid="uid://dqrujxar1ft6l" path="res://player_2.tscn" id="2_jvm34"]
+[ext_resource type="PackedScene" uid="uid://dqrujxar1ft6l" path="res://Player.tscn" id="2_jvm34"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_n2gua"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -838,4 +838,4 @@ layer_2/name = "Set Dressing"
 layer_2/tile_data = PackedInt32Array(393220, 0, 6, 393221, 65536, 6, 458756, 65536, 6, 393223, 393216, 7, 720908, 327680, 5, 786444, 393216, 5, 786434, 131072, 6, 786435, 65536, 6, 196620, 524288, 4, 327692, 589824, 7, 262156, 458752, 5, 327693, 524288, 6)
 
 [node name="player 2" parent="." instance=ExtResource("2_jvm34")]
-position = Vector2(171, 174)
+position = Vector2(183, 161)

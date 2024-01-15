@@ -20,7 +20,7 @@ enum {CLOCKWISE, ANTICLOCKWISE, NOT}
 @onready var particles = $Net/GPUParticles2D
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	velocity = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down") * SPEED
 	if velocity.x != 0:
 		$PlayerSprite.flip_h = velocity.x < 0
