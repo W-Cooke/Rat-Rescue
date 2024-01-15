@@ -1,9 +1,7 @@
-extends Area2D
+extends CharacterBody2D
 
-# player control variables
-@export var speed : int = 125
-var velocity = Vector2.ZERO
 
+@export var SPEED = 150.0
 signal net_spin
 
 # spinning script variables
@@ -21,11 +19,13 @@ enum {CLOCKWISE, ANTICLOCKWISE, NOT}
 @onready var netsprite = $Net/NetSprite
 @onready var particles = $Net/GPUParticles2D
 
-func handle_input(delta):
-	velocity = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	position += velocity * speed * delta
+
+func _physics_process(delta):
+	velocity = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down") * SPEED
 	if velocity.x != 0:
 		$PlayerSprite.flip_h = velocity.x < 0
+	move_and_slide()
+	controller_angle()
 
 func controller_angle():
 	var stick_rotation : Vector2 = Vector2(Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y), Input.get_joy_axis(0, JOY_AXIS_RIGHT_X))
@@ -51,10 +51,6 @@ func controller_angle():
 		angle_array.resize(1)
 		handle_bools(NOT)
 	previous_angle = current_angle
-
-func _process(delta):
-	handle_input(delta)
-	controller_angle()
 
 # function to handle spinning state of net
 func handle_bools(state):
