@@ -19,7 +19,7 @@ angle_min = -418.1
 angle_max = 412.5
 inherit_velocity_ratio = 0.308
 
-[node name="player 2" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_avsqt")
 
