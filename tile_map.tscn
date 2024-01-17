@@ -766,7 +766,7 @@ sources/0 = SubResource("TileSetAtlasSource_nbpvv")
 
 [sub_resource type="Curve2D" id="Curve2D_mis0c"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 22, 136, 0, 0, 0, 0, 22, 40, 0, 0, 0, 0, 104, 39, 0, 0, 0, 0, 105, 113)
+"points": PackedVector2Array(0, 0, 0, 0, 22, 136, 0, 0, 0, 0, 22, 40, 0, 0, 0, 0, 104, 39, 0, 0, 0, 0, 104, 87)
 }
 point_count = 4
 
