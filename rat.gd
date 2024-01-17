@@ -36,6 +36,12 @@ func follow_path(path):
 	# runaway = true
 	pass
 
+func path_progress():
+	#TODO:
+	# function for process that will update the progress ratio of the pathfollow2D
+	# hopefully...
+	pass
+
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("rat") and runaway:
 		runaway = false
