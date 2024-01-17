@@ -18,8 +18,9 @@ emission_sphere_radius = 6.37
 angle_min = -418.1
 angle_max = 412.5
 inherit_velocity_ratio = 0.308
+spread = 57.588
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 motion_mode = 1
 script = ExtResource("1_avsqt")
 

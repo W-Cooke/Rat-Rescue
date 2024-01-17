@@ -7,6 +7,7 @@
 radius = 7.0
 
 [node name="Rat" type="CharacterBody2D"]
+motion_mode = 1
 script = ExtResource("1_l83jr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -16,7 +17,7 @@ texture = ExtResource("1_ksc5s")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_a5fxq")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." groups=["rat"]]
 path_postprocessing = 1
 debug_enabled = true
 
