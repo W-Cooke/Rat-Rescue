@@ -30,6 +30,7 @@ func _on_timer_timeout():
 func follow_path(path):
 	# TODO: write code to follow along path, set runaway bool to true at end of path
 	# pseudocode:
+	# The answer is RemoteTransform2D!
 	# navigation_agent.target_position = path.global_positon (maybe need to specify progress ratio?)
 	# assign location to progress ratio 0.0
 	# iterate through progress ratio until ratio >= 1
