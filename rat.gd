@@ -45,6 +45,8 @@ func path_progress():
 	#TODO:
 	# function for process that will update the progress ratio of the pathfollow2D
 	# hopefully...
+	# path progress might have to be part of script for path? 
+	# UGH but that's clunky and I'd have to manually do stuff. easier to call it from this script
 	pass
 
 func _on_area_2d_body_entered(body):
