@@ -785,10 +785,6 @@ layer_2/tile_data = PackedInt32Array(524295, 0, 6, 524296, 65536, 6, 589831, 655
 position = Vector2(146, 139)
 SPEED = 149.17
 
-[node name="Rat" parent="." node_paths=PackedStringArray("target") groups=["rat"] instance=ExtResource("3_pk5ba")]
-position = Vector2(68, 136)
-target = NodePath("../Player")
-
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
@@ -801,4 +797,8 @@ curve = SubResource("Curve2D_mis0c")
 position = Vector2(22, 136)
 rotation = -1.5708
 
-[connection signal="body_entered" from="Area2D" to="Rat" method="_on_area_2d_body_entered"]
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Rat" parent="Node2D" node_paths=PackedStringArray("target") instance=ExtResource("3_pk5ba")]
+position = Vector2(87, 125)
+target = NodePath("../../Player")
