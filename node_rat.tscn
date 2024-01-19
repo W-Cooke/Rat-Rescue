@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cy7jhvtnp0o2e"]
-
-[ext_resource type="PackedScene" uid="uid://dnccj0l8r7erf" path="res://rat.tscn" id="1_ikhgw"]
-
-[node name="NodeRat" type="Node2D"]
-
-[node name="Rat" parent="." instance=ExtResource("1_ikhgw")]

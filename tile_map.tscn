@@ -1,8 +1,10 @@
-[gd_scene load_steps=39 format=3 uid="uid://b7jnwmxqfabup"]
+[gd_scene load_steps=48 format=3 uid="uid://b7jnwmxqfabup"]
 
 [ext_resource type="Texture2D" uid="uid://c1bj2qll7pgq4" path="res://Assets/Sprite/Tilemap/tilemap_packed.png" id="1_t105r"]
 [ext_resource type="PackedScene" uid="uid://dqrujxar1ft6l" path="res://player.tscn" id="2_jvm34"]
 [ext_resource type="PackedScene" uid="uid://dnccj0l8r7erf" path="res://rat.tscn" id="3_pk5ba"]
+[ext_resource type="Texture2D" uid="uid://dyd32rh533nim" path="res://icon.svg" id="3_y27nj"]
+[ext_resource type="Texture2D" uid="uid://v5ktfvo08dvi" path="res://Assets/Sprite/Tiles/tile_0064.png" id="5_k2cvg"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_naeas"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -766,9 +768,39 @@ sources/0 = SubResource("TileSetAtlasSource_nbpvv")
 
 [sub_resource type="Curve2D" id="Curve2D_mis0c"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 22, 136, 0, 0, 0, 0, 22, 40, 0, 0, 0, 0, 104, 39, 0, 0, 0, 0, 104, 87)
+"points": PackedVector2Array(0, 0, 0, 0, 22, 136, 0, 0, 0, 0, 22, 40, 0, 0, 0, 0, 114, 39, 0, 0, 0, 0, 114, 110)
 }
 point_count = 4
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ue26t"]
+size = Vector2(23, 39)
+
+[sub_resource type="Curve2D" id="Curve2D_pnfeg"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 117, 40, 0, 0, 0, 0, 214, 40, 0, 0, 0, 0, 216, 135, 0, 0, 0, 0, 135, 135)
+}
+point_count = 4
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_22tum"]
+size = Vector2(36, 19)
+
+[sub_resource type="Curve2D" id="Curve2D_lf445"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 215, 135, 0, 0, 0, 0, 213, 219, 0, 0, 0, 0, 112, 219, 0, 0, 0, 0, 111, 150)
+}
+point_count = 4
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c0dum"]
+size = Vector2(24, 44)
+
+[sub_resource type="Curve2D" id="Curve2D_x7jq1"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 110, 216, 0, 0, 0, 0, 23, 215, 0, 0, 0, 0, 22, 138, 0, 0, 0, 0, 93, 136)
+}
+point_count = 4
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_65xjx"]
+size = Vector2(44, 25)
 
 [node name="TileMap" type="TileMap"]
 texture_filter = 1
@@ -785,20 +817,94 @@ layer_2/tile_data = PackedInt32Array(524295, 0, 6, 524296, 65536, 6, 589831, 655
 position = Vector2(146, 139)
 SPEED = 149.17
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Rat" parent="." groups=["rat"] instance=ExtResource("3_pk5ba")]
+position = Vector2(79, 134)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PackedVector2Array(17, 111, 32, 111, 34, 155, 15, 156)
+[node name="Paths" type="Node" parent="."]
 
-[node name="Path2D" type="Path2D" parent="." groups=["path"]]
+[node name="Path2D" type="Path2D" parent="Paths" groups=["path"]]
 curve = SubResource("Curve2D_mis0c")
 
-[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+[node name="PathFollow2D" type="PathFollow2D" parent="Paths/Path2D" groups=["pathfollow"]]
 position = Vector2(22, 136)
 rotation = -1.5708
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Node2D" type="Node2D" parent="Paths/Path2D/PathFollow2D"]
 
-[node name="Rat" parent="Node2D" node_paths=PackedStringArray("target") instance=ExtResource("3_pk5ba")]
-position = Vector2(87, 125)
-target = NodePath("../../Player")
+[node name="Sprite2D" type="Sprite2D" parent="Paths/Path2D/PathFollow2D/Node2D"]
+visible = false
+scale = Vector2(0.115, 0.115)
+texture = ExtResource("3_y27nj")
+
+[node name="Area2D" type="Area2D" parent="Paths/Path2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Paths/Path2D/Area2D"]
+position = Vector2(25.5, 138.5)
+shape = SubResource("RectangleShape2D_ue26t")
+
+[node name="Path2D2" type="Path2D" parent="Paths" groups=["path"]]
+curve = SubResource("Curve2D_pnfeg")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Paths/Path2D2" groups=["pathfollow"]]
+position = Vector2(117, 40)
+
+[node name="Node2D" type="Node2D" parent="Paths/Path2D2/PathFollow2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Paths/Path2D2/PathFollow2D/Node2D"]
+visible = false
+scale = Vector2(0.075, 0.075)
+texture = ExtResource("3_y27nj")
+
+[node name="Area2D" type="Area2D" parent="Paths/Path2D2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Paths/Path2D2/Area2D"]
+position = Vector2(113, 41.5)
+shape = SubResource("RectangleShape2D_22tum")
+
+[node name="Path2D3" type="Path2D" parent="Paths" groups=["path"]]
+curve = SubResource("Curve2D_lf445")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Paths/Path2D3" groups=["pathfollow"]]
+position = Vector2(215, 135)
+rotation = 1.5946
+
+[node name="Node2D" type="Node2D" parent="Paths/Path2D3/PathFollow2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Paths/Path2D3/PathFollow2D/Node2D"]
+visible = false
+scale = Vector2(0.09, 0.09)
+texture = ExtResource("3_y27nj")
+
+[node name="Area2D" type="Area2D" parent="Paths/Path2D3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Paths/Path2D3/Area2D"]
+position = Vector2(212, 136)
+shape = SubResource("RectangleShape2D_c0dum")
+
+[node name="Path2D4" type="Path2D" parent="Paths" groups=["path"]]
+curve = SubResource("Curve2D_x7jq1")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Paths/Path2D4" groups=["pathfollow"]]
+position = Vector2(110, 216)
+rotation = -3.1301
+
+[node name="Node2D" type="Node2D" parent="Paths/Path2D4/PathFollow2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Paths/Path2D4/PathFollow2D/Node2D"]
+visible = false
+texture_filter = 1
+rotation = 3.14159
+texture = ExtResource("5_k2cvg")
+
+[node name="Area2D" type="Area2D" parent="Paths/Path2D4"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Paths/Path2D4/Area2D"]
+position = Vector2(113, 215.5)
+shape = SubResource("RectangleShape2D_65xjx")
+
+[node name="Corners" type="Node" parent="Paths"]
+
+[connection signal="body_entered" from="Paths/Path2D/Area2D" to="Rat" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Paths/Path2D2/Area2D" to="Rat" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Paths/Path2D3/Area2D" to="Rat" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Paths/Path2D4/Area2D" to="Rat" method="_on_area_2d_body_entered"]

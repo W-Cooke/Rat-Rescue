@@ -13,7 +13,9 @@ config_version=5
 config/name="Rat Rescue"
 run/main_scene="res://tile_map.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+boot_splash/bg_color=Color(0.576471, 0.415686, 0.901961, 1)
 boot_splash/image="res://Assets/Sprite/Tiles/tile_0124.png"
+boot_splash/fullsize=false
 config/icon="res://Assets/Sprite/Tiles/tile_0124.png"
 
 [display]
