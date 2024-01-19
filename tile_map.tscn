@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://b7jnwmxqfabup"]
+[gd_scene load_steps=49 format=3 uid="uid://b7jnwmxqfabup"]
 
 [ext_resource type="Texture2D" uid="uid://c1bj2qll7pgq4" path="res://Assets/Sprite/Tilemap/tilemap_packed.png" id="1_t105r"]
 [ext_resource type="PackedScene" uid="uid://dqrujxar1ft6l" path="res://player.tscn" id="2_jvm34"]
@@ -802,6 +802,8 @@ point_count = 4
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_65xjx"]
 size = Vector2(44, 25)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sy25a"]
+
 [node name="TileMap" type="TileMap"]
 texture_filter = 1
 tile_set = SubResource("TileSet_eeoxy")
@@ -815,10 +817,15 @@ layer_2/tile_data = PackedInt32Array(524295, 0, 6, 524296, 65536, 6, 589831, 655
 
 [node name="Player" parent="." instance=ExtResource("2_jvm34")]
 position = Vector2(146, 139)
-SPEED = 149.17
 
 [node name="Rat" parent="." groups=["rat"] instance=ExtResource("3_pk5ba")]
 position = Vector2(79, 134)
+
+[node name="Rat2" parent="." instance=ExtResource("3_pk5ba")]
+position = Vector2(182, 135)
+
+[node name="Rat3" parent="." instance=ExtResource("3_pk5ba")]
+position = Vector2(109, 167)
 
 [node name="Paths" type="Node" parent="."]
 
@@ -904,7 +911,53 @@ shape = SubResource("RectangleShape2D_65xjx")
 
 [node name="Corners" type="Node" parent="Paths"]
 
+[node name="Area2D" type="Area2D" parent="Paths/Corners"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Paths/Corners/Area2D"]
+position = Vector2(24, 37)
+shape = SubResource("RectangleShape2D_sy25a")
+
+[node name="Area2D2" type="Area2D" parent="Paths/Corners"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Paths/Corners/Area2D2"]
+position = Vector2(217, 40)
+shape = SubResource("RectangleShape2D_sy25a")
+
+[node name="Area2D3" type="Area2D" parent="Paths/Corners"]
+position = Vector2(-2, 175)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Paths/Corners/Area2D3"]
+position = Vector2(217, 40)
+shape = SubResource("RectangleShape2D_sy25a")
+
+[node name="Area2D4" type="Area2D" parent="Paths/Corners"]
+position = Vector2(-193, 178)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Paths/Corners/Area2D4"]
+position = Vector2(217, 40)
+shape = SubResource("RectangleShape2D_sy25a")
+
 [connection signal="body_entered" from="Paths/Path2D/Area2D" to="Rat" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Paths/Path2D/Area2D" to="Rat2" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Paths/Path2D/Area2D" to="Rat3" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Paths/Path2D2/Area2D" to="Rat" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Paths/Path2D2/Area2D" to="Rat2" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Paths/Path2D2/Area2D" to="Rat3" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Paths/Path2D3/Area2D" to="Rat" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Paths/Path2D3/Area2D" to="Rat2" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Paths/Path2D3/Area2D" to="Rat3" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Paths/Path2D4/Area2D" to="Rat" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Paths/Path2D4/Area2D" to="Rat2" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Paths/Path2D4/Area2D" to="Rat3" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Paths/Corners/Area2D" to="Rat" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Paths/Corners/Area2D" to="Rat2" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Paths/Corners/Area2D" to="Rat3" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Paths/Corners/Area2D2" to="Rat" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Paths/Corners/Area2D2" to="Rat2" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Paths/Corners/Area2D2" to="Rat3" method="_on_area_2d_2_body_entered"]
+[connection signal="body_entered" from="Paths/Corners/Area2D3" to="Rat" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Paths/Corners/Area2D3" to="Rat2" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Paths/Corners/Area2D3" to="Rat3" method="_on_area_2d_3_body_entered"]
+[connection signal="body_entered" from="Paths/Corners/Area2D4" to="Rat" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Paths/Corners/Area2D4" to="Rat2" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Paths/Corners/Area2D4" to="Rat3" method="_on_area_2d_4_body_entered"]

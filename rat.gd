@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+#region Variables
 @export var MAX_SPEED : int = 300
 @export var path_speed : float = 0.006
 var direction : Vector2
@@ -13,6 +14,7 @@ var path_ratio : float = 0.0
 @onready var paths : Array = get_tree().get_nodes_in_group("path")
 @onready var rat : CharacterBody2D = $"."
 var path_follow
+#endregion
 
 func _ready():
 	print(paths)
@@ -67,8 +69,22 @@ func _nearest_path():
 			nearest_path = path
 	return nearest_path
 
-func _on_area_2d_body_entered(body):
+#region Area2D Signals
+func handle_area_entered(body):
 	if body.is_in_group("rat") and runaway:
 		runaway = false
 		path_follow = _nearest_path().get_child(0)
 		path_follow.progress_ratio = 0.0
+
+func _on_area_2d_body_entered(body):
+	handle_area_entered(body)
+
+func _on_area_2d_2_body_entered(body):
+	handle_area_entered(body)
+
+func _on_area_2d_3_body_entered(body):
+	handle_area_entered(body)
+
+func _on_area_2d_4_body_entered(body):
+	handle_area_entered(body)
+#endregion

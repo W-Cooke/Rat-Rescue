@@ -48,3 +48,5 @@ shape = SubResource("CircleShape2D_npudd")
 position = Vector2(-2.225, -15.69)
 amount = 50
 process_material = SubResource("ParticleProcessMaterial_p5xja")
+
+[connection signal="body_entered" from="Net" to="." method="_on_net_body_entered"]
