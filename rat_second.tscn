@@ -1,13 +1,28 @@
-[gd_scene load_steps=10 format=3 uid="uid://dnccj0l8r7erf"]
+[gd_scene load_steps=10 format=3 uid="uid://dpsfwrjp5m28t"]
 
-[ext_resource type="Texture2D" uid="uid://dv03u3qe6qh3f" path="res://Assets/Sprite/rat1.png" id="1_ksc5s"]
-[ext_resource type="Script" path="res://rat.gd" id="1_l83jr"]
-[ext_resource type="Texture2D" uid="uid://xg0yuvicql3r" path="res://Assets/Sprite/star_01.png" id="3_igi2g"]
-[ext_resource type="Texture2D" uid="uid://bnsf4kkeg2p2f" path="res://Assets/Sprite/star_02.png" id="4_vxhgb"]
-[ext_resource type="Texture2D" uid="uid://dgjmvee1v1f0u" path="res://Assets/Sprite/star_03.png" id="5_6uyn8"]
+[ext_resource type="Script" path="res://rat.gd" id="1_wmktw"]
+[ext_resource type="Texture2D" uid="uid://dv03u3qe6qh3f" path="res://Assets/Sprite/rat1.png" id="2_rex3s"]
+[ext_resource type="Texture2D" uid="uid://xg0yuvicql3r" path="res://Assets/Sprite/star_01.png" id="3_dfp3d"]
+[ext_resource type="Texture2D" uid="uid://bnsf4kkeg2p2f" path="res://Assets/Sprite/star_02.png" id="4_qhrls"]
+[ext_resource type="Texture2D" uid="uid://dgjmvee1v1f0u" path="res://Assets/Sprite/star_03.png" id="5_2yxj2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a5fxq"]
 radius = 7.0
+
+[sub_resource type="Animation" id="Animation_hg8wj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D2:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_dfp3d")]
+}
 
 [sub_resource type="Animation" id="Animation_4fjm0"]
 resource_name = "sparkle"
@@ -22,22 +37,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ExtResource("3_igi2g"), ExtResource("4_vxhgb"), ExtResource("5_6uyn8")]
-}
-
-[sub_resource type="Animation" id="Animation_hg8wj"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D2:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_igi2g")]
+"values": [ExtResource("3_dfp3d"), ExtResource("4_qhrls"), ExtResource("5_2yxj2")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e172o"]
@@ -48,11 +48,11 @@ _data = {
 
 [node name="Rat" type="CharacterBody2D"]
 motion_mode = 1
-script = ExtResource("1_l83jr")
+script = ExtResource("1_wmktw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("1_ksc5s")
+texture = ExtResource("2_rex3s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_a5fxq")
@@ -68,7 +68,7 @@ autostart = true
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 visible = false
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("3_igi2g")
+texture = ExtResource("3_dfp3d")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D2"]
 active = false

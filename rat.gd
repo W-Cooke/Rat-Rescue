@@ -76,3 +76,12 @@ func handle_area_entered(body):
 func _on_area_2d_body_entered(body):
 	handle_area_entered(body)
 #endregion
+
+
+func _on_player_rat_capture(body):
+	if body == rat:
+		$Sprite2D.hide()
+		$Sprite2D2.show()
+		$Sprite2D2/AnimationPlayer.play()
+		await $Sprite2D2/AnimationPlayer.animation_finished
+		queue_free()

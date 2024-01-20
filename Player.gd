@@ -95,5 +95,4 @@ func _on_net_body_entered(body):
 	if body.is_in_group("rat"):
 		print("DETECTED")
 		if spinning_anticlockwise or spinning_clockwise:
-			await get_tree().create_timer(1).timeout
-			body.queue_free()
+			rat_capture.emit(body)
