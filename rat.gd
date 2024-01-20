@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 #region Variables
 @export var MAX_SPEED : int = 300
-@export var path_speed : float = 0.006
+@export var path_speed : float = 0.002
 var direction : Vector2
 var runaway : bool = true
 var following_path : bool = false
@@ -28,9 +28,6 @@ func _physics_process(delta):
 		velocity = direction * MAX_SPEED * delta
 	move_and_slide()
 	progress_ratio()
-	print_debug("runaway: " + str(runaway))
-	print_debug("following_path: " + str(following_path))
-	print_debug("target: " + str(target))
 
 func progress_ratio():
 	if not runaway:
@@ -77,14 +74,5 @@ func handle_area_entered(body):
 		path_follow.progress_ratio = 0.0
 
 func _on_area_2d_body_entered(body):
-	handle_area_entered(body)
-
-func _on_area_2d_2_body_entered(body):
-	handle_area_entered(body)
-
-func _on_area_2d_3_body_entered(body):
-	handle_area_entered(body)
-
-func _on_area_2d_4_body_entered(body):
 	handle_area_entered(body)
 #endregion

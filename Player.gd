@@ -3,6 +3,7 @@ extends CharacterBody2D
 #region Variables
 @export var SPEED = 75.00
 signal net_spin
+signal rat_capture
 
 # spinning script variables
 @export_category ("Spin Variables")
@@ -21,7 +22,7 @@ enum {CLOCKWISE, ANTICLOCKWISE, NOT}
 @onready var particles = $Net/GPUParticles2D
 #endregion
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	velocity = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down") * SPEED
 	if velocity.x != 0:
 		$PlayerSprite.flip_h = velocity.x < 0
@@ -91,6 +92,8 @@ func calculate_mean(arr):
 
 
 func _on_net_body_entered(body):
-	if body.is_in_group("rats"):
+	if body.is_in_group("rat"):
+		print("DETECTED")
 		if spinning_anticlockwise or spinning_clockwise:
+			await get_tree().create_timer(1).timeout
 			body.queue_free()

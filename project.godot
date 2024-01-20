@@ -24,7 +24,11 @@ window/size/viewport_width=720
 window/size/viewport_height=720
 window/size/resizable=false
 window/stretch/mode="viewport"
-window/stretch/scale=3.0
+window/stretch/scale=2.0
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
 
 [input]
 
