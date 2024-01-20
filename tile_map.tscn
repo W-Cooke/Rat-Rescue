@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://b7jnwmxqfabup"]
+[gd_scene load_steps=44 format=3 uid="uid://b7jnwmxqfabup"]
 
 [ext_resource type="Texture2D" uid="uid://c1bj2qll7pgq4" path="res://Assets/Sprite/Tilemap/tilemap_packed.png" id="1_t105r"]
 [ext_resource type="PackedScene" uid="uid://dqrujxar1ft6l" path="res://player.tscn" id="2_jvm34"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dyd32rh533nim" path="res://icon.svg" id="3_y27nj"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="5_a0tqu"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="6_bd8jp"]
+[ext_resource type="PackedScene" uid="uid://radf1i0eibdm" path="res://rat_two.tscn" id="7_fr5ki"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_naeas"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -814,6 +815,11 @@ position = Vector2(0, 198)
 position = Vector2(24, 148.75)
 shape = SubResource("RectangleShape2D_ue26t")
 
+[node name="Points" type="Node" parent="Paths"]
+
+[node name="Node2D" type="Node2D" parent="Paths/Points" groups=["point"]]
+position = Vector2(185, 125)
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(221, 333)
 scale = Vector2(0.29, 0.29)
@@ -849,7 +855,13 @@ inactive_update_mode = 0
 [node name="Rats" type="Node" parent="."]
 
 [node name="Rat" parent="Rats" groups=["rat"] instance=ExtResource("3_pk5ba")]
+visible = false
 position = Vector2(111, 340)
 
+[node name="Rat Two" parent="Rats" groups=["rat"] instance=ExtResource("7_fr5ki")]
+position = Vector2(280, 262)
+
 [connection signal="rat_capture" from="Player" to="Rats/Rat" method="_on_player_rat_capture"]
+[connection signal="rat_capture" from="Player" to="Rats/Rat Two" method="_on_player_rat_capture"]
 [connection signal="body_entered" from="Paths/Path2D/Area2D" to="Rats/Rat" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Paths/Path2D/Area2D" to="Rats/Rat Two" method="_on_area_2d_body_entered"]

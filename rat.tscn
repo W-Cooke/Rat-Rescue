@@ -9,6 +9,21 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_a5fxq"]
 radius = 7.0
 
+[sub_resource type="Animation" id="Animation_hg8wj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D2:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_igi2g")]
+}
+
 [sub_resource type="Animation" id="Animation_4fjm0"]
 resource_name = "sparkle"
 length = 0.3
@@ -23,21 +38,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [ExtResource("3_igi2g"), ExtResource("4_vxhgb"), ExtResource("5_6uyn8")]
-}
-
-[sub_resource type="Animation" id="Animation_hg8wj"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D2:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_igi2g")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e172o"]
@@ -60,6 +60,7 @@ shape = SubResource("CircleShape2D_a5fxq")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." groups=["rat"]]
 path_postprocessing = 1
 avoidance_enabled = true
+debug_enabled = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1

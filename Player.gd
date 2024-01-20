@@ -29,7 +29,6 @@ func _physics_process(_delta):
 	move_and_slide()
 	controller_angle()
 
-
 #region Input Handling
 func controller_angle():
 	# get stick vector
@@ -89,7 +88,6 @@ func calculate_mean(arr):
 	var mean : float = sum / count
 	return mean
 #endregion
-
 
 func _on_net_body_entered(body):
 	if body.is_in_group("rat"):
