@@ -16,6 +16,8 @@ var path_ratio : float = 0.0
 var path_follow
 #endregion
 
+func _ready():
+	print_debug(paths)
 
 func _physics_process(delta):
 	if runaway:

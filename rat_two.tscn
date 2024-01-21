@@ -78,7 +78,7 @@ libraries = {
 autoplay = "sparkle"
 
 [node name="Running Timer" type="Timer" parent="."]
-autostart = true
+wait_time = 2.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Running Timer" to="." method="_on_running_timer_timeout"]

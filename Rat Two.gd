@@ -5,7 +5,9 @@ extends CharacterBody2D
 @export var path_speed : float = 0.002
 var direction : Vector2
 var runaway : bool = true
+var chasing_target : bool = false
 var path_ratio : float = 0.0
+var target_counter : int = 0
 
 @onready var player : Node2D = get_tree().get_first_node_in_group("player")
 @onready var target : Node2D = player
@@ -14,6 +16,9 @@ var path_ratio : float = 0.0
 @onready var rat : CharacterBody2D = $"."
 var path_follow
 #endregion
+
+func _ready():
+	print_debug(points)
 
 func _physics_process(delta):
 	if runaway:
@@ -27,9 +32,19 @@ func _physics_process(delta):
 func set_target():
 	if runaway:
 		target = player
-	else:
+		print("target: player")
+	elif target_counter < 5 and not chasing_target:
 		target = _nearest_point()
-	print_debug(target)
+		target_counter += 1
+		print("target: closest point")
+		$"Running Timer".start()
+		chasing_target = true
+	elif not chasing_target:
+		target = points[randi_range(0, points.size() - 1)]
+		target_counter = 0
+		chasing_target = true
+		$"Running Timer".start()
+		print("target: random")
 
 func create_path():
 	set_target()
@@ -71,3 +86,4 @@ func _on_player_rat_capture(body):
 
 func _on_running_timer_timeout():
 	runaway = true
+	chasing_target = false
