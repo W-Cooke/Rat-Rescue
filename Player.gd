@@ -91,6 +91,5 @@ func calculate_mean(arr):
 
 func _on_net_body_entered(body):
 	if body.is_in_group("rat"):
-		print("DETECTED")
 		if spinning_anticlockwise or spinning_clockwise:
 			rat_capture.emit(body)
