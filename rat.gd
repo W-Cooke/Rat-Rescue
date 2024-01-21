@@ -66,7 +66,7 @@ func _nearest_path():
 
 #region Area2D Signals
 func handle_area_entered(body):
-	if body.is_in_group("rat") and runaway:
+	if body == rat and runaway:
 		runaway = false
 		path_follow = _nearest_path().get_child(0)
 		path_follow.progress_ratio = 0.0

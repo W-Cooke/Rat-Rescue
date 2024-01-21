@@ -49,7 +49,8 @@ func _nearest_point():
 
 #region Area2D Signals
 func handle_area_entered(body):
-	if body.is_in_group("rat") and runaway:
+	#TODO: work on this
+	if body == rat and runaway:
 		runaway = false
 		path_follow = _nearest_point()
 		$"Running Timer".start()
