@@ -17,8 +17,10 @@ emission_shape = 2
 emission_sphere_radius = 6.37
 angle_min = -418.1
 angle_max = 412.5
-inherit_velocity_ratio = 0.308
+inherit_velocity_ratio = 0.444
 spread = 57.588
+gravity = Vector3(0, -10.115, 0)
+color = Color(0.866667, 0.701961, 0.984314, 1)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 motion_mode = 1
@@ -46,7 +48,9 @@ shape = SubResource("CircleShape2D_npudd")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Net"]
 position = Vector2(-2.225, -15.69)
-amount = 50
+amount = 100
 process_material = SubResource("ParticleProcessMaterial_p5xja")
+trail_enabled = true
+trail_lifetime = 1.07
 
 [connection signal="body_entered" from="Net" to="." method="_on_net_body_entered"]
