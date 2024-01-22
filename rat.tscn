@@ -46,7 +46,7 @@ _data = {
 "sparkle": SubResource("Animation_4fjm0")
 }
 
-[node name="Rat" type="CharacterBody2D"]
+[node name="Rat" type="CharacterBody2D" groups=["rat"]]
 motion_mode = 1
 script = ExtResource("1_l83jr")
 
@@ -57,7 +57,7 @@ texture = ExtResource("1_ksc5s")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_a5fxq")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." groups=["rat"]]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_postprocessing = 1
 avoidance_enabled = true
 

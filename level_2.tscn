@@ -62,8 +62,16 @@ offset_bottom = -167.0
 [node name="RATS" type="Node" parent="."]
 
 [node name="Rat" parent="RATS" instance=ExtResource("5_etkmr")]
-position = Vector2(13, 121)
+position = Vector2(-23, 137)
+
+[node name="Rat2" parent="RATS" instance=ExtResource("5_etkmr")]
+position = Vector2(-9, 110)
+
+[node name="Rat3" parent="RATS" instance=ExtResource("5_etkmr")]
+position = Vector2(1, 134)
 
 [node name="Paths" type="Node" parent="."]
 
 [connection signal="rat_capture" from="Player" to="RATS/Rat" method="_on_player_rat_capture"]
+[connection signal="rat_capture" from="Player" to="RATS/Rat2" method="_on_player_rat_capture"]
+[connection signal="rat_capture" from="Player" to="RATS/Rat3" method="_on_player_rat_capture"]

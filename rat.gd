@@ -17,7 +17,8 @@ var path_follow
 #endregion
 
 func _ready():
-	print_debug(paths)
+	# print_debug(paths)
+	pass
 
 func _physics_process(delta):
 	if runaway:
