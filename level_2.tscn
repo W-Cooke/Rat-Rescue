@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cjmehwsrf4717"]
+[gd_scene load_steps=14 format=3 uid="uid://cjmehwsrf4717"]
 
 [ext_resource type="Script" path="res://level_2.gd" id="1_dhapm"]
 [ext_resource type="TileSet" uid="uid://ba4pi7vawvoog" path="res://Assets/tile_map.tres" id="1_x4b3f"]
@@ -25,6 +25,15 @@ point_count = 5
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_knp3h"]
 size = Vector2(58, 38)
+
+[sub_resource type="Curve2D" id="Curve2D_bwbvw"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 481, 108, 0, 0, 0, 0, 575, 103, 0, 0, 0, 0, 581, 191, 0, 0, 0, 0, 343, 228, 0, 0, 0, 0, 358, 354, 0, 0, 0, 0, 453, 457, 0, 0, 0, 0, 511, 405, 0, 0, 0, 0, 515, 318, 0, 0, 0, 0, 608, 300)
+}
+point_count = 9
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o07mh"]
+size = Vector2(166, 122)
 
 [node name="Level 2" type="Node"]
 script = ExtResource("1_dhapm")
@@ -94,6 +103,7 @@ position = Vector2(24, 135)
 [node name="Paths" type="Node" parent="."]
 
 [node name="Path2D" type="Path2D" parent="Paths" groups=["path"]]
+visible = false
 curve = SubResource("Curve2D_ypxx2")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Paths/Path2D"]
@@ -109,6 +119,7 @@ position = Vector2(34.25, 90.25)
 shape = SubResource("RectangleShape2D_wrrw2")
 
 [node name="Path2D2" type="Path2D" parent="Paths" groups=["path"]]
+visible = false
 curve = SubResource("Curve2D_u31b5")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Paths/Path2D2"]
@@ -123,6 +134,22 @@ rotation = 0.0121945
 position = Vector2(-39, 229)
 shape = SubResource("RectangleShape2D_knp3h")
 
+[node name="Path2D3" type="Path2D" parent="Paths" groups=["path"]]
+visible = false
+curve = SubResource("Curve2D_bwbvw")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Paths/Path2D3"]
+position = Vector2(481, 108)
+rotation = -0.0531414
+
+[node name="Node2D" type="Node2D" parent="Paths/Path2D3/PathFollow2D"]
+
+[node name="Area2D" type="Area2D" parent="Paths/Path2D3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Paths/Path2D3/Area2D"]
+position = Vector2(541, 101)
+shape = SubResource("RectangleShape2D_o07mh")
+
 [connection signal="rat_capture" from="Player" to="." method="_on_player_rat_capture"]
 [connection signal="rat_capture" from="Player" to="RATS/Rat" method="_on_player_rat_capture"]
 [connection signal="rat_capture" from="Player" to="RATS/Rat2" method="_on_player_rat_capture"]
@@ -133,3 +160,6 @@ shape = SubResource("RectangleShape2D_knp3h")
 [connection signal="body_entered" from="Paths/Path2D2/Area2D" to="RATS/Rat" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Paths/Path2D2/Area2D" to="RATS/Rat2" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Paths/Path2D2/Area2D" to="RATS/Rat3" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Paths/Path2D3/Area2D" to="RATS/Rat" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Paths/Path2D3/Area2D" to="RATS/Rat2" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Paths/Path2D3/Area2D" to="RATS/Rat3" method="_on_area_2d_body_entered"]
