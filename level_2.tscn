@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjmehwsrf4717"]
+[gd_scene load_steps=12 format=3 uid="uid://cjmehwsrf4717"]
 
+[ext_resource type="Script" path="res://level_2.gd" id="1_dhapm"]
 [ext_resource type="TileSet" uid="uid://ba4pi7vawvoog" path="res://Assets/tile_map.tres" id="1_x4b3f"]
 [ext_resource type="PackedScene" uid="uid://dqrujxar1ft6l" path="res://player.tscn" id="2_ekry3"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_6f7e4"]
@@ -7,7 +8,26 @@
 [ext_resource type="PackedScene" uid="uid://dnccj0l8r7erf" path="res://rat.tscn" id="5_etkmr"]
 [ext_resource type="PackedScene" uid="uid://4c1jphmkmnrx" path="res://ui.tscn" id="6_qx5h7"]
 
+[sub_resource type="Curve2D" id="Curve2D_ypxx2"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -29, 102, -180.799, -24.5685, 180.799, 24.5685, 202, 220, 0, 0, 0, 0, 472, 213, 0, 0, 0, 0, 584, 173, 0, 0, 0, 0, 564, 89)
+}
+point_count = 5
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wrrw2"]
+size = Vector2(195.5, 53.5)
+
+[sub_resource type="Curve2D" id="Curve2D_u31b5"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -37, 229, 0, 0, 0, 0, 127, 231, 0, 0, 0, 0, 112, 441, 0, 0, 0, 0, 93, 766, 0, 0, 0, 0, 268, 758)
+}
+point_count = 5
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_knp3h"]
+size = Vector2(58, 38)
+
 [node name="Level 2" type="Node"]
+script = ExtResource("1_dhapm")
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
@@ -54,6 +74,7 @@ tween_on_load = true
 inactive_update_mode = 0
 
 [node name="UI" parent="PhantomCamera2D" instance=ExtResource("6_qx5h7")]
+visible = false
 offset_left = -163.0
 offset_top = -167.0
 offset_right = -163.0
@@ -62,16 +83,53 @@ offset_bottom = -167.0
 [node name="RATS" type="Node" parent="."]
 
 [node name="Rat" parent="RATS" instance=ExtResource("5_etkmr")]
-position = Vector2(-23, 137)
+position = Vector2(-26, 160)
 
 [node name="Rat2" parent="RATS" instance=ExtResource("5_etkmr")]
-position = Vector2(-9, 110)
+position = Vector2(82, 131)
 
 [node name="Rat3" parent="RATS" instance=ExtResource("5_etkmr")]
-position = Vector2(1, 134)
+position = Vector2(24, 135)
 
 [node name="Paths" type="Node" parent="."]
 
+[node name="Path2D" type="Path2D" parent="Paths" groups=["path"]]
+curve = SubResource("Curve2D_ypxx2")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Paths/Path2D"]
+position = Vector2(-29, 102)
+rotation = 0.472268
+
+[node name="Node2D" type="Node2D" parent="Paths/Path2D/PathFollow2D"]
+
+[node name="Area2D" type="Area2D" parent="Paths/Path2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Paths/Path2D/Area2D"]
+position = Vector2(34.25, 90.25)
+shape = SubResource("RectangleShape2D_wrrw2")
+
+[node name="Path2D2" type="Path2D" parent="Paths" groups=["path"]]
+curve = SubResource("Curve2D_u31b5")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Paths/Path2D2"]
+position = Vector2(-37, 229)
+rotation = 0.0121945
+
+[node name="Node2D" type="Node2D" parent="Paths/Path2D2/PathFollow2D"]
+
+[node name="Area2D" type="Area2D" parent="Paths/Path2D2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Paths/Path2D2/Area2D"]
+position = Vector2(-39, 229)
+shape = SubResource("RectangleShape2D_knp3h")
+
+[connection signal="rat_capture" from="Player" to="." method="_on_player_rat_capture"]
 [connection signal="rat_capture" from="Player" to="RATS/Rat" method="_on_player_rat_capture"]
 [connection signal="rat_capture" from="Player" to="RATS/Rat2" method="_on_player_rat_capture"]
 [connection signal="rat_capture" from="Player" to="RATS/Rat3" method="_on_player_rat_capture"]
+[connection signal="body_entered" from="Paths/Path2D/Area2D" to="RATS/Rat" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Paths/Path2D/Area2D" to="RATS/Rat2" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Paths/Path2D/Area2D" to="RATS/Rat3" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Paths/Path2D2/Area2D" to="RATS/Rat" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Paths/Path2D2/Area2D" to="RATS/Rat2" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Paths/Path2D2/Area2D" to="RATS/Rat3" method="_on_area_2d_body_entered"]

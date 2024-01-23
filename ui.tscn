@@ -40,7 +40,7 @@ text = "
 
 "
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="VictoryLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 29
 text = "        RATS \"RESCUED\"!"

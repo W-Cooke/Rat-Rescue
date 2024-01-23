@@ -261,10 +261,10 @@ shape = SubResource("RectangleShape2D_2gugd")
 
 [node name="Rats" type="Node" parent="."]
 
-[node name="Rat" parent="Rats" groups=["rat"] instance=ExtResource("3_pk5ba")]
+[node name="Rat" parent="Rats" instance=ExtResource("3_pk5ba")]
 position = Vector2(111, 340)
 
-[node name="Rat2" parent="Rats" groups=["rat"] instance=ExtResource("3_pk5ba")]
+[node name="Rat2" parent="Rats" instance=ExtResource("3_pk5ba")]
 position = Vector2(178, 103)
 
 [node name="Rat Two" parent="Rats" groups=["rat"] instance=ExtResource("7_fr5ki")]
