@@ -72,4 +72,10 @@ func run_from_mouse():
 			)
 
 func wander_around():
-	label.text = "Wandering"
+	pass
+
+func wander_steering() -> Vector2:
+	wander_angle = randf_range(wander_angle - WANDER_RANDOMNESS, wander_angle + WANDER_RANDOMNESS)
+	var vector_to_circle : Vector2 = velocity.normalized() * max_speed
+	var desired_velocity : Vector2 = vector_to_circle + Vector2(WANDER_CIRCLE_RADIUS, 0).rotated(wander_angle)
+	return desired_velocity - velocity
