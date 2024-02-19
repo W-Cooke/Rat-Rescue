@@ -20,7 +20,7 @@ const DISTANCE_THRESHOLD : float = 3.0
 
 #region wander 
 const WANDER_CIRCLE_RADIUS : int = 8
-const WANDER_RANDOMNESS : float = 0.2
+const WANDER_RANDOMNESS : float = 0.5
 var wander_angle : float = 0.0
 #endregion
 
@@ -72,7 +72,9 @@ func run_from_mouse():
 			)
 
 func wander_around():
-	pass
+	label.text = "Wandering"
+	var steering = wander_steering()
+	velocity += steering
 
 func wander_steering() -> Vector2:
 	wander_angle = randf_range(wander_angle - WANDER_RANDOMNESS, wander_angle + WANDER_RANDOMNESS)
