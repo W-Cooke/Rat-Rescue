@@ -18,6 +18,10 @@ boot_splash/image="res://Assets/Sprite/Tiles/tile_0124.png"
 boot_splash/fullsize=false
 config/icon="res://Assets/Sprite/Tiles/tile_0124.png"
 
+[autoload]
+
+Steering="*res://Steering.gd"
+
 [display]
 
 window/size/viewport_width=720
