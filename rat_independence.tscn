@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://bvn7cqb6savp0"]
+[gd_scene load_steps=11 format=3 uid="uid://bvn7cqb6savp0"]
 
 [ext_resource type="Texture2D" uid="uid://dv03u3qe6qh3f" path="res://Assets/Sprite/rat1.png" id="1_0lliu"]
 [ext_resource type="Script" path="res://rat_independence.gd" id="1_d65gj"]
 [ext_resource type="Texture2D" uid="uid://cqw72yu6whkqc" path="res://Assets/Sprite/Tiles/tile_0123.png" id="2_thesy"]
+[ext_resource type="Texture2D" uid="uid://fn8n55fug510" path="res://Assets/Sprite/rat3.png" id="3_01oq6"]
 [ext_resource type="Texture2D" uid="uid://cfxku0dkr51jp" path="res://Assets/Sprite/Tiles/tile_0124.png" id="3_g7nmb"]
-[ext_resource type="Texture2D" uid="uid://tvlm4xtjycyo" path="res://Assets/Sprite/rat2.png" id="5_2rlrh"]
+[ext_resource type="Texture2D" uid="uid://f4p3jisyyha4" path="res://Assets/Sprite/rat4.png" id="6_6w8xp"]
+[ext_resource type="Texture2D" uid="uid://cymdnfb7ccaom" path="res://Assets/Sprite/rat5.png" id="7_b6bcx"]
+[ext_resource type="Texture2D" uid="uid://dgtc7oojywqgs" path="res://Assets/Sprite/Tiles/tile_0060.png" id="8_ab2qx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qmwgc"]
 radius = 7.0
@@ -13,17 +16,19 @@ radius = 7.0
 radius = 138.014
 
 [node name="RatIndependence" type="CharacterBody2D"]
+scale = Vector2(2, 2)
 motion_mode = 1
 script = ExtResource("1_d65gj")
-max_speed = 300.0
 rat_sprite_1 = ExtResource("1_0lliu")
-rat_sprite_2 = ExtResource("5_2rlrh")
+rat_sprite_2 = ExtResource("3_01oq6")
 rat_sprite_3 = ExtResource("2_thesy")
 rat_sprite_4 = ExtResource("3_g7nmb")
+rat_sprite_5 = ExtResource("6_6w8xp")
+rat_sprite_6 = ExtResource("7_b6bcx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("1_0lliu")
+texture = ExtResource("8_ab2qx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_qmwgc")
@@ -33,3 +38,10 @@ visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_7bq54")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -24.5
+offset_top = -30.0
+offset_right = 26.5
+offset_bottom = -7.0
+text = "Follow"
