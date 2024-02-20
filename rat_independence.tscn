@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bvn7cqb6savp0"]
+[gd_scene load_steps=15 format=3 uid="uid://bvn7cqb6savp0"]
 
 [ext_resource type="Texture2D" uid="uid://dv03u3qe6qh3f" path="res://Assets/Sprite/rat1.png" id="1_0lliu"]
 [ext_resource type="Script" path="res://rat_independence.gd" id="1_d65gj"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://f4p3jisyyha4" path="res://Assets/Sprite/rat4.png" id="6_6w8xp"]
 [ext_resource type="Texture2D" uid="uid://cymdnfb7ccaom" path="res://Assets/Sprite/rat5.png" id="7_b6bcx"]
 [ext_resource type="Texture2D" uid="uid://dgtc7oojywqgs" path="res://Assets/Sprite/Tiles/tile_0060.png" id="8_ab2qx"]
+[ext_resource type="Texture2D" uid="uid://xg0yuvicql3r" path="res://Assets/Sprite/star_01.png" id="9_xsmrb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qmwgc"]
 radius = 7.0
@@ -15,7 +16,29 @@ radius = 7.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_7bq54"]
 radius = 138.014
 
-[node name="RatIndependence" type="CharacterBody2D"]
+[sub_resource type="Curve" id="Curve_8fyxm"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.93865, 0.021978), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_711bi"]
+curve = SubResource("Curve_8fyxm")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tkkdo"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 60.158
+initial_velocity_min = 52.63
+initial_velocity_max = 52.63
+angular_velocity_min = 197.06
+angular_velocity_max = 197.06
+gravity = Vector3(0, 98, 0)
+linear_accel_min = 46.31
+linear_accel_max = 46.31
+scale_min = 0.1
+scale_max = 0.1
+scale_curve = SubResource("CurveTexture_711bi")
+
+[node name="RatIndependence" type="CharacterBody2D" groups=["rat"]]
 scale = Vector2(2, 2)
 motion_mode = 1
 script = ExtResource("1_d65gj")
@@ -33,9 +56,9 @@ texture = ExtResource("8_ab2qx")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_qmwgc")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="DetectionRadius" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRadius"]
 shape = SubResource("CircleShape2D_7bq54")
 
 [node name="Label" type="Label" parent="."]
@@ -44,3 +67,21 @@ offset_top = -30.0
 offset_right = 26.5
 offset_bottom = -7.0
 text = "Follow"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_tkkdo")
+texture = ExtResource("9_xsmrb")
+explosiveness = 0.8
+randomness = 0.68
+
+[node name="DistanceTimer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="DetectionRadius" to="." method="_on_detection_radius_body_entered"]
+[connection signal="body_exited" from="DetectionRadius" to="." method="_on_detection_radius_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
