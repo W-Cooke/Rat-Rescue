@@ -20,6 +20,8 @@ angle_max = 412.5
 inherit_velocity_ratio = 0.444
 spread = 57.588
 gravity = Vector3(0, -10.115, 0)
+scale_min = 10.35
+scale_max = 10.35
 color = Color(0.866667, 0.701961, 0.984314, 1)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]

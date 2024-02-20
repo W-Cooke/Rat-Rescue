@@ -4,6 +4,11 @@ extends CharacterBody2D
 @export var max_speed : float = 300.0
 @onready var label = $Label
 @onready var timer = $Timer
+@onready var distance_timer = $DistanceTimer
+@onready var wandering_timer = $WanderingTimer
+@onready var follow_timer = $WanderingTimer/FollowTimer
+@onready var wait_timer = $WaitTimer
+@onready var raycast_timer = $RaycastTimer
 @onready var player = get_tree().get_first_node_in_group("player")
 enum {WANDER, RUNNING, FOLLOWING, WAITING}
 var state = WANDER
@@ -46,7 +51,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 func follow_the_player():
-	label.text = "Following"
+	label.text = "Lemme see something..."
 	var target_global_position: Vector2 = player.global_position
 	if global_position.distance_to(target_global_position) < DISTANCE_THRESHOLD:
 		velocity = Vector2.ZERO
@@ -59,7 +64,7 @@ func follow_the_player():
 			)
 
 func run_from_player():
-	label.text = "Running!"
+	label.text = "Scamper!"
 	var target_global_position: Vector2 = player.global_position
 	if global_position.distance_to(target_global_position) < DISTANCE_THRESHOLD:
 		velocity = Vector2.ZERO
@@ -72,28 +77,16 @@ func run_from_player():
 			)
 
 func wander_around():
-	label.text = "Wandering"
+	label.text = "Looking Around"
 	var steering = wander_steering()
 	velocity += steering
 
 #TODO: replace this method with something more elegant
 func random_pauses():
-	#first checks if rat is not being pursued
-	# then waits a moment before resuming movement
-	if state = WANDER:
-		state = WAITING
-	# create timer in code or have it be a discrete node
-	await get_tree().create_timer(randf_range(0.5, 2.0))
-	if state == WAITING:
-		state = WANDER
-
-#TODO: new timer for pursuing player after a given time
-func when_wandering_for_too_long():
+	label.text = "Oooh, piece of candy!"
 	if state == WANDER:
-		state = FOLLOWING
-	await get_tree().create_timer(randf_range(1, 3))
-	if state == FOLLOWING:
-		state = WANDER
+		state = WAITING
+		wait_timer.start(randf_range(0.4, 1.5))
 
 func wander_steering() -> Vector2:
 	wander_angle = randf_range(wander_angle - WANDER_RANDOMNESS, wander_angle + WANDER_RANDOMNESS)
@@ -108,6 +101,7 @@ func cast_ray() -> bool:
 	query.exclude = [self]
 	var result = space_state.intersect_ray(query)
 	if player.get_instance_id() == result["collider_id"]:
+		print_debug("SCAMPER!!")
 		return true
 	else:
 		return false
@@ -115,7 +109,9 @@ func cast_ray() -> bool:
 #region signals received
 func _on_detection_radius_body_entered(body):
 	#TODO: frequent raycasts if in area, so checks can be made if player becomes visible while still in area
+	#TODO: raycasts currently not working super well :/
 	if body.is_in_group("player"):
+		raycast_timer.start()
 		if cast_ray():
 			state = RUNNING
 
@@ -124,17 +120,40 @@ func _on_detection_radius_body_exited(body):
 		timer.start()
 
 func _on_timer_timeout():
-	print("timer finished")
 	state = WANDER
+	wandering_timer.start()
 
 func _on_player_rat_capture(body):
-	if body == rat:
-		print("rat caught")
-		rat.remove_from_group("rat")
+	if body.is_in_group("rat"):
+		#TODO: this is still broken, rat capture inconsistent
+		#TODO: random rats get despawned instead of targeted ratto
+		print("rat caught: " + str(body))
+		body.remove_from_group("rat")
 		$Sprite2D.hide()
 		$GPUParticles2D.emitting = true
-		await get_tree().create_timer(1)
+		await get_tree().create_timer(1.0)
 		#TODO: particle effect not playing before despawning
-		#TODO: add distance timer that activates following script when not detected for a while
 		queue_free()
+
+func _on_distance_timer_timeout():
+	random_pauses()
+	distance_timer.start(randf_range(3.0, 6.0))
+
+func _on_wait_timer_timeout():
+	if state == WAITING:
+		state = WANDER
+
+func _on_raycast_timer_timeout():
+	print("casting ray")
+	if cast_ray():
+		raycast_timer.stop()
+		state = RUNNING
+
+func _on_wandering_timer_timeout():
+	state = FOLLOWING
+	follow_timer.start(randf_range(1.0, 2.0))
+
+func _on_follow_timer_timeout():
+	if state != WANDER:
+		state = WANDER
 #endregion

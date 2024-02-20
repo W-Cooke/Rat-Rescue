@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bvn7cqb6savp0"]
+[gd_scene load_steps=16 format=3 uid="uid://bvn7cqb6savp0"]
 
 [ext_resource type="Texture2D" uid="uid://dv03u3qe6qh3f" path="res://Assets/Sprite/rat1.png" id="1_0lliu"]
 [ext_resource type="Script" path="res://rat_independence.gd" id="1_d65gj"]
@@ -15,6 +15,10 @@ radius = 7.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7bq54"]
 radius = 138.014
+
+[sub_resource type="LabelSettings" id="LabelSettings_prr4m"]
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Curve" id="Curve_8fyxm"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.93865, 0.021978), 0.0, 0.0, 0, 0]
@@ -67,6 +71,7 @@ offset_top = -30.0
 offset_right = 26.5
 offset_bottom = -7.0
 text = "Follow"
+label_settings = SubResource("LabelSettings_prr4m")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
@@ -77,11 +82,29 @@ emitting = false
 amount = 30
 process_material = SubResource("ParticleProcessMaterial_tkkdo")
 texture = ExtResource("9_xsmrb")
+one_shot = true
 explosiveness = 0.8
 randomness = 0.68
 
+[node name="WaitTimer" type="Timer" parent="."]
+
 [node name="DistanceTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="WanderingTimer" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="FollowTimer" type="Timer" parent="WanderingTimer"]
+
+[node name="RaycastTimer" type="Timer" parent="."]
+wait_time = 0.5
 
 [connection signal="body_entered" from="DetectionRadius" to="." method="_on_detection_radius_body_entered"]
 [connection signal="body_exited" from="DetectionRadius" to="." method="_on_detection_radius_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="WaitTimer" to="." method="_on_wait_timer_timeout"]
+[connection signal="timeout" from="DistanceTimer" to="." method="_on_distance_timer_timeout"]
+[connection signal="timeout" from="WanderingTimer" to="." method="_on_wandering_timer_timeout"]
+[connection signal="timeout" from="WanderingTimer/FollowTimer" to="." method="_on_follow_timer_timeout"]
+[connection signal="timeout" from="RaycastTimer" to="." method="_on_raycast_timer_timeout"]
