@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var label = $Label
 @onready var timer = $Timer
 @onready var player = get_tree().get_first_node_in_group("player")
-enum {WANDER, RUNNING, FOLLOWING}
+enum {WANDER, RUNNING, FOLLOWING, WAITING}
 var state = WANDER
 
 @onready var rat : CharacterBody2D = $"."
@@ -31,12 +31,9 @@ var wander_angle : float = 0.0
 
 func _ready():
 	# select a random rat texture and applies it
-	var image = sprite_array.pick_random().get_image()
-	$Sprite2D.texture = ImageTexture.create_from_image(image)
+	$Sprite2D.texture = ImageTexture.create_from_image(sprite_array.pick_random().get_image())
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("ui_accept"):
-		cast_ray()
 	match(state):
 		RUNNING:
 			run_from_player()
@@ -44,6 +41,8 @@ func _physics_process(delta):
 			follow_the_player()
 		WANDER:
 			wander_around()
+		WAITING:
+			velocity = Vector2.ZERO
 	move_and_slide()
 
 func follow_the_player():
@@ -77,6 +76,25 @@ func wander_around():
 	var steering = wander_steering()
 	velocity += steering
 
+#TODO: replace this method with something more elegant
+func random_pauses():
+	#first checks if rat is not being pursued
+	# then waits a moment before resuming movement
+	if state = WANDER:
+		state = WAITING
+	# create timer in code or have it be a discrete node
+	await get_tree().create_timer(randf_range(0.5, 2.0))
+	if state == WAITING:
+		state = WANDER
+
+#TODO: new timer for pursuing player after a given time
+func when_wandering_for_too_long():
+	if state == WANDER:
+		state = FOLLOWING
+	await get_tree().create_timer(randf_range(1, 3))
+	if state == FOLLOWING:
+		state = WANDER
+
 func wander_steering() -> Vector2:
 	wander_angle = randf_range(wander_angle - WANDER_RANDOMNESS, wander_angle + WANDER_RANDOMNESS)
 	var vector_to_circle : Vector2 = velocity.normalized() * max_speed
@@ -94,7 +112,9 @@ func cast_ray() -> bool:
 	else:
 		return false
 
+#region signals received
 func _on_detection_radius_body_entered(body):
+	#TODO: frequent raycasts if in area, so checks can be made if player becomes visible while still in area
 	if body.is_in_group("player"):
 		if cast_ray():
 			state = RUNNING
@@ -117,3 +137,4 @@ func _on_player_rat_capture(body):
 		#TODO: particle effect not playing before despawning
 		#TODO: add distance timer that activates following script when not detected for a while
 		queue_free()
+#endregion
