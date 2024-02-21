@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bvn7cqb6savp0"]
+[gd_scene load_steps=19 format=3 uid="uid://bvn7cqb6savp0"]
 
 [ext_resource type="Texture2D" uid="uid://dv03u3qe6qh3f" path="res://Assets/Sprite/rat1.png" id="1_0lliu"]
 [ext_resource type="Script" path="res://rat_independence.gd" id="1_d65gj"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://cymdnfb7ccaom" path="res://Assets/Sprite/rat5.png" id="7_b6bcx"]
 [ext_resource type="Texture2D" uid="uid://dgtc7oojywqgs" path="res://Assets/Sprite/Tiles/tile_0060.png" id="8_ab2qx"]
 [ext_resource type="Texture2D" uid="uid://xg0yuvicql3r" path="res://Assets/Sprite/star_01.png" id="9_xsmrb"]
+[ext_resource type="AudioStream" uid="uid://bag67btkepxvw" path="res://Assets/Sound/enchant.wav" id="10_bhrbx"]
+[ext_resource type="AudioStream" uid="uid://b0fvvsml0ylvq" path="res://Assets/Sound/ratsqueak.wav" id="10_ovi4j"]
+[ext_resource type="AudioStream" uid="uid://xfylvxyarjcw" path="res://Assets/Sound/scratching.wav" id="12_4d6fe"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qmwgc"]
 radius = 7.0
@@ -33,8 +36,8 @@ direction = Vector3(0, -1, 0)
 spread = 60.158
 initial_velocity_min = 52.63
 initial_velocity_max = 52.63
-angular_velocity_min = 197.06
-angular_velocity_max = 197.06
+angular_velocity_min = -717.49
+angular_velocity_max = 813.24
 gravity = Vector3(0, 98, 0)
 linear_accel_min = 46.31
 linear_accel_max = 46.31
@@ -99,6 +102,15 @@ wait_time = 10.0
 
 [node name="RaycastTimer" type="Timer" parent="."]
 wait_time = 0.5
+
+[node name="DetectedSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_ovi4j")
+
+[node name="CaptureSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_bhrbx")
+
+[node name="ScratchSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_4d6fe")
 
 [connection signal="body_entered" from="DetectionRadius" to="." method="_on_detection_radius_body_entered"]
 [connection signal="body_exited" from="DetectionRadius" to="." method="_on_detection_radius_body_exited"]

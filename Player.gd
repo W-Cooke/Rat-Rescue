@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var SPEED = 75.00
 signal net_spin
 signal rat_capture
+@onready var magic_sound = $MagicSound
 
 # spinning script variables
 @export_category ("Spin Variables")
@@ -69,15 +70,20 @@ func handle_bools(state):
 			spinning_clockwise = true
 			netsprite.flip_h = false
 			particles.emitting = true
+			if not magic_sound.playing:
+				magic_sound.play()
 		ANTICLOCKWISE:
 			spinning_anticlockwise = true
 			spinning_clockwise = false
 			netsprite.flip_h = true
 			particles.emitting = true
+			if not magic_sound.playing:
+				magic_sound.play()
 		NOT:
 			spinning_anticlockwise = false
 			spinning_clockwise = false
 			particles.emitting = false
+			magic_sound.stop()
 
 # calculates mean, who would've guessed!
 func calculate_mean(arr):

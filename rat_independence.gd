@@ -13,7 +13,11 @@ extends CharacterBody2D
 enum {WANDER, RUNNING, FOLLOWING, WAITING}
 var state = WANDER
 
-@onready var rat : CharacterBody2D = $"."
+#region sound
+@onready var capture_sound = $CaptureSound
+@onready var detected_sound = $DetectedSound
+@onready var scratch_sound = $ScratchSound
+#endregion
 
 const DISTANCE_THRESHOLD : float = 3.0
 #region populates an array with all available rat textures
@@ -29,7 +33,7 @@ const DISTANCE_THRESHOLD : float = 3.0
 
 #region wander 
 const WANDER_CIRCLE_RADIUS : int = 8
-const WANDER_RANDOMNESS : float = 0.5
+const WANDER_RANDOMNESS : float = 1.0
 var wander_angle : float = 0.0
 #endregion
 #endregion
@@ -38,7 +42,8 @@ func _ready():
 	# select a random rat texture and applies it
 	$Sprite2D.texture = ImageTexture.create_from_image(sprite_array.pick_random().get_image())
 
-func _physics_process(delta):
+func _physics_process(_delta):
+	# state machine 
 	match(state):
 		RUNNING:
 			run_from_player()
@@ -50,42 +55,39 @@ func _physics_process(delta):
 			velocity = Vector2.ZERO
 	move_and_slide()
 
+#region state methods
+
 func follow_the_player():
-	label.text = "Lemme see something..."
+	label.text = "FOLLOW"
 	var target_global_position: Vector2 = player.global_position
-	if global_position.distance_to(target_global_position) < DISTANCE_THRESHOLD:
-		velocity = Vector2.ZERO
-	else:
-		velocity = Steering.follow(
-			velocity,
-			global_position,
-			target_global_position,
-			max_speed
-			)
+	velocity = Steering.follow(
+		velocity,
+		global_position,
+		target_global_position,
+		max_speed
+		)
 
 func run_from_player():
-	label.text = "Scamper!"
+	label.text = "RUN"
 	var target_global_position: Vector2 = player.global_position
-	if global_position.distance_to(target_global_position) < DISTANCE_THRESHOLD:
-		velocity = Vector2.ZERO
-	else:
-		velocity = Steering.run_away(
-			velocity,
-			global_position,
-			target_global_position,
-			max_speed
-			)
+	velocity = Steering.run_away(
+		velocity,
+		global_position,
+		target_global_position,
+		max_speed
+	)
 
 func wander_around():
-	label.text = "Looking Around"
+	label.text = "WANDER"
 	var steering = wander_steering()
 	velocity += steering
 
 #TODO: replace this method with something more elegant
 func random_pauses():
-	label.text = "Oooh, piece of candy!"
+	label.text = "PAUSE"
 	if state == WANDER:
 		state = WAITING
+		scratch_sound.play()
 		wait_timer.start(randf_range(0.4, 1.5))
 
 func wander_steering() -> Vector2:
@@ -101,19 +103,18 @@ func cast_ray() -> bool:
 	query.exclude = [self]
 	var result = space_state.intersect_ray(query)
 	if player.get_instance_id() == result["collider_id"]:
-		print_debug("SCAMPER!!")
 		return true
 	else:
 		return false
+#endregion
 
 #region signals received
 func _on_detection_radius_body_entered(body):
-	#TODO: frequent raycasts if in area, so checks can be made if player becomes visible while still in area
-	#TODO: raycasts currently not working super well :/
 	if body.is_in_group("player"):
 		raycast_timer.start()
 		if cast_ray():
 			state = RUNNING
+			detected_sound.play()
 
 func _on_detection_radius_body_exited(body):
 	if body.is_in_group("player") and state == RUNNING:
@@ -124,15 +125,13 @@ func _on_timer_timeout():
 	wandering_timer.start()
 
 func _on_player_rat_capture(body):
-	if body.is_in_group("rat"):
-		#TODO: this is still broken, rat capture inconsistent
-		#TODO: random rats get despawned instead of targeted ratto
-		print("rat caught: " + str(body))
-		body.remove_from_group("rat")
-		$Sprite2D.hide()
+	if body == self:
+		self.remove_from_group("rat")
 		$GPUParticles2D.emitting = true
-		await get_tree().create_timer(1.0)
-		#TODO: particle effect not playing before despawning
+		$Sprite2D.hide()
+		label.hide()
+		capture_sound.play()
+		await get_tree().create_timer(1.0).timeout
 		queue_free()
 
 func _on_distance_timer_timeout():
@@ -141,13 +140,15 @@ func _on_distance_timer_timeout():
 
 func _on_wait_timer_timeout():
 	if state == WAITING:
+		scratch_sound.stop()
 		state = WANDER
 
 func _on_raycast_timer_timeout():
-	print("casting ray")
 	if cast_ray():
 		raycast_timer.stop()
-		state = RUNNING
+		if state != RUNNING:
+			detected_sound.play()
+			state = RUNNING
 
 func _on_wandering_timer_timeout():
 	state = FOLLOWING

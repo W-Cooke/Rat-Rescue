@@ -24,7 +24,7 @@ static func run_away(
 		mass := DEFAULT_MASS
 	) -> Vector2:
 	var desired_velocity := (global_position - target_position).normalized() * max_speed
-	var steering := desired_velocity - velocity
+	var steering := (desired_velocity - velocity) / mass
 	return velocity + steering
 
 
