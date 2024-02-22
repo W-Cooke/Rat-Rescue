@@ -1,9 +1,16 @@
-// trying my hand at writing a shader!
 shader_type canvas_item;
 
-uniform float speed;
+uniform vec2 direction = vec2(-1.0, -1.0);
+uniform float speed = 0.5;
 
-// In theory this should scroll diagonally based off the speed variable
-void fragment () {
-	COLOR = texture(TEXTURE, vec2(UV.x + TIME * speed, UV.y + TIME * speed));
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV + (direction * TIME * speed));
+}
+
+void light() {
+	// Called for every pixel for every light affecting the CanvasItem.
 }
