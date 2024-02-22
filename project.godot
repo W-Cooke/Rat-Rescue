@@ -15,7 +15,7 @@ run/main_scene="res://tile_map.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 boot_splash/bg_color=Color(0.576471, 0.415686, 0.901961, 1)
 boot_splash/image="res://Assets/Sprite/rat2_scaled_40x_pngcrushed.png"
-config/icon="res://Assets/Sprite/Tiles/tile_0124.png"
+config/icon="res://Assets/Sprite/rat2_scaled_40x_pngcrushed.png"
 
 [autoload]
 
