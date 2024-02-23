@@ -34,7 +34,6 @@ func _physics_process(_delta):
 	if velocity.x != 0:
 		$PlayerSprite.flip_h = velocity.x < 0
 	move_and_slide()
-	controller_angle()
 	#TODO: remove and replace with settings
 	if Input.is_action_just_released("controller switch"):
 		if keyboard_controls:
@@ -45,6 +44,9 @@ func _physics_process(_delta):
 			print("mode switched to controller")
 	if keyboard_controls:
 		net_spin_keyboard()
+	else:
+		controller_angle()
+	#TODO check if this works
 
 #region Input Handling
 func controller_angle():
@@ -83,7 +85,7 @@ func net_spin_keyboard():
 		net_rotation += rotation_rate
 		if net_rotation > TAU:
 			net_rotation = 0.0
-		#TODO: this currently starts music every frame, not ideal :/
+		#TODO: check if conditional in process has fixed this!
 		handle_bools(CLOCKWISE)
 	if Input.is_action_just_released("ui_accept"):
 		handle_bools(NOT)
