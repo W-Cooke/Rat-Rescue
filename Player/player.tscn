@@ -18,7 +18,6 @@ emission_shape = 2
 emission_sphere_radius = 6.37
 angle_min = -418.1
 angle_max = 412.5
-inherit_velocity_ratio = 0.444
 spread = 57.588
 gravity = Vector3(0, -10.115, 0)
 scale_min = 0.0

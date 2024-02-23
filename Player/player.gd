@@ -17,6 +17,12 @@ var spinning_clockwise = false
 var spinning_anticlockwise = false
 enum {CLOCKWISE, ANTICLOCKWISE, NOT}
 
+# rotation with keyboard variables
+#TODO: tidy up
+var rotation_rate : float = 0.3
+var net_rotation : float = 0.0
+var keyboard_controls : bool = false
+
 # node variables
 @onready var net = $Net
 @onready var netsprite = $Net/NetSprite
@@ -29,6 +35,16 @@ func _physics_process(_delta):
 		$PlayerSprite.flip_h = velocity.x < 0
 	move_and_slide()
 	controller_angle()
+	#TODO: remove and replace with settings
+	if Input.is_action_just_released("controller switch"):
+		if keyboard_controls:
+			keyboard_controls = false
+			print("mode switched to keyboard controls")
+		else:
+			keyboard_controls = true
+			print("mode switched to controller")
+	if keyboard_controls:
+		net_spin_keyboard()
 
 #region Input Handling
 func controller_angle():
@@ -61,6 +77,16 @@ func controller_angle():
 		handle_bools(NOT)
 	previous_angle = current_angle
 
+func net_spin_keyboard():
+	if Input.is_action_pressed("ui_accept"):
+		net.rotation = net_rotation
+		net_rotation += rotation_rate
+		if net_rotation > TAU:
+			net_rotation = 0.0
+		#TODO: this currently starts music every frame, not ideal :/
+		handle_bools(CLOCKWISE)
+	if Input.is_action_just_released("ui_accept"):
+		handle_bools(NOT)
 # function to handle spinning state of net
 func handle_bools(state):
 	# I really wanted to use the match statement, this felt like a good use
