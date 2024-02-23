@@ -1,12 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://dnccj0l8r7erf"]
+[gd_scene load_steps=10 format=3 uid="uid://radf1i0eibdm"]
 
-[ext_resource type="Texture2D" uid="uid://dv03u3qe6qh3f" path="res://Assets/Sprite/rat1.png" id="1_ksc5s"]
-[ext_resource type="Script" path="res://rat.gd" id="1_l83jr"]
-[ext_resource type="Texture2D" uid="uid://xg0yuvicql3r" path="res://Assets/Sprite/star_01.png" id="3_igi2g"]
-[ext_resource type="Texture2D" uid="uid://bnsf4kkeg2p2f" path="res://Assets/Sprite/star_02.png" id="4_vxhgb"]
-[ext_resource type="Texture2D" uid="uid://dgjmvee1v1f0u" path="res://Assets/Sprite/star_03.png" id="5_6uyn8"]
+[ext_resource type="Script" path="res://Rat/Rat Two.gd" id="1_1fnoj"]
+[ext_resource type="Texture2D" uid="uid://cqw72yu6whkqc" path="res://Assets/Sprite/Tiles/tile_0123.png" id="2_iyadh"]
+[ext_resource type="Texture2D" uid="uid://xg0yuvicql3r" path="res://Assets/Sprite/star_01.png" id="3_eyg1q"]
+[ext_resource type="Texture2D" uid="uid://bnsf4kkeg2p2f" path="res://Assets/Sprite/star_02.png" id="4_0gobh"]
+[ext_resource type="Texture2D" uid="uid://dgjmvee1v1f0u" path="res://Assets/Sprite/star_03.png" id="5_cxm70"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_a5fxq"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_0job6"]
 radius = 7.0
 
 [sub_resource type="Animation" id="Animation_hg8wj"]
@@ -21,7 +21,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_igi2g")]
+"values": [ExtResource("3_eyg1q")]
 }
 
 [sub_resource type="Animation" id="Animation_4fjm0"]
@@ -37,7 +37,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ExtResource("3_igi2g"), ExtResource("4_vxhgb"), ExtResource("5_6uyn8")]
+"values": [ExtResource("3_eyg1q"), ExtResource("4_0gobh"), ExtResource("5_cxm70")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e172o"]
@@ -46,21 +46,19 @@ _data = {
 "sparkle": SubResource("Animation_4fjm0")
 }
 
-[node name="Rat" type="CharacterBody2D" groups=["rat"]]
-motion_mode = 1
-script = ExtResource("1_l83jr")
+[node name="Rat Two" type="CharacterBody2D"]
+script = ExtResource("1_1fnoj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("1_ksc5s")
+texture = ExtResource("2_iyadh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_a5fxq")
+shape = SubResource("CircleShape2D_0job6")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." groups=["rat"]]
 path_postprocessing = 1
 avoidance_enabled = true
-debug_enabled = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1
@@ -69,7 +67,7 @@ autostart = true
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 visible = false
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("3_igi2g")
+texture = ExtResource("3_eyg1q")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D2"]
 active = false
@@ -79,4 +77,8 @@ libraries = {
 }
 autoplay = "sparkle"
 
+[node name="Running Timer" type="Timer" parent="."]
+wait_time = 2.0
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Running Timer" to="." method="_on_running_timer_timeout"]

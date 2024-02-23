@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1icdgxc13mje"]
+
+[ext_resource type="PackedScene" uid="uid://d0w4dn3rllsuq" path="res://Assets/UI/UI_Background.tscn" id="1_2qmld"]
+[ext_resource type="FontFile" uid="uid://bdn714kv37s2p" path="res://Assets/UI/PixelifySans-VariableFont_wght.ttf" id="1_kklgt"]
+[ext_resource type="LabelSettings" uid="uid://bkud046cx5bw6" path="res://Assets/UI/main_menu.tres" id="3_xmwoo"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UI_BG" parent="." instance=ExtResource("1_2qmld")]
+layout_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -147.0
+offset_top = 80.025
+offset_right = 147.0
+offset_bottom = 332.025
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartGame" type="Label" parent="VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_kklgt")
+theme_override_font_sizes/font_size = 46
+text = "Start Game"
+label_settings = ExtResource("3_xmwoo")
+horizontal_alignment = 1
+
+[node name="Settings" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+label_settings = ExtResource("3_xmwoo")
+horizontal_alignment = 1
+
+[node name="Credits" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Credits"
+label_settings = ExtResource("3_xmwoo")
+horizontal_alignment = 1
+
+[node name="Quit" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+label_settings = ExtResource("3_xmwoo")
+horizontal_alignment = 1

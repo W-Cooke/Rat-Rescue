@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dqrujxar1ft6l"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_avsqt"]
+[ext_resource type="Script" path="res://Player/player.gd" id="1_avsqt"]
 [ext_resource type="Texture2D" uid="uid://bowrf0axx8nsa" path="res://Assets/Sprite/Tiles/tile_0084.png" id="2_e5l2x"]
 [ext_resource type="Texture2D" uid="uid://05eph82rjipj" path="res://Assets/Sprite/Net.png" id="3_5dlip"]
 [ext_resource type="AudioStream" uid="uid://bou413j3p3ast" path="res://Assets/Sound/410259__adrimb86__fairy_sound.wav" id="4_hybtw"]
@@ -21,8 +21,8 @@ angle_max = 412.5
 inherit_velocity_ratio = 0.444
 spread = 57.588
 gravity = Vector3(0, -10.115, 0)
-scale_min = 10.35
-scale_max = 10.35
+scale_min = 0.0
+scale_max = 0.5
 color = Color(0.866667, 0.701961, 0.984314, 1)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]

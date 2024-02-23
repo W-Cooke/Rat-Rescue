@@ -1,12 +1,12 @@
 [gd_scene load_steps=24 format=3 uid="uid://b7jnwmxqfabup"]
 
 [ext_resource type="TileSet" uid="uid://ba4pi7vawvoog" path="res://Assets/tile_map.tres" id="1_ahqnd"]
-[ext_resource type="PackedScene" uid="uid://dqrujxar1ft6l" path="res://player.tscn" id="2_jvm34"]
-[ext_resource type="PackedScene" uid="uid://dnccj0l8r7erf" path="res://rat.tscn" id="3_pk5ba"]
+[ext_resource type="PackedScene" uid="uid://dqrujxar1ft6l" path="res://Player/player.tscn" id="2_jvm34"]
+[ext_resource type="PackedScene" uid="uid://dnccj0l8r7erf" path="res://Rat/rat.tscn" id="3_pk5ba"]
 [ext_resource type="Texture2D" uid="uid://dyd32rh533nim" path="res://icon.svg" id="3_y27nj"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="5_a0tqu"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="6_bd8jp"]
-[ext_resource type="PackedScene" uid="uid://radf1i0eibdm" path="res://rat_two.tscn" id="7_fr5ki"]
+[ext_resource type="PackedScene" uid="uid://radf1i0eibdm" path="res://Rat/rat_two.tscn" id="7_fr5ki"]
 
 [sub_resource type="Curve2D" id="Curve2D_mis0c"]
 _data = {

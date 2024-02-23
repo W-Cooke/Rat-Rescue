@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://bvn7cqb6savp0"]
 
 [ext_resource type="Texture2D" uid="uid://dv03u3qe6qh3f" path="res://Assets/Sprite/rat1.png" id="1_0lliu"]
-[ext_resource type="Script" path="res://rat_independence.gd" id="1_d65gj"]
+[ext_resource type="Script" path="res://Rat/rat_independence.gd" id="1_d65gj"]
 [ext_resource type="Texture2D" uid="uid://cqw72yu6whkqc" path="res://Assets/Sprite/Tiles/tile_0123.png" id="2_thesy"]
 [ext_resource type="Texture2D" uid="uid://fn8n55fug510" path="res://Assets/Sprite/rat3.png" id="3_01oq6"]
 [ext_resource type="Texture2D" uid="uid://cfxku0dkr51jp" path="res://Assets/Sprite/Tiles/tile_0124.png" id="3_g7nmb"]
