@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 #region Variables
-@export var SPEED = 75.00
+@export var SPEED : float = 75.00
 signal net_spin
 signal rat_capture
 @onready var magic_sound = $MagicSound
@@ -10,11 +10,11 @@ signal rat_capture
 @export_category ("Spin Variables")
 @export var angle_threshold : float = 200.0
 @export var array_size : int = 20
-var current_angle = 0.0
-var previous_angle = 0.0
-var angle_array = [0.0]
-var spinning_clockwise = false
-var spinning_anticlockwise = false
+var current_angle : float = 0.0
+var previous_angle : float = 0.0
+var angle_array : Array = [0.0]
+var spinning_clockwise : bool = false
+var spinning_anticlockwise : bool = false
 enum {CLOCKWISE, ANTICLOCKWISE, NOT}
 
 # rotation with keyboard variables
@@ -46,7 +46,7 @@ func _physics_process(_delta):
 		net_spin_keyboard()
 	else:
 		controller_angle()
-	#TODO check if this works
+	#TODO: check if this works
 
 #region Input Handling
 func controller_angle():
@@ -65,7 +65,8 @@ func controller_angle():
 		else:
 			angle_array.push_front(angle_diff)
 		if angle_array.size() > array_size:
-			# triggers every time the array gets pushed to a certain size, current size is 20 so that takes 20 frames to fill
+			# triggers every time the array gets pushed to a certain size, current size is defined in variable declaration
+			# array size change will dictate timing of checks/gamefeel
 			var mean = calculate_mean(angle_array)
 			if mean < -10:
 				handle_bools(CLOCKWISE)
@@ -91,7 +92,6 @@ func net_spin_keyboard():
 		handle_bools(NOT)
 # function to handle spinning state of net
 func handle_bools(state):
-	# I really wanted to use the match statement, this felt like a good use
 	match state:
 		CLOCKWISE:
 			spinning_anticlockwise = false
