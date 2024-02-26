@@ -1,7 +1,8 @@
 extends CharacterBody2D
 
 #region variable declaration
-@export var max_speed : float = 300.0
+@export var maximum_speed : float = 300.0
+var max_speed = maximum_speed
 @onready var label = $Label
 @onready var timer = $Timer
 @onready var distance_timer = $DistanceTimer
@@ -10,7 +11,7 @@ extends CharacterBody2D
 @onready var wait_timer = $WaitTimer
 @onready var raycast_timer = $RaycastTimer
 @onready var player = get_tree().get_first_node_in_group("player")
-enum {WANDER, RUNNING, FOLLOWING, WAITING}
+enum {WANDER, RUNNING, FOLLOWING, WAITING, DASH}
 var state = WANDER
 
 #region sound
@@ -40,7 +41,9 @@ var wander_angle : float = 0.0
 
 func _ready():
 	# select a random rat texture and applies it
-	$Sprite2D.texture = ImageTexture.create_from_image(sprite_array.pick_random().get_image())
+	var image = ImageTexture.create_from_image(sprite_array.pick_random().get_image())
+	#TODO: set image to texture of dash particle as well
+	$Sprite2D.texture = image
 
 func _physics_process(_delta):
 	# state machine 
