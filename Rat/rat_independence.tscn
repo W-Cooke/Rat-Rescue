@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bvn7cqb6savp0"]
+[gd_scene load_steps=33 format=3 uid="uid://bvn7cqb6savp0"]
 
 [ext_resource type="Texture2D" uid="uid://dv03u3qe6qh3f" path="res://Assets/Sprite/rat1.png" id="1_0lliu"]
 [ext_resource type="Script" path="res://Rat/rat_independence.gd" id="1_d65gj"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://bag67btkepxvw" path="res://Assets/Sound/enchant.wav" id="10_bhrbx"]
 [ext_resource type="AudioStream" uid="uid://b0fvvsml0ylvq" path="res://Assets/Sound/ratsqueak.wav" id="10_ovi4j"]
 [ext_resource type="AudioStream" uid="uid://xfylvxyarjcw" path="res://Assets/Sound/scratching.wav" id="12_4d6fe"]
+[ext_resource type="Texture2D" uid="uid://r4mcef51n1m4" path="res://Assets/Sprite/Tilemap/Spell_Capture_effect.png" id="13_bovso"]
 
 [sub_resource type="Gradient" id="Gradient_ed1vy"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -55,6 +56,77 @@ linear_accel_max = 46.31
 scale_min = 0.1
 scale_max = 0.1
 scale_curve = SubResource("CurveTexture_711bi")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iu5tv"]
+atlas = ExtResource("13_bovso")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_03ndc"]
+atlas = ExtResource("13_bovso")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q1x27"]
+atlas = ExtResource("13_bovso")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yqorf"]
+atlas = ExtResource("13_bovso")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qgyjh"]
+atlas = ExtResource("13_bovso")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tnolu"]
+atlas = ExtResource("13_bovso")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_43q2q"]
+atlas = ExtResource("13_bovso")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_urkl5"]
+atlas = ExtResource("13_bovso")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3byy6"]
+atlas = ExtResource("13_bovso")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4bukq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iu5tv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_03ndc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q1x27")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yqorf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qgyjh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tnolu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_43q2q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_urkl5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3byy6")
+}],
+"loop": false,
+"name": &"default",
+"speed": 16.0
+}]
 
 [node name="RatIndependence" type="CharacterBody2D" groups=["rat"]]
 scale = Vector2(2, 2)
@@ -157,6 +229,14 @@ autostart = true
 [node name="DashCooldownTimer" type="Timer" parent="Timers"]
 wait_time = 2.5
 one_shot = true
+
+[node name="SpellEffect" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2.325, 2.325)
+sprite_frames = SubResource("SpriteFrames_4bukq")
+autoplay = "default"
+frame = 8
+frame_progress = 1.0
 
 [connection signal="body_entered" from="DetectionRadius" to="." method="_on_detection_radius_body_entered"]
 [connection signal="body_exited" from="DetectionRadius" to="." method="_on_detection_radius_body_exited"]

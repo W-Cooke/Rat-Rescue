@@ -29,6 +29,9 @@ var keyboard_controls : bool = false
 @onready var netsprite = $Net/NetSprite
 @onready var particles = $Net/GPUParticles2D
 @onready var player_sprite = $PlayerAnimatedSprite
+var anim_warmup : bool = false
+var anim_done : bool = false
+var anim_looping : bool = false
 #endregion
 
 func _ready():
@@ -36,10 +39,9 @@ func _ready():
 
 func _physics_process(_delta):
 	velocity = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down") * SPEED
+	animation_handler()
 	if velocity.x != 0:
 		player_sprite.flip_h = velocity.x < 0
-	else:
-		player_sprite.stop()
 	move_and_slide()
 	#TODO: remove and replace with settings
 	if Input.is_action_just_released("controller switch"):
@@ -124,6 +126,9 @@ func handle_bools(state):
 			particles.emitting = false
 			spell_effect.hide()
 			magic_sound.stop()
+			anim_looping = false
+			anim_warmup = false
+			anim_done = false
 
 # calculates mean, who would've guessed!
 func calculate_mean(arr):
@@ -135,9 +140,20 @@ func calculate_mean(arr):
 	return mean
 #endregion
 
+#TODO: fix this so criteria matches animation state, currently not finished
 func animation_handler():
-	if spinning_anticlockwise or spinning_clockwise:
+	if (spinning_anticlockwise or spinning_clockwise) and not anim_warmup:
 		player_sprite.play("cast_warmup")
+		print("warmup")
+		anim_warmup = true
+	elif (spinning_anticlockwise or spinning_clockwise) and not anim_done:
+		if not player_sprite.is_playing():
+			anim_done = true
+	elif (spinning_anticlockwise or spinning_clockwise) and (anim_warmup and anim_done) and not anim_looping:
+		player_sprite.play("cast_loop")
+		anim_looping = true
+	else:
+		player_sprite.play("run")
 
 func _on_net_body_entered(body):
 	if body.is_in_group("rat"):

@@ -33,6 +33,7 @@ const DISTANCE_THRESHOLD : float = 3.0
 @export var rat_sprite_6 : CompressedTexture2D
 @onready var sprite_array : Array = [rat_sprite_1, rat_sprite_2, rat_sprite_3, rat_sprite_4, rat_sprite_5, rat_sprite_6]
 @onready var dash_particles : GPUParticles2D = $DashParticles
+@onready var spell_effect : AnimatedSprite2D = $SpellEffect
 #endregion
 
 #region position array
@@ -72,6 +73,7 @@ func _ready():
 	var image = ImageTexture.create_from_image(sprite_array.pick_random().get_image())
 	dash_particles.texture = image
 	$Sprite2D.texture = image
+	spell_effect.hide()
 
 func _physics_process(_delta):
 	# state machine 
@@ -223,8 +225,11 @@ func _on_timer_timeout():
 func _on_player_rat_capture(body):
 	if body == self:
 		self.remove_from_group("rat")
+		state = WAITING
 		$GPUParticles2D.emitting = true
 		$Sprite2D.hide()
+		spell_effect.show()
+		spell_effect.play()
 		label.hide()
 		capture_sound.play()
 		await get_tree().create_timer(1.0).timeout
