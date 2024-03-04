@@ -4,12 +4,14 @@ extends CharacterBody2D
 @export var maximum_speed : float = 300.0
 var max_speed = maximum_speed
 @onready var label = $Label
-@onready var timer = $Timer
-@onready var distance_timer = $DistanceTimer
-@onready var wandering_timer = $WanderingTimer
-@onready var follow_timer = $WanderingTimer/FollowTimer
-@onready var wait_timer = $WaitTimer
-@onready var raycast_timer = $RaycastTimer
+@onready var timer = $Timers/Timer
+@onready var distance_timer = $Timers/DistanceTimer
+@onready var wandering_timer = $Timers/WanderingTimer
+@onready var follow_timer = $Timers/WanderingTimer/FollowTimer
+@onready var wait_timer = $Timers/WaitTimer
+@onready var raycast_timer = $Timers/RaycastTimer
+@onready var dash_timer = $Timers/DashTimer
+@onready var dash_cooldown_timer = $Timers/DashCooldownTimer
 @onready var player = get_tree().get_first_node_in_group("player")
 enum {WANDER, RUNNING, FOLLOWING, WAITING, DASH}
 var state = WANDER
@@ -30,6 +32,32 @@ const DISTANCE_THRESHOLD : float = 3.0
 @export var rat_sprite_5 : CompressedTexture2D
 @export var rat_sprite_6 : CompressedTexture2D
 @onready var sprite_array : Array = [rat_sprite_1, rat_sprite_2, rat_sprite_3, rat_sprite_4, rat_sprite_5, rat_sprite_6]
+@onready var dash_particles : GPUParticles2D = $DashParticles
+#endregion
+
+#region position array
+var position_array : Array = []
+var array_max_size : int = 30
+var dash_cooldown : bool = true
+#endregion
+
+#region default directions
+var dir_NE : Vector2 = Vector2(1.0, 1.0)
+var dir_NW : Vector2 = Vector2(-1.0, 1.0)
+var dir_SE : Vector2 = Vector2(1.0, -1.0)
+var dir_SW : Vector2 = Vector2(-1.0, -1.0)
+#endregion
+
+#region raycasts
+@onready var RC_N : Object = $Raycasts/RayCastNorth
+@onready var RC_S : Object = $Raycasts/RayCastSouth
+@onready var RC_E : Object = $Raycasts/RayCastEast
+@onready var RC_W : Object = $Raycasts/RayCastWest
+
+@onready var raycast_NE : Array[Object] = [RC_N, RC_E]
+@onready var raycast_NW : Array[Object] = [RC_N, RC_W]
+@onready var raycast_SE : Array[Object] = [RC_S, RC_E]
+@onready var raycast_SW : Array[Object] = [RC_S, RC_W]
 #endregion
 
 #region wander 
@@ -42,18 +70,32 @@ var wander_angle : float = 0.0
 func _ready():
 	# select a random rat texture and applies it
 	var image = ImageTexture.create_from_image(sprite_array.pick_random().get_image())
-	#TODO: set image to texture of dash particle as well
+	dash_particles.texture = image
 	$Sprite2D.texture = image
 
 func _physics_process(_delta):
 	# state machine 
+	
+	# region debug
+	print("Raycast North: " + str(RC_N.is_colliding()))
+	print("Raycast East: " + str(RC_E.is_colliding()))
+	print("Raycast South: " + str(RC_S.is_colliding()))
+	print("Raycast West: " + str(RC_W.is_colliding()))
+	#endregion
 	match(state):
 		RUNNING:
 			run_from_player()
+			if check_for_no_movement():
+				print("DASH CRITERIA MET")
+				velocity = decide_corner_direction()
+				print("velocity: " + str(velocity))
+				state = DASH
 		FOLLOWING:
 			follow_the_player()
 		WANDER:
 			wander_around()
+		DASH:
+			dash()
 		WAITING:
 			velocity = Vector2.ZERO
 	move_and_slide()
@@ -85,10 +127,9 @@ func wander_around():
 	var steering = wander_steering()
 	velocity += steering
 
-#TODO: replace this method with something more elegant
 func random_pauses():
-	label.text = "PAUSE"
 	if state == WANDER:
+		label.text = "PAUSE"
 		state = WAITING
 		scratch_sound.play()
 		wait_timer.start(randf_range(0.4, 1.5))
@@ -109,6 +150,55 @@ func cast_ray() -> bool:
 		return true
 	else:
 		return false
+
+func dash():
+	if max_speed != maximum_speed * 3 and dash_cooldown:
+		max_speed *= 3
+		velocity *= max_speed
+		dash_timer.start()
+		self.set_collision_layer_value(1, false)
+		dash_cooldown_timer.start()
+		dash_cooldown = false
+		label.text = "DASH"
+#endregion
+
+#region Dash Logic
+func check_for_no_movement() -> bool:
+	position_array.push_front(Vector2(snappedf(self.global_position.x, 1.0), snappedf(self.global_position.y, 1.0)))
+	if position_array.size() == array_max_size:
+		if position_array.count(Vector2(snappedf(self.global_position.x, 1.0), snappedf(self.global_position.y, 1.0))) >= array_max_size: # 2 less than full array size just for some wiggle room
+			position_array.clear()
+			return true
+		else:
+			position_array.clear()
+	return false
+
+func randomise_angles():
+	dir_NE = Vector2(randf_range(-1.0, 0.0), randf_range(0.0, 1.0))
+	#dir_NW = Vector2(randf_range(-1.0, 0.0), randf_range(-1.0, 0.0))
+	dir_NW = Vector2(-1.0, 1.0)
+	dir_SE = Vector2(randf_range(0.0, 1.0), randf_range(-1.0, 0.0))
+	dir_SW = Vector2(randf_range(0.0, 1.0), randf_range(0.0, 1.0))
+	
+
+func decide_corner_direction() -> Vector2:
+	randomise_angles()
+	if raycast_NE[0].is_colliding and raycast_NE[1].is_colliding:
+		print("SW")
+		return dir_SW
+	elif raycast_NW[0].is_colliding and raycast_NW[1].is_colliding:
+		print("SE")
+		return dir_SE
+	elif raycast_SE[0].is_colliding and raycast_SE[1].is_colliding:
+		print("NW")
+		return dir_NW
+	elif raycast_SW[0].is_colliding and raycast_SW[1].is_colliding:
+		print("NE")
+		return dir_NE
+	else:
+		print("VOID")
+		return Vector2.ZERO
+
 #endregion
 
 #region signals received
@@ -124,8 +214,11 @@ func _on_detection_radius_body_exited(body):
 		timer.start()
 
 func _on_timer_timeout():
-	state = WANDER
-	wandering_timer.start()
+	if state == RUNNING:
+		state = WANDER
+		wandering_timer.start()
+	else:
+		timer.start()
 
 func _on_player_rat_capture(body):
 	if body == self:
@@ -154,10 +247,20 @@ func _on_raycast_timer_timeout():
 			state = RUNNING
 
 func _on_wandering_timer_timeout():
-	state = FOLLOWING
-	follow_timer.start(randf_range(1.0, 2.0))
+	if state != RUNNING:
+		state = FOLLOWING
+		follow_timer.start(randf_range(1.0, 2.0))
+	
 
 func _on_follow_timer_timeout():
 	if state != WANDER:
 		state = WANDER
+
+func _on_dash_timer_timeout():
+	state = RUNNING
+	max_speed = maximum_speed
+	self.set_collision_layer_value(1, true)
+
+func _on_dash_cooldown_timer_timeout():
+	dash_cooldown = true
 #endregion

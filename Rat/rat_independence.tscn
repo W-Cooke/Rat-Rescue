@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bvn7cqb6savp0"]
+[gd_scene load_steps=22 format=3 uid="uid://bvn7cqb6savp0"]
 
 [ext_resource type="Texture2D" uid="uid://dv03u3qe6qh3f" path="res://Assets/Sprite/rat1.png" id="1_0lliu"]
 [ext_resource type="Script" path="res://Rat/rat_independence.gd" id="1_d65gj"]
@@ -12,6 +12,17 @@
 [ext_resource type="AudioStream" uid="uid://bag67btkepxvw" path="res://Assets/Sound/enchant.wav" id="10_bhrbx"]
 [ext_resource type="AudioStream" uid="uid://b0fvvsml0ylvq" path="res://Assets/Sound/ratsqueak.wav" id="10_ovi4j"]
 [ext_resource type="AudioStream" uid="uid://xfylvxyarjcw" path="res://Assets/Sound/scratching.wav" id="12_4d6fe"]
+
+[sub_resource type="Gradient" id="Gradient_ed1vy"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_30aea"]
+gradient = SubResource("Gradient_ed1vy")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dv3wh"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_30aea")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qmwgc"]
 radius = 7.0
@@ -56,6 +67,13 @@ rat_sprite_4 = ExtResource("3_g7nmb")
 rat_sprite_5 = ExtResource("6_6w8xp")
 rat_sprite_6 = ExtResource("7_b6bcx")
 
+[node name="DashParticles" type="GPUParticles2D" parent="."]
+texture_filter = 1
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_dv3wh")
+texture = ExtResource("1_0lliu")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("8_ab2qx")
@@ -69,16 +87,12 @@ shape = SubResource("CircleShape2D_qmwgc")
 shape = SubResource("CircleShape2D_7bq54")
 
 [node name="Label" type="Label" parent="."]
-offset_left = -24.5
-offset_top = -30.0
-offset_right = 26.5
-offset_bottom = -7.0
+offset_left = -25.0
+offset_top = -48.0
+offset_right = 26.0
+offset_bottom = -25.0
 text = "Follow"
 label_settings = SubResource("LabelSettings_prr4m")
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
-one_shot = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 emitting = false
@@ -89,20 +103,6 @@ one_shot = true
 explosiveness = 0.8
 randomness = 0.68
 
-[node name="WaitTimer" type="Timer" parent="."]
-
-[node name="DistanceTimer" type="Timer" parent="."]
-wait_time = 5.0
-autostart = true
-
-[node name="WanderingTimer" type="Timer" parent="."]
-wait_time = 10.0
-
-[node name="FollowTimer" type="Timer" parent="WanderingTimer"]
-
-[node name="RaycastTimer" type="Timer" parent="."]
-wait_time = 0.5
-
 [node name="DetectedSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_ovi4j")
 
@@ -112,11 +112,59 @@ stream = ExtResource("10_bhrbx")
 [node name="ScratchSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("12_4d6fe")
 
+[node name="Raycasts" type="Node" parent="."]
+
+[node name="RayCastNorth" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(0, -50)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="RayCastEast" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(50, 0)
+
+[node name="RayCastSouth" type="RayCast2D" parent="Raycasts"]
+
+[node name="RayCastWest" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(-50, 0)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="DashTimer" type="Timer" parent="Timers"]
+wait_time = 0.5
+one_shot = true
+
+[node name="Timer" type="Timer" parent="Timers"]
+wait_time = 3.0
+one_shot = true
+
+[node name="WanderingTimer" type="Timer" parent="Timers"]
+wait_time = 10.0
+one_shot = true
+
+[node name="FollowTimer" type="Timer" parent="Timers/WanderingTimer"]
+
+[node name="RaycastTimer" type="Timer" parent="Timers"]
+wait_time = 0.5
+
+[node name="DistanceTimer" type="Timer" parent="Timers"]
+wait_time = 5.0
+autostart = true
+
+[node name="WaitTimer" type="Timer" parent="Timers"]
+
+[node name="DashCooldownTimer" type="Timer" parent="Timers"]
+wait_time = 2.5
+one_shot = true
+
 [connection signal="body_entered" from="DetectionRadius" to="." method="_on_detection_radius_body_entered"]
 [connection signal="body_exited" from="DetectionRadius" to="." method="_on_detection_radius_body_exited"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="WaitTimer" to="." method="_on_wait_timer_timeout"]
-[connection signal="timeout" from="DistanceTimer" to="." method="_on_distance_timer_timeout"]
-[connection signal="timeout" from="WanderingTimer" to="." method="_on_wandering_timer_timeout"]
-[connection signal="timeout" from="WanderingTimer/FollowTimer" to="." method="_on_follow_timer_timeout"]
-[connection signal="timeout" from="RaycastTimer" to="." method="_on_raycast_timer_timeout"]
+[connection signal="timeout" from="Timers/DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="Timers/Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timers/WanderingTimer" to="." method="_on_wandering_timer_timeout"]
+[connection signal="timeout" from="Timers/WanderingTimer/FollowTimer" to="." method="_on_follow_timer_timeout"]
+[connection signal="timeout" from="Timers/RaycastTimer" to="." method="_on_raycast_timer_timeout"]
+[connection signal="timeout" from="Timers/DistanceTimer" to="." method="_on_distance_timer_timeout"]
+[connection signal="timeout" from="Timers/WaitTimer" to="." method="_on_wait_timer_timeout"]
+[connection signal="timeout" from="Timers/DashCooldownTimer" to="." method="_on_dash_cooldown_timer_timeout"]

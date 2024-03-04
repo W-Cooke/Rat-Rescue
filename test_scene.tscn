@@ -18,15 +18,7 @@ position = Vector2(78, 408)
 scale = Vector2(2, 2)
 SPEED = 300.0
 
-[node name="RatIndependence3" parent="." instance=ExtResource("2_wjwhy")]
-position = Vector2(613, 405)
-
 [node name="RatIndependence" parent="." instance=ExtResource("2_wjwhy")]
 position = Vector2(394, 260)
 
-[node name="RatIndependence2" parent="." instance=ExtResource("2_wjwhy")]
-position = Vector2(594, 237)
-
-[connection signal="rat_capture" from="Player" to="RatIndependence3" method="_on_player_rat_capture"]
 [connection signal="rat_capture" from="Player" to="RatIndependence" method="_on_player_rat_capture"]
-[connection signal="rat_capture" from="Player" to="RatIndependence2" method="_on_player_rat_capture"]

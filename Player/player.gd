@@ -5,6 +5,7 @@ extends CharacterBody2D
 signal net_spin
 signal rat_capture
 @onready var magic_sound = $MagicSound
+@onready var spell_effect = $SpellEffect
 
 # spinning script variables
 @export_category ("Spin Variables")
@@ -27,12 +28,18 @@ var keyboard_controls : bool = false
 @onready var net = $Net
 @onready var netsprite = $Net/NetSprite
 @onready var particles = $Net/GPUParticles2D
+@onready var player_sprite = $PlayerAnimatedSprite
 #endregion
+
+func _ready():
+	spell_effect.hide()
 
 func _physics_process(_delta):
 	velocity = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down") * SPEED
 	if velocity.x != 0:
-		$PlayerSprite.flip_h = velocity.x < 0
+		player_sprite.flip_h = velocity.x < 0
+	else:
+		player_sprite.stop()
 	move_and_slide()
 	#TODO: remove and replace with settings
 	if Input.is_action_just_released("controller switch"):
@@ -97,6 +104,8 @@ func handle_bools(state):
 			spinning_anticlockwise = false
 			spinning_clockwise = true
 			netsprite.flip_h = false
+			spell_effect.flip_h = true
+			spell_effect.show()
 			particles.emitting = true
 			if not magic_sound.playing:
 				magic_sound.play()
@@ -104,6 +113,8 @@ func handle_bools(state):
 			spinning_anticlockwise = true
 			spinning_clockwise = false
 			netsprite.flip_h = true
+			spell_effect.flip_h = false
+			spell_effect.show()
 			particles.emitting = true
 			if not magic_sound.playing:
 				magic_sound.play()
@@ -111,6 +122,7 @@ func handle_bools(state):
 			spinning_anticlockwise = false
 			spinning_clockwise = false
 			particles.emitting = false
+			spell_effect.hide()
 			magic_sound.stop()
 
 # calculates mean, who would've guessed!
@@ -122,6 +134,10 @@ func calculate_mean(arr):
 	var mean : float = sum / count
 	return mean
 #endregion
+
+func animation_handler():
+	if spinning_anticlockwise or spinning_clockwise:
+		player_sprite.play("cast_warmup")
 
 func _on_net_body_entered(body):
 	if body.is_in_group("rat"):
