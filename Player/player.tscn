@@ -1,10 +1,10 @@
-[gd_scene load_steps=33 format=3 uid="uid://dqrujxar1ft6l"]
+[gd_scene load_steps=44 format=3 uid="uid://dqrujxar1ft6l"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_avsqt"]
-[ext_resource type="Texture2D" uid="uid://bowrf0axx8nsa" path="res://Assets/Sprite/Tiles/tile_0084.png" id="2_e5l2x"]
 [ext_resource type="Texture2D" uid="uid://05eph82rjipj" path="res://Assets/Sprite/Net.png" id="3_5dlip"]
 [ext_resource type="AudioStream" uid="uid://bou413j3p3ast" path="res://Assets/Sound/410259__adrimb86__fairy_sound.wav" id="4_hybtw"]
 [ext_resource type="Texture2D" uid="uid://5ta065ey2kax" path="res://Assets/Sprite/Tilemap/Spinning_effect_magic.png" id="5_6aupx"]
+[ext_resource type="Texture2D" uid="uid://xg0yuvicql3r" path="res://Assets/Sprite/star_01.png" id="6_ychg6"]
 [ext_resource type="Texture2D" uid="uid://bp0onx0tip87b" path="res://Assets/Sprite/Wizard_animated.png" id="6_ytly8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_77txr"]
@@ -99,8 +99,12 @@ animations = [{
 }],
 "loop": true,
 "name": &"Spell_Effect",
-"speed": 15.0
+"speed": 12.0
 }]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6w37k"]
+atlas = ExtResource("6_ytly8")
+region = Rect2(17, 17, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_snd44"]
 atlas = ExtResource("6_ytly8")
@@ -110,15 +114,47 @@ region = Rect2(34, 17, 16, 16)
 atlas = ExtResource("6_ytly8")
 region = Rect2(0, 34, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jw55q"]
-atlas = ExtResource("6_ytly8")
-region = Rect2(17, 17, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6n518"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3rl0j"]
 atlas = ExtResource("6_ytly8")
 region = Rect2(34, 17, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yksxk"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_6hc67"]
+atlas = ExtResource("6_ytly8")
+region = Rect2(0, 34, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1fa3g"]
+atlas = ExtResource("6_ytly8")
+region = Rect2(34, 17, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xhidy"]
+atlas = ExtResource("6_ytly8")
+region = Rect2(0, 34, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_35ex7"]
+atlas = ExtResource("6_ytly8")
+region = Rect2(34, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1dv3"]
+atlas = ExtResource("6_ytly8")
+region = Rect2(34, 17, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xwo8j"]
+atlas = ExtResource("6_ytly8")
+region = Rect2(0, 34, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gk04"]
+atlas = ExtResource("6_ytly8")
+region = Rect2(34, 17, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ma353"]
+atlas = ExtResource("6_ytly8")
+region = Rect2(0, 34, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_llj7p"]
+atlas = ExtResource("6_ytly8")
+region = Rect2(34, 17, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmxhm"]
 atlas = ExtResource("6_ytly8")
 region = Rect2(0, 34, 16, 16)
 
@@ -142,27 +178,49 @@ region = Rect2(0, 17, 16, 16)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_6w37k")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_snd44")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_u4eff")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3rl0j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6hc67")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1fa3g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xhidy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_35ex7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m1dv3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xwo8j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5gk04")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ma353")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_llj7p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xmxhm")
 }],
 "loop": true,
 "name": &"cast_loop",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jw55q")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6n518")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yksxk")
-}],
-"loop": false,
-"name": &"cast_warmup",
 "speed": 5.0
 }, {
 "frames": [{
@@ -186,6 +244,13 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_npudd"]
 radius = 8.2922
 
+[sub_resource type="Gradient" id="Gradient_jc6q5"]
+offsets = PackedFloat32Array(0, 0.295082, 0.508197, 0.704918, 0.827869)
+colors = PackedColorArray(0.758047, 0.360078, 0.988015, 1, 1, 1, 1, 1, 0.571716, 0.304576, 0.995544, 1, 1, 1, 1, 1, 0.616777, 0.429531, 0.992063, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_asm3t"]
+gradient = SubResource("Gradient_jc6q5")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p5xja"]
 lifetime_randomness = 0.84
 particle_flag_disable_z = true
@@ -195,18 +260,14 @@ angle_min = -418.1
 angle_max = 412.5
 spread = 57.588
 gravity = Vector3(0, -10.115, 0)
-scale_min = 0.0
-scale_max = 0.5
-color = Color(0.866667, 0.701961, 0.984314, 1)
+scale_min = 0.01
+scale_max = 0.05
+color_ramp = SubResource("GradientTexture1D_asm3t")
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 3
 motion_mode = 1
 script = ExtResource("1_avsqt")
-
-[node name="PlayerSprite" type="Sprite2D" parent="."]
-visible = false
-texture_filter = 1
-texture = ExtResource("2_e5l2x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
@@ -218,19 +279,18 @@ volume_db = -7.7
 pitch_scale = 0.62
 
 [node name="SpellEffect" type="AnimatedSprite2D" parent="."]
-visible = false
 texture_filter = 1
-scale = Vector2(1.4, 1.4)
+scale = Vector2(2.085, 2.085)
 sprite_frames = SubResource("SpriteFrames_v5iq7")
 animation = &"Spell_Effect"
 autoplay = "Spell_Effect"
-frame_progress = 0.783296
-offset = Vector2(0, 3.04)
+frame_progress = 0.74472
+offset = Vector2(0, 0.765)
 
 [node name="PlayerAnimatedSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_ulbay")
-animation = &"cast_warmup"
+animation = &"cast_loop"
 
 [node name="Net" type="Area2D" parent="."]
 
@@ -248,7 +308,7 @@ shape = SubResource("CircleShape2D_npudd")
 position = Vector2(-2.225, -15.69)
 amount = 100
 process_material = SubResource("ParticleProcessMaterial_p5xja")
-trail_enabled = true
+texture = ExtResource("6_ychg6")
 trail_lifetime = 1.07
 
 [connection signal="body_entered" from="Net" to="." method="_on_net_body_entered"]

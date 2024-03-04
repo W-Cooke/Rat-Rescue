@@ -29,9 +29,7 @@ var keyboard_controls : bool = false
 @onready var netsprite = $Net/NetSprite
 @onready var particles = $Net/GPUParticles2D
 @onready var player_sprite = $PlayerAnimatedSprite
-var anim_warmup : bool = false
-var anim_done : bool = false
-var anim_looping : bool = false
+var casting_animation : bool = false
 #endregion
 
 func _ready():
@@ -109,6 +107,7 @@ func handle_bools(state):
 			spell_effect.flip_h = true
 			spell_effect.show()
 			particles.emitting = true
+			casting_animation = true
 			if not magic_sound.playing:
 				magic_sound.play()
 		ANTICLOCKWISE:
@@ -118,17 +117,16 @@ func handle_bools(state):
 			spell_effect.flip_h = false
 			spell_effect.show()
 			particles.emitting = true
+			casting_animation = true
 			if not magic_sound.playing:
 				magic_sound.play()
 		NOT:
 			spinning_anticlockwise = false
 			spinning_clockwise = false
 			particles.emitting = false
+			casting_animation = false
 			spell_effect.hide()
 			magic_sound.stop()
-			anim_looping = false
-			anim_warmup = false
-			anim_done = false
 
 # calculates mean, who would've guessed!
 func calculate_mean(arr):
@@ -142,18 +140,16 @@ func calculate_mean(arr):
 
 #TODO: fix this so criteria matches animation state, currently not finished
 func animation_handler():
-	if (spinning_anticlockwise or spinning_clockwise) and not anim_warmup:
-		player_sprite.play("cast_warmup")
-		print("warmup")
-		anim_warmup = true
-	elif (spinning_anticlockwise or spinning_clockwise) and not anim_done:
-		if not player_sprite.is_playing():
-			anim_done = true
-	elif (spinning_anticlockwise or spinning_clockwise) and (anim_warmup and anim_done) and not anim_looping:
-		player_sprite.play("cast_loop")
-		anim_looping = true
+	if velocity.x != 0:
+		if not casting_animation:
+			player_sprite.play("run")
+		else:
+			player_sprite.play("cast_loop")
 	else:
-		player_sprite.play("run")
+		if not casting_animation:
+			player_sprite.stop()
+		else:
+			player_sprite.play("cast_loop")
 
 func _on_net_body_entered(body):
 	if body.is_in_group("rat"):

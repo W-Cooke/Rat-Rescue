@@ -50,10 +50,10 @@ var dir_SW : Vector2 = Vector2(-1.0, -1.0)
 #endregion
 
 #region raycasts
-@onready var RC_N : Object = $Raycasts/RayCastNorth
-@onready var RC_S : Object = $Raycasts/RayCastSouth
-@onready var RC_E : Object = $Raycasts/RayCastEast
-@onready var RC_W : Object = $Raycasts/RayCastWest
+@onready var RC_N : Object = $RayCastNorth
+@onready var RC_S : Object = $RayCastSouth
+@onready var RC_E : Object = $RayCastEast
+@onready var RC_W : Object = $RayCastWest
 
 @onready var raycast_NE : Array[Object] = [RC_N, RC_E]
 @onready var raycast_NW : Array[Object] = [RC_N, RC_W]
@@ -77,18 +77,10 @@ func _ready():
 
 func _physics_process(_delta):
 	# state machine 
-	
-	# region debug
-	print("Raycast North: " + str(RC_N.is_colliding()))
-	print("Raycast East: " + str(RC_E.is_colliding()))
-	print("Raycast South: " + str(RC_S.is_colliding()))
-	print("Raycast West: " + str(RC_W.is_colliding()))
-	#endregion
 	match(state):
 		RUNNING:
 			run_from_player()
 			if check_for_no_movement():
-				print("DASH CRITERIA MET")
 				velocity = decide_corner_direction()
 				print("velocity: " + str(velocity))
 				state = DASH
@@ -158,7 +150,9 @@ func dash():
 		max_speed *= 3
 		velocity *= max_speed
 		dash_timer.start()
+		dash_particles.emitting = true
 		self.set_collision_layer_value(1, false)
+		self.set_collision_mask_value(2, false)
 		dash_cooldown_timer.start()
 		dash_cooldown = false
 		label.text = "DASH"
@@ -176,25 +170,23 @@ func check_for_no_movement() -> bool:
 	return false
 
 func randomise_angles():
-	dir_NE = Vector2(randf_range(-1.0, 0.0), randf_range(0.0, 1.0))
-	#dir_NW = Vector2(randf_range(-1.0, 0.0), randf_range(-1.0, 0.0))
-	dir_NW = Vector2(-1.0, 1.0)
-	dir_SE = Vector2(randf_range(0.0, 1.0), randf_range(-1.0, 0.0))
-	dir_SW = Vector2(randf_range(0.0, 1.0), randf_range(0.0, 1.0))
-	
+	dir_NE = Vector2(randf_range(0.0, 1.0), randf_range(-1.0, 0.0))
+	dir_NW = Vector2(randf_range(-1.0, 0.0), randf_range(-1.0, 0.0))
+	dir_SE = Vector2(randf_range(0.0, 1.0), randf_range(0.0, 1.0))
+	dir_SW = Vector2(randf_range(-1.0, 0.0), randf_range(0.0, 1.0))
 
 func decide_corner_direction() -> Vector2:
 	randomise_angles()
-	if raycast_NE[0].is_colliding and raycast_NE[1].is_colliding:
+	if raycast_NE[0].is_colliding() and raycast_NE[1].is_colliding():
 		print("SW")
 		return dir_SW
-	elif raycast_NW[0].is_colliding and raycast_NW[1].is_colliding:
+	elif raycast_NW[0].is_colliding() and raycast_NW[1].is_colliding():
 		print("SE")
 		return dir_SE
-	elif raycast_SE[0].is_colliding and raycast_SE[1].is_colliding:
+	elif raycast_SE[0].is_colliding() and raycast_SE[1].is_colliding():
 		print("NW")
 		return dir_NW
-	elif raycast_SW[0].is_colliding and raycast_SW[1].is_colliding:
+	elif raycast_SW[0].is_colliding() and raycast_SW[1].is_colliding():
 		print("NE")
 		return dir_NE
 	else:
@@ -207,9 +199,13 @@ func decide_corner_direction() -> Vector2:
 func _on_detection_radius_body_entered(body):
 	if body.is_in_group("player"):
 		raycast_timer.start()
+		if not timer.is_stopped():
+			timer.stop()
 		if cast_ray():
-			state = RUNNING
-			detected_sound.play()
+			if state != RUNNING and state != DASH:
+				state = RUNNING
+				detected_sound.play()
+
 
 func _on_detection_radius_body_exited(body):
 	if body.is_in_group("player") and state == RUNNING:
@@ -226,7 +222,6 @@ func _on_player_rat_capture(body):
 	if body == self:
 		self.remove_from_group("rat")
 		state = WAITING
-		$GPUParticles2D.emitting = true
 		$Sprite2D.hide()
 		spell_effect.show()
 		spell_effect.play()
@@ -236,7 +231,8 @@ func _on_player_rat_capture(body):
 		queue_free()
 
 func _on_distance_timer_timeout():
-	random_pauses()
+	if state == WANDER:
+		random_pauses()
 	distance_timer.start(randf_range(3.0, 6.0))
 
 func _on_wait_timer_timeout():
@@ -264,7 +260,9 @@ func _on_follow_timer_timeout():
 func _on_dash_timer_timeout():
 	state = RUNNING
 	max_speed = maximum_speed
+	dash_particles.emitting = false
 	self.set_collision_layer_value(1, true)
+	self.set_collision_mask_value(2, true)
 
 func _on_dash_cooldown_timer_timeout():
 	dash_cooldown = true

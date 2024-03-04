@@ -7,6 +7,7 @@
 [node name="TestScene" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
+texture_filter = 1
 position = Vector2(-8, -5)
 scale = Vector2(2, 2)
 tile_set = ExtResource("1_0e2x4")
@@ -21,4 +22,14 @@ SPEED = 300.0
 [node name="RatIndependence" parent="." instance=ExtResource("2_wjwhy")]
 position = Vector2(394, 260)
 
+[node name="RatIndependence2" parent="." instance=ExtResource("2_wjwhy")]
+position = Vector2(222, 159)
+collision_mask = 1
+
+[node name="RatIndependence3" parent="." instance=ExtResource("2_wjwhy")]
+position = Vector2(361, 464)
+collision_mask = 1
+
 [connection signal="rat_capture" from="Player" to="RatIndependence" method="_on_player_rat_capture"]
+[connection signal="rat_capture" from="Player" to="RatIndependence2" method="_on_player_rat_capture"]
+[connection signal="rat_capture" from="Player" to="RatIndependence3" method="_on_player_rat_capture"]

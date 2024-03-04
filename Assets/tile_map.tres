@@ -520,7 +520,7 @@ texture = ExtResource("1_fomgi")
 3:2/0 = 0
 3:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:2/0/physics_layer_0/angular_velocity = 0.0
-3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -2.125, -8, -1.875, -0.25, -8, 0.5)
+3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -2.125, -8, -1.875, 0.25, -8, 1.5)
 3:2/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_peoqh")
 3:3/0 = 0
 3:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -758,6 +758,7 @@ texture = ExtResource("1_fomgi")
 0:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_dxi14")
 
 [resource]
-physics_layer_0/collision_layer = 1
-navigation_layer_0/layers = 1
+physics_layer_0/collision_layer = 3
+physics_layer_0/collision_mask = 3
+navigation_layer_0/layers = 3
 sources/0 = SubResource("TileSetAtlasSource_nbpvv")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bvn7cqb6savp0"]
+[gd_scene load_steps=29 format=3 uid="uid://bvn7cqb6savp0"]
 
 [ext_resource type="Texture2D" uid="uid://dv03u3qe6qh3f" path="res://Assets/Sprite/rat1.png" id="1_0lliu"]
 [ext_resource type="Script" path="res://Rat/rat_independence.gd" id="1_d65gj"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://f4p3jisyyha4" path="res://Assets/Sprite/rat4.png" id="6_6w8xp"]
 [ext_resource type="Texture2D" uid="uid://cymdnfb7ccaom" path="res://Assets/Sprite/rat5.png" id="7_b6bcx"]
 [ext_resource type="Texture2D" uid="uid://dgtc7oojywqgs" path="res://Assets/Sprite/Tiles/tile_0060.png" id="8_ab2qx"]
-[ext_resource type="Texture2D" uid="uid://xg0yuvicql3r" path="res://Assets/Sprite/star_01.png" id="9_xsmrb"]
 [ext_resource type="AudioStream" uid="uid://bag67btkepxvw" path="res://Assets/Sound/enchant.wav" id="10_bhrbx"]
 [ext_resource type="AudioStream" uid="uid://b0fvvsml0ylvq" path="res://Assets/Sound/ratsqueak.wav" id="10_ovi4j"]
 [ext_resource type="AudioStream" uid="uid://xfylvxyarjcw" path="res://Assets/Sound/scratching.wav" id="12_4d6fe"]
@@ -23,6 +22,8 @@ gradient = SubResource("Gradient_ed1vy")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dv3wh"]
 particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 2.0
 color_ramp = SubResource("GradientTexture1D_30aea")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qmwgc"]
@@ -34,28 +35,6 @@ radius = 138.014
 [sub_resource type="LabelSettings" id="LabelSettings_prr4m"]
 outline_size = 6
 outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="Curve" id="Curve_8fyxm"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.93865, 0.021978), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_711bi"]
-curve = SubResource("Curve_8fyxm")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tkkdo"]
-particle_flag_disable_z = true
-direction = Vector3(0, -1, 0)
-spread = 60.158
-initial_velocity_min = 52.63
-initial_velocity_max = 52.63
-angular_velocity_min = -717.49
-angular_velocity_max = 813.24
-gravity = Vector3(0, 98, 0)
-linear_accel_min = 46.31
-linear_accel_max = 46.31
-scale_min = 0.1
-scale_max = 0.1
-scale_curve = SubResource("CurveTexture_711bi")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iu5tv"]
 atlas = ExtResource("13_bovso")
@@ -130,6 +109,7 @@ animations = [{
 
 [node name="RatIndependence" type="CharacterBody2D" groups=["rat"]]
 scale = Vector2(2, 2)
+collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_d65gj")
 rat_sprite_1 = ExtResource("1_0lliu")
@@ -142,9 +122,10 @@ rat_sprite_6 = ExtResource("7_b6bcx")
 [node name="DashParticles" type="GPUParticles2D" parent="."]
 texture_filter = 1
 emitting = false
-amount = 1
+amount = 20
 process_material = SubResource("ParticleProcessMaterial_dv3wh")
 texture = ExtResource("1_0lliu")
+lifetime = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -159,21 +140,13 @@ shape = SubResource("CircleShape2D_qmwgc")
 shape = SubResource("CircleShape2D_7bq54")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_left = -25.0
 offset_top = -48.0
 offset_right = 26.0
 offset_bottom = -25.0
 text = "Follow"
 label_settings = SubResource("LabelSettings_prr4m")
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-emitting = false
-amount = 30
-process_material = SubResource("ParticleProcessMaterial_tkkdo")
-texture = ExtResource("9_xsmrb")
-one_shot = true
-explosiveness = 0.8
-randomness = 0.68
 
 [node name="DetectedSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_ovi4j")
@@ -184,22 +157,27 @@ stream = ExtResource("10_bhrbx")
 [node name="ScratchSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("12_4d6fe")
 
-[node name="Raycasts" type="Node" parent="."]
-
-[node name="RayCastNorth" type="RayCast2D" parent="Raycasts"]
+[node name="RayCastNorth" type="RayCast2D" parent="."]
+scale = Vector2(0.5, 0.5)
 target_position = Vector2(0, -50)
 collide_with_areas = true
-collide_with_bodies = false
 
-[node name="RayCastEast" type="RayCast2D" parent="Raycasts"]
+[node name="RayCastEast" type="RayCast2D" parent="."]
+scale = Vector2(0.5, 0.5)
+exclude_parent = false
 target_position = Vector2(50, 0)
+collide_with_areas = true
 
-[node name="RayCastSouth" type="RayCast2D" parent="Raycasts"]
+[node name="RayCastSouth" type="RayCast2D" parent="."]
+scale = Vector2(0.5, 0.5)
+exclude_parent = false
+collide_with_areas = true
 
-[node name="RayCastWest" type="RayCast2D" parent="Raycasts"]
+[node name="RayCastWest" type="RayCast2D" parent="."]
+scale = Vector2(0.5, 0.5)
+exclude_parent = false
 target_position = Vector2(-50, 0)
 collide_with_areas = true
-collide_with_bodies = false
 
 [node name="Timers" type="Node" parent="."]
 
