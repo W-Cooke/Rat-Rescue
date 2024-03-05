@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://d0w4dn3rllsuq"]
+[gd_scene load_steps=7 format=3 uid="uid://d0w4dn3rllsuq"]
 
 [ext_resource type="Shader" path="res://Scripts/scrolling_rats.gdshader" id="1_5nv8d"]
 [ext_resource type="Shader" path="res://Scripts/UI_Background.gdshader" id="1_qfjft"]
 [ext_resource type="Texture2D" uid="uid://26l4qkyvhble" path="res://Assets/UI/Wave-2.9s-1084px.png" id="2_3so81"]
 [ext_resource type="Texture2D" uid="uid://cvm6khpwvojxp" path="res://Assets/Sprite/Tilemap/BG_Rat_Tiles.png" id="4_7wujj"]
-[ext_resource type="Texture2D" uid="uid://b2pm7matkmaki" path="res://Assets/UI/RR_LOGO_1.png" id="5_rf6wi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tx3or"]
 shader = ExtResource("1_qfjft")
@@ -44,14 +43,3 @@ scale = Vector2(1, 1.04762)
 texture = ExtResource("4_7wujj")
 expand_mode = 2
 stretch_mode = 1
-
-[node name="TextureRect3" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -227.0
-offset_right = 228.0
-offset_bottom = 435.0
-grow_horizontal = 2
-texture = ExtResource("5_rf6wi")

@@ -38,7 +38,7 @@ const DISTANCE_THRESHOLD : float = 3.0
 
 #region position array
 var position_array : Array = []
-var array_max_size : int = 30
+var array_max_size : int = 20
 var dash_cooldown : bool = true
 #endregion
 
@@ -162,7 +162,7 @@ func dash():
 func check_for_no_movement() -> bool:
 	position_array.push_front(Vector2(snappedf(self.global_position.x, 1.0), snappedf(self.global_position.y, 1.0)))
 	if position_array.size() == array_max_size:
-		if position_array.count(Vector2(snappedf(self.global_position.x, 1.0), snappedf(self.global_position.y, 1.0))) >= array_max_size: # 2 less than full array size just for some wiggle room
+		if position_array.count(Vector2(snappedf(self.global_position.x, 1.0), snappedf(self.global_position.y, 1.0))) >= array_max_size:
 			position_array.clear()
 			return true
 		else:

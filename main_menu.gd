@@ -56,3 +56,7 @@ func ui_manager():
 			cursor.position.x += menu_array[cursor_index].text.length() * 4
 		3:
 			cursor.position.x += menu_array[cursor_index].text.length() * 20
+
+
+func _on_menu_music_finished():
+	$MenuMusic.play()

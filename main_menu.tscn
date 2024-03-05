@@ -1,12 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://b1icdgxc13mje"]
+[gd_scene load_steps=10 format=3 uid="uid://b1icdgxc13mje"]
 
 [ext_resource type="PackedScene" uid="uid://d0w4dn3rllsuq" path="res://Assets/UI/UI_Background.tscn" id="1_2qmld"]
 [ext_resource type="FontFile" uid="uid://bdn714kv37s2p" path="res://Assets/UI/PixelifySans-VariableFont_wght.ttf" id="1_kklgt"]
 [ext_resource type="Script" path="res://main_menu.gd" id="1_musqw"]
+[ext_resource type="AudioStream" uid="uid://chgqu4a6fbcpd" path="res://Assets/Sound/Music/381307__adnova__beepbox-3.wav" id="3_dr2t5"]
 [ext_resource type="LabelSettings" uid="uid://bkud046cx5bw6" path="res://Assets/UI/main_menu.tres" id="3_xmwoo"]
 [ext_resource type="Texture2D" uid="uid://cc8yyxx1j3f5g" path="res://Assets/UI/generic_arrows_diagonal_all.png" id="4_mlfkg"]
 [ext_resource type="AudioStream" uid="uid://d3pj8fffxfyh6" path="res://Assets/Sound/confirmation_002.wav" id="6_b7qif"]
 [ext_resource type="AudioStream" uid="uid://b184letr5wfle" path="res://Assets/Sound/select_007.wav" id="7_iqwp0"]
+[ext_resource type="Texture2D" uid="uid://b2pm7matkmaki" path="res://Assets/UI/RR_LOGO_1.png" id="9_5gxb4"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -19,6 +21,11 @@ script = ExtResource("1_musqw")
 
 [node name="UI_BG" parent="." instance=ExtResource("1_2qmld")]
 layout_mode = 1
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_dr2t5")
+volume_db = -5.622
+autoplay = true
 
 [node name="ConfirmSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_b7qif")
@@ -95,3 +102,16 @@ layout_mode = 2
 text = "Quit"
 label_settings = ExtResource("3_xmwoo")
 horizontal_alignment = 1
+
+[node name="Logo" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -227.0
+offset_right = 228.0
+offset_bottom = 435.0
+grow_horizontal = 2
+texture = ExtResource("9_5gxb4")
+
+[connection signal="finished" from="MenuMusic" to="." method="_on_menu_music_finished"]
