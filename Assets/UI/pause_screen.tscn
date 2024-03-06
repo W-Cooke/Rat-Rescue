@@ -1,21 +1,34 @@
-[gd_scene load_steps=6 format=3 uid="uid://cnuyvrigk0ryw"]
+[gd_scene load_steps=8 format=3 uid="uid://cnuyvrigk0ryw"]
 
+[ext_resource type="Script" path="res://Assets/UI/pause_screen.gd" id="1_5kb2c"]
 [ext_resource type="Shader" path="res://Assets/UI/pause_screen.gdshader" id="1_5kpjv"]
 [ext_resource type="Texture2D" uid="uid://cc8yyxx1j3f5g" path="res://Assets/UI/generic_arrows_diagonal_all.png" id="1_kl3hg"]
 [ext_resource type="FontFile" uid="uid://bdn714kv37s2p" path="res://Assets/UI/PixelifySans-VariableFont_wght.ttf" id="2_o3g50"]
 [ext_resource type="LabelSettings" uid="uid://bkud046cx5bw6" path="res://Assets/UI/main_menu.tres" id="3_x0g1m"]
+[ext_resource type="AudioStream" uid="uid://b184letr5wfle" path="res://Assets/Sound/select_007.wav" id="6_a2dcm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3lhhl"]
 shader = ExtResource("1_5kpjv")
-shader_parameter/amount = 1.371
+shader_parameter/amount = 1.4
 
 [node name="PauseScreen" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_5kb2c")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_3lhhl")
+layout_mode = 0
+offset_left = -366.0
+offset_top = -402.0
+offset_right = 354.0
+offset_bottom = 318.0
+scale = Vector2(2, 2)
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -36,22 +49,16 @@ pivot_offset = Vector2(146.835, 0)
 layout_mode = 2
 alignment = 1
 
-[node name="StartGame" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="Resume" type="Label" parent="CenterContainer/VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_o3g50")
 theme_override_font_sizes/font_size = 46
-text = "TODO: sort this out"
+text = "Resume"
 label_settings = ExtResource("3_x0g1m")
 horizontal_alignment = 1
 
-[node name="Settings" type="Label" parent="CenterContainer/VBoxContainer"]
-layout_mode = 2
-text = "Settings"
-label_settings = ExtResource("3_x0g1m")
-horizontal_alignment = 1
-
-[node name="Credits" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="MainMenu" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "Main Menu"
 label_settings = ExtResource("3_x0g1m")
@@ -86,17 +93,5 @@ patch_margin_bottom = 22
 axis_stretch_horizontal = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_3lhhl")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -23.0
-offset_top = -14.0
-offset_right = -23.0
-offset_bottom = -14.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.07856, 1.03686)
-color = Color(1, 1, 1, 0.054902)
+[node name="SelectSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_a2dcm")
