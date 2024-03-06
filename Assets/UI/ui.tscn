@@ -26,8 +26,6 @@ offset_right = 231.0
 offset_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("1_kfhhg")
-theme_override_font_sizes/font_size = 29
 text = "RATS \"RESCUED\"!"
 label_settings = ExtResource("2_phewt")
 
@@ -36,7 +34,15 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
 [node name="RatsLeftLabel" type="Label" parent="VBoxContainer/HBoxContainer"]

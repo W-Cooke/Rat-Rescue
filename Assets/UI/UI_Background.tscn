@@ -25,20 +25,24 @@ grow_vertical = 2
 
 [node name="TextureRect2" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_tx3or")
-layout_mode = 0
-offset_left = -11.0
-offset_top = -7.0
-offset_right = 728.0
-offset_bottom = 732.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_3so81")
 stretch_mode = 1
 
 [node name="TextureRect" type="TextureRect" parent="."]
 texture_filter = 1
 material = SubResource("ShaderMaterial_a2lar")
-layout_mode = 0
-offset_right = 740.0
-offset_bottom = 697.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(1, 1.04762)
 texture = ExtResource("4_7wujj")
 expand_mode = 2

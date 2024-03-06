@@ -45,10 +45,10 @@ func _physics_process(_delta):
 	if Input.is_action_just_released("controller switch"):
 		if keyboard_controls:
 			keyboard_controls = false
-			print("mode switched to keyboard controls")
+			print("mode switched to controller")
 		else:
 			keyboard_controls = true
-			print("mode switched to controller")
+			print("mode switched to keyboard controls")
 	if keyboard_controls:
 		net_spin_keyboard()
 	else:

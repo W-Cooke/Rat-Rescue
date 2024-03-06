@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://byv31wb3k77mn"]
+[gd_scene load_steps=5 format=3 uid="uid://byv31wb3k77mn"]
 
 [ext_resource type="TileSet" uid="uid://ba4pi7vawvoog" path="res://Assets/tile_map.tres" id="1_0e2x4"]
 [ext_resource type="PackedScene" uid="uid://dqrujxar1ft6l" path="res://Player/player.tscn" id="2_jc2an"]
 [ext_resource type="PackedScene" uid="uid://bvn7cqb6savp0" path="res://Rat/rat_independence.tscn" id="2_wjwhy"]
+[ext_resource type="PackedScene" uid="uid://cnuyvrigk0ryw" path="res://Assets/UI/pause_screen.tscn" id="4_1xe3t"]
 
 [node name="TestScene" type="Node2D"]
 
@@ -29,6 +30,8 @@ collision_mask = 1
 [node name="RatIndependence3" parent="." instance=ExtResource("2_wjwhy")]
 position = Vector2(361, 464)
 collision_mask = 1
+
+[node name="PauseScreen" parent="." instance=ExtResource("4_1xe3t")]
 
 [connection signal="rat_capture" from="Player" to="RatIndependence" method="_on_player_rat_capture"]
 [connection signal="rat_capture" from="Player" to="RatIndependence2" method="_on_player_rat_capture"]

@@ -2,7 +2,8 @@ extends CharacterBody2D
 
 #region variable declaration
 @export var maximum_speed : float = 300.0
-var max_speed = maximum_speed
+var wander_speed : float = maximum_speed / 2
+var max_speed : float = maximum_speed
 @onready var label = $Label
 @onready var timer = $Timers/Timer
 @onready var distance_timer = $Timers/DistanceTimer
@@ -74,6 +75,9 @@ func _ready():
 	dash_particles.texture = image
 	$Sprite2D.texture = image
 	spell_effect.hide()
+	# randomise speed a little
+	maximum_speed = randf_range(maximum_speed - 10, maximum_speed + 40.0)
+	print("maximum speed: " + str(maximum_speed))
 
 func _physics_process(_delta):
 	# state machine 
@@ -130,7 +134,7 @@ func random_pauses():
 
 func wander_steering() -> Vector2:
 	wander_angle = randf_range(wander_angle - WANDER_RANDOMNESS, wander_angle + WANDER_RANDOMNESS)
-	var vector_to_circle : Vector2 = velocity.normalized() * max_speed
+	var vector_to_circle : Vector2 = velocity.normalized() * wander_speed
 	var desired_velocity : Vector2 = vector_to_circle + Vector2(WANDER_CIRCLE_RADIUS, 0).rotated(wander_angle)
 	return desired_velocity - velocity
 
@@ -146,7 +150,7 @@ func cast_ray() -> bool:
 		return false
 
 func dash():
-	if max_speed != maximum_speed * 3 and dash_cooldown:
+	if dash_cooldown:
 		max_speed *= 3
 		velocity *= max_speed
 		dash_timer.start()
@@ -178,19 +182,14 @@ func randomise_angles():
 func decide_corner_direction() -> Vector2:
 	randomise_angles()
 	if raycast_NE[0].is_colliding() and raycast_NE[1].is_colliding():
-		print("SW")
 		return dir_SW
 	elif raycast_NW[0].is_colliding() and raycast_NW[1].is_colliding():
-		print("SE")
 		return dir_SE
 	elif raycast_SE[0].is_colliding() and raycast_SE[1].is_colliding():
-		print("NW")
 		return dir_NW
 	elif raycast_SW[0].is_colliding() and raycast_SW[1].is_colliding():
-		print("NE")
 		return dir_NE
 	else:
-		print("VOID")
 		return Vector2.ZERO
 
 #endregion
