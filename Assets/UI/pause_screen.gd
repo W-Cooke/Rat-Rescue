@@ -8,6 +8,7 @@ extends Control
 @onready var pause_array : Array = [resume, main_menu, quit]
 @onready var cursor = $Cursor
 @onready var select_sound = $SelectSound
+@onready var confirm_sound = $ConfirmSound
 
 var pause_index : int = 0
 
@@ -15,7 +16,16 @@ func _ready():
 	cursor.global_position = pause_array[pause_index].global_position
 
 func _process(_delta):
-	ui_manager()
+	if get_tree().paused:
+		ui_manager()
+		if Input.is_action_just_released("ui_accept"):
+			match(pause_index):
+				0:
+					resume_game()
+				1:
+					confirm_sound.play()
+				2:
+					quit_game()
 
 func ui_manager():
 	if Input.is_action_just_released("ui_up"):
@@ -29,5 +39,26 @@ func ui_manager():
 	elif pause_index < 0:
 		pause_index = pause_array.size() - 1
 	cursor.global_position = pause_array[pause_index].global_position
-	cursor.size.x = pause_array[pause_index].text.length() * 33
+	cursor.global_position.x -= 20
+	match(pause_index):
+		0:
+			cursor.size.x = 225
+		1:
+			cursor.size.x = 280
+		2:
+			cursor.size.x = 145
 	cursor.size.y = pause_array[pause_index].size.y
+
+func paused_game_toggle():
+	get_tree().paused = !get_tree().paused
+
+func resume_game():
+	confirm_sound.play()
+	await confirm_sound.finished
+	paused_game_toggle()
+	self.hide()
+
+func quit_game():
+	confirm_sound.play()
+	await confirm_sound.finished
+	get_tree().quit()

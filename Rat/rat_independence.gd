@@ -77,7 +77,6 @@ func _ready():
 	spell_effect.hide()
 	# randomise speed a little
 	maximum_speed = randf_range(maximum_speed - 10, maximum_speed + 40.0)
-	print("maximum speed: " + str(maximum_speed))
 
 func _physics_process(_delta):
 	# state machine 
