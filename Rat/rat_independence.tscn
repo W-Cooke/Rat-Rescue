@@ -135,6 +135,7 @@ texture = ExtResource("8_ab2qx")
 shape = SubResource("CircleShape2D_qmwgc")
 
 [node name="DetectionRadius" type="Area2D" parent="."]
+scale = Vector2(0.8, 0.8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRadius"]
 shape = SubResource("CircleShape2D_7bq54")

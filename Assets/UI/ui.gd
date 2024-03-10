@@ -9,4 +9,4 @@ extends Control
 @onready var keyboard_icon = $MarginContainer/Keyboard
 
 func _ready():
-	rats_left_num = number_of_rats
+	rats_left_num = str(number_of_rats)
