@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cnuyvrigk0ryw"]
+[gd_scene load_steps=11 format=3 uid="uid://cnuyvrigk0ryw"]
 
 [ext_resource type="Script" path="res://Assets/UI/pause_screen.gd" id="1_5kb2c"]
 [ext_resource type="Shader" path="res://Assets/UI/pause_screen.gdshader" id="1_5kpjv"]
@@ -7,6 +7,8 @@
 [ext_resource type="LabelSettings" uid="uid://bkud046cx5bw6" path="res://Assets/UI/main_menu.tres" id="3_x0g1m"]
 [ext_resource type="AudioStream" uid="uid://b184letr5wfle" path="res://Assets/Sound/select_007.wav" id="6_a2dcm"]
 [ext_resource type="AudioStream" uid="uid://d3pj8fffxfyh6" path="res://Assets/Sound/confirmation_002.wav" id="7_h0n3h"]
+[ext_resource type="AudioStream" uid="uid://bv6f4rblmxjxf" path="res://Assets/Sound/pause_pause.ogg" id="8_hqwsg"]
+[ext_resource type="AudioStream" uid="uid://dkm6rqwhkdj6e" path="res://Assets/Sound/pause_resume.ogg" id="9_jc7tq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3lhhl"]
 shader = ExtResource("1_5kpjv")
@@ -97,3 +99,9 @@ stream = ExtResource("6_a2dcm")
 
 [node name="ConfirmSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_h0n3h")
+
+[node name="ResumeSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_hqwsg")
+
+[node name="PauseSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_jc7tq")

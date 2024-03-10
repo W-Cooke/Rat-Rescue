@@ -9,6 +9,8 @@ extends Control
 @onready var cursor = $Cursor
 @onready var select_sound = $SelectSound
 @onready var confirm_sound = $ConfirmSound
+@onready var pause_sound = $PauseSound
+@onready var resume_sound = $ResumeSound
 
 var pause_index : int = 0
 
@@ -26,6 +28,8 @@ func _process(_delta):
 					confirm_sound.play()
 				2:
 					quit_game()
+		elif Input.is_action_just_released("pause"):
+			resume_game()
 
 func ui_manager():
 	if Input.is_action_just_released("ui_up"):
@@ -53,8 +57,8 @@ func paused_game_toggle():
 	get_tree().paused = !get_tree().paused
 
 func resume_game():
-	confirm_sound.play()
-	await confirm_sound.finished
+	resume_sound.play()
+	await resume_sound.finished
 	paused_game_toggle()
 	self.hide()
 
