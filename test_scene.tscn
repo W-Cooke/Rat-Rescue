@@ -47,13 +47,12 @@ offset_right = -22.0
 offset_bottom = 362.0
 
 [node name="UI" parent="." instance=ExtResource("5_ec1gi")]
-anchors_preset = 9
+layout_direction = 1
+anchors_preset = 0
 anchor_right = 0.0
-offset_left = 270.0
-offset_top = 349.0
-offset_right = 270.0
-offset_bottom = 349.0
+anchor_bottom = 0.0
 grow_horizontal = 1
+grow_vertical = 1
 
 [connection signal="rat_capture" from="Player" to="RatIndependence" method="_on_player_rat_capture"]
 [connection signal="rat_capture" from="Player" to="RatIndependence2" method="_on_player_rat_capture"]
