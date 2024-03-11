@@ -44,7 +44,7 @@ grow_vertical = 0
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
+[node name="VSeparator" type="Control" parent="VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
@@ -56,8 +56,8 @@ text = "RATS LEFT:
 "
 label_settings = ExtResource("2_phewt")
 
-[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(9.125, 0)
+[node name="VSeparator2" type="Control" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(8.075, 0)
 layout_mode = 2
 
 [node name="RatsLeftNum" type="Label" parent="VBoxContainer/HBoxContainer"]
@@ -66,7 +66,7 @@ theme_override_fonts/font = ExtResource("1_kfhhg")
 text = "0"
 label_settings = ExtResource("2_phewt")
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator" type="Control" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 

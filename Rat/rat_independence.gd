@@ -67,6 +67,10 @@ const WANDER_CIRCLE_RADIUS : int = 8
 const WANDER_RANDOMNESS : float = 1.0
 var wander_angle : float = 0.0
 #endregion
+
+#region signals
+signal rat_caught
+#endregion
 #endregion
 
 func _ready():
@@ -85,7 +89,6 @@ func _physics_process(_delta):
 			run_from_player()
 			if check_for_no_movement():
 				velocity = decide_corner_direction()
-				print("velocity: " + str(velocity))
 				state = DASH
 		FOLLOWING:
 			follow_the_player()
@@ -220,6 +223,7 @@ func _on_player_rat_capture(body):
 	if body == self:
 		self.remove_from_group("rat")
 		state = WAITING
+		rat_caught.emit()
 		$Sprite2D.hide()
 		spell_effect.show()
 		spell_effect.play()
