@@ -7,6 +7,8 @@ extends Control
 @onready var menu_array : Array = [startgame_label, settings_label, credits_label, quit_label]
 enum {START, SETTINGS, CREDITS, QUIT}
 @onready var cursor = $Cursor
+@onready var test_level = "res://test_scene.tscn"
+@onready var confirm_sound = $ConfirmSound
 
 var cursor_index : int = 0
 
@@ -19,17 +21,19 @@ func _process(delta):
 
 func move_to_scene():
 	if Input.is_action_just_pressed("ui_accept"):
-		$ConfirmSound.play()
+		confirm_sound.play()
+		await confirm_sound.finished
 		match(cursor_index):
 			0:
 				print("START GAME")
+				
+				get_tree().change_scene_to_file(test_level)
 			1:
 				print("SETTING")
 			2:
 				print("CREDITS")
 			3:
 				print("QUIT")
-				await $ConfirmSound.finished
 				get_tree().quit()
 
 func ui_manager():

@@ -11,6 +11,7 @@ extends Control
 @onready var confirm_sound = $ConfirmSound
 @onready var pause_sound = $PauseSound
 @onready var resume_sound = $ResumeSound
+@onready var main_menu_scene = "res://main_menu.tscn"
 var controllable = false
 
 var pause_index : int = 0
@@ -27,7 +28,9 @@ func _process(_delta):
 					resume_game()
 				1:
 					confirm_sound.play()
-					print("GO BACK TO MAIN MENU")
+					await confirm_sound.finished
+					get_tree().paused = false
+					get_tree().change_scene_to_file(main_menu_scene)
 				2:
 					quit_game()
 
