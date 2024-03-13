@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8ga0acxdfvbh"]
+
+[ext_resource type="LabelSettings" uid="uid://bkud046cx5bw6" path="res://Assets/UI/main_menu.tres" id="1_psg06"]
+
+[node name="Level2" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 263.0
+offset_top = 300.0
+offset_right = 447.0
+offset_bottom = 360.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 0
+text = "LEVEL 2"
+label_settings = ExtResource("1_psg06")

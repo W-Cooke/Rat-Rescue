@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvcvgkkb4evgn"]
+
+[ext_resource type="LabelSettings" uid="uid://bkud046cx5bw6" path="res://Assets/UI/main_menu.tres" id="1_vkn01"]
+
+[node name="Level4" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+offset_left = 257.0
+offset_top = 293.0
+offset_right = 441.0
+offset_bottom = 353.0
+text = "LEVEL 4"
+label_settings = ExtResource("1_vkn01")

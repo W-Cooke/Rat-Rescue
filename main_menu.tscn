@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b1icdgxc13mje"]
+[gd_scene load_steps=11 format=3 uid="uid://b1icdgxc13mje"]
 
 [ext_resource type="PackedScene" uid="uid://d0w4dn3rllsuq" path="res://Assets/UI/UI_Background.tscn" id="1_2qmld"]
 [ext_resource type="FontFile" uid="uid://bdn714kv37s2p" path="res://Assets/UI/PixelifySans-VariableFont_wght.ttf" id="1_kklgt"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://d3pj8fffxfyh6" path="res://Assets/Sound/confirmation_002.wav" id="6_b7qif"]
 [ext_resource type="AudioStream" uid="uid://b184letr5wfle" path="res://Assets/Sound/select_007.wav" id="7_iqwp0"]
 [ext_resource type="Texture2D" uid="uid://b2pm7matkmaki" path="res://Assets/UI/RR_LOGO_1.png" id="9_5gxb4"]
+[ext_resource type="Texture2D" uid="uid://2q1rssecqts6" path="res://Assets/UI/generic_arrows_horizontal.png" id="10_qli11"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -113,5 +114,51 @@ offset_right = 228.0
 offset_bottom = 435.0
 grow_horizontal = 2
 texture = ExtResource("9_5gxb4")
+
+[node name="LevelSelector" type="CenterContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -109.0
+offset_top = 143.565
+offset_right = 109.0
+offset_bottom = 203.565
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LevelSelector"]
+layout_mode = 2
+
+[node name="LevelSelectText" type="Label" parent="LevelSelector/HBoxContainer"]
+layout_mode = 2
+text = "LEVEL: "
+label_settings = ExtResource("3_xmwoo")
+
+[node name="VSeparator2" type="Control" parent="LevelSelector/HBoxContainer"]
+custom_minimum_size = Vector2(48.505, 0)
+layout_mode = 2
+
+[node name="LevelSelectNum" type="Label" parent="LevelSelector/HBoxContainer"]
+layout_mode = 2
+text = "01"
+label_settings = ExtResource("3_xmwoo")
+
+[node name="VSeparator" type="Control" parent="LevelSelector/HBoxContainer"]
+custom_minimum_size = Vector2(48.505, 0)
+layout_mode = 2
+
+[node name="LevelCursor" type="NinePatchRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 380.0
+offset_top = 477.0
+offset_right = 561.0
+offset_bottom = 627.0
+scale = Vector2(0.735, 0.735)
+texture = ExtResource("10_qli11")
 
 [connection signal="finished" from="MenuMusic" to="." method="_on_menu_music_finished"]
