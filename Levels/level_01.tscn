@@ -32,6 +32,14 @@ SPEED = 300.0
 [node name="RatIndependence" parent="." instance=ExtResource("6_dgg76")]
 position = Vector2(164, 277)
 
+[node name="UI" parent="." instance=ExtResource("5_j064p")]
+layout_direction = 1
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
 [node name="PauseScreen" parent="." instance=ExtResource("4_s325h")]
 visible = false
 anchors_preset = 8
@@ -43,14 +51,6 @@ offset_left = -22.0
 offset_top = 362.0
 offset_right = -22.0
 offset_bottom = 362.0
-
-[node name="UI" parent="." instance=ExtResource("5_j064p")]
-layout_direction = 1
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
 
 [node name="SignalBus" type="Node" parent="."]
 script = ExtResource("7_7w7n5")

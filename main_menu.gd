@@ -52,12 +52,15 @@ func move_to_scene():
 					get_tree().quit()
 		else:
 			var path = "res://Levels/level_0%s.tscn" % level_index
+			TransitionScreen.transition()
+			await TransitionScreen.on_transition_finished
 			get_tree().change_scene_to_file(path)
 	if Input.is_action_just_pressed("Pause") and level_select:
 				main_menu.show()
 				level_selector.hide()
 				cursor.show()
 				level_cursor.hide()
+				select_sound.play()
 				level_select = false
 
 func ui_manager():

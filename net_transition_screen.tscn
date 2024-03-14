@@ -1,27 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://dr3c5smwks872"]
+[gd_scene load_steps=11 format=3 uid="uid://dr3c5smwks872"]
 
 [ext_resource type="Shader" path="res://Scripts/transition_screen.gdshader" id="1_ajius"]
 [ext_resource type="Texture2D" uid="uid://bsqr56je36m3i" path="res://Assets/UI/test_net_transition.png" id="2_tl6j1"]
+[ext_resource type="Script" path="res://Scripts/net_transition_screen.gd" id="3_mtx5r"]
+[ext_resource type="AudioStream" uid="uid://bf73b7lf4wbeg" path="res://Assets/Sound/minimize_009.ogg" id="4_2iigx"]
+[ext_resource type="AudioStream" uid="uid://cxof8kaf5d11h" path="res://Assets/Sound/maximize_009.ogg" id="5_pr5wt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wwrs5"]
 shader = ExtResource("1_ajius")
 shader_parameter/scale = 0.0
 shader_parameter/mask = ExtResource("2_tl6j1")
-
-[sub_resource type="Animation" id="Animation_f0adc"]
-resource_name = "FadeToBlack"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:material:shader_parameter/scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
 
 [sub_resource type="Animation" id="Animation_71gd8"]
 resource_name = "FadeFromBlack"
@@ -36,6 +24,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_f0adc"]
+resource_name = "FadeToBlack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
 }
 
 [sub_resource type="Animation" id="Animation_gtqm8"]
@@ -60,7 +63,10 @@ _data = {
 "RESET": SubResource("Animation_gtqm8")
 }
 
-[node name="NetTransitionScreen" type="ColorRect"]
+[node name="NetTransitionScreen" type="CanvasLayer"]
+script = ExtResource("3_mtx5r")
+
+[node name="NetTransitionScreen" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_wwrs5")
 anchors_preset = 15
 anchor_right = 1.0
@@ -70,6 +76,17 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../NetTransitionScreen")
 libraries = {
 "": SubResource("AnimationLibrary_kw4yi")
 }
+
+[node name="FadeInSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_2iigx")
+volume_db = -5.0
+pitch_scale = 0.5
+
+[node name="FadeOutSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_pr5wt")
+volume_db = -5.0
+pitch_scale = 0.5

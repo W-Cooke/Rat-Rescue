@@ -20,6 +20,7 @@ config/icon="res://Assets/UI/RR_LOGO_1.png"
 [autoload]
 
 Steering="*res://Steering.gd"
+TransitionScreen="*res://net_transition_screen.tscn"
 
 [display]
 

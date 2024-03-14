@@ -30,6 +30,8 @@ func _process(_delta):
 					confirm_sound.play()
 					await confirm_sound.finished
 					get_tree().paused = false
+					TransitionScreen.transition()
+					await TransitionScreen.on_transition_finished
 					get_tree().change_scene_to_file(main_menu_scene)
 				2:
 					quit_game()
