@@ -81,6 +81,9 @@ func _ready():
 	spell_effect.hide()
 	# randomise speed a little
 	maximum_speed = randf_range(maximum_speed - 10, maximum_speed + 40.0)
+	# connect player signal to rat in code 
+	#TODO: test if this works
+	player.connect(_on_player_rat_capture(body))
 
 func _physics_process(_delta):
 	# state machine 

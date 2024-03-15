@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+#TODO: flair, add idle state for use when game is starting, no sprite, just emitting particles.
+# style similar to Forget Me Not
+
 #region Variables
 @export var SPEED : float = 75.00
 signal net_spin
@@ -19,7 +22,6 @@ var spinning_anticlockwise : bool = false
 enum {CLOCKWISE, ANTICLOCKWISE, NOT}
 
 # rotation with keyboard variables
-#TODO: tidy up
 var rotation_rate : float = 0.3
 var net_rotation : float = 0.0
 var keyboard_controls : bool = false
@@ -53,7 +55,6 @@ func _physics_process(_delta):
 		net_spin_keyboard()
 	else:
 		controller_angle()
-	#TODO: check if this works
 
 #region Input Handling
 func controller_angle():
@@ -138,7 +139,6 @@ func calculate_mean(arr):
 	return mean
 #endregion
 
-#TODO: fix this so criteria matches animation state, currently not finished
 func animation_handler():
 	if velocity.x != 0:
 		if not casting_animation:
