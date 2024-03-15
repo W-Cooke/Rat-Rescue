@@ -74,7 +74,7 @@ signal rat_caught
 #endregion
 
 func _ready():
-	# select a random rat texture and applies it
+	# select a random rat texture and applies it to rat and dash effect
 	var image = ImageTexture.create_from_image(sprite_array.pick_random().get_image())
 	dash_particles.texture = image
 	$Sprite2D.texture = image
