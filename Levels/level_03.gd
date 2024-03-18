@@ -1,5 +1,7 @@
 extends Node2D
 
+#TODO: reconnect all signals for level 3
+
 @onready var pause_screen = $CanvasLayer/PauseScreen
 @onready var level_start_timer = $LevelStartTimer
 @onready var level_end_timer = $LevelEndTimer
@@ -33,7 +35,7 @@ func _on_level_failed():
 func _on_level_end_timer_timeout():
 	var path
 	if victory:
-		path = "res://Levels/level_03.tscn"
+		path = "res://Levels/level_04.tscn"
 	else:
 		path = "res://main_menu.tscn"
 	TransitionScreen.transition()
