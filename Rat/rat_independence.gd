@@ -14,7 +14,7 @@ var max_speed : float = maximum_speed
 @onready var dash_timer = $Timers/DashTimer
 @onready var dash_cooldown_timer = $Timers/DashCooldownTimer
 @onready var player = get_tree().get_first_node_in_group("player")
-enum {WANDER, RUNNING, FOLLOWING, WAITING, DASH}
+enum {WANDER, RUNNING, FOLLOWING, WAITING, DASH, CAUGHT}
 var state = WANDER
 
 #region sound
@@ -81,9 +81,6 @@ func _ready():
 	spell_effect.hide()
 	# randomise speed a little
 	maximum_speed = randf_range(maximum_speed - 10, maximum_speed + 40.0)
-	# connect player signal to rat in code 
-	#TODO: test if this works
-	player.connect(_on_player_rat_capture(body))
 
 func _physics_process(_delta):
 	# state machine 
@@ -100,6 +97,8 @@ func _physics_process(_delta):
 		DASH:
 			dash()
 		WAITING:
+			velocity = Vector2.ZERO
+		CAUGHT:
 			velocity = Vector2.ZERO
 	move_and_slide()
 
@@ -225,7 +224,7 @@ func _on_timer_timeout():
 func _on_player_rat_capture(body):
 	if body == self:
 		self.remove_from_group("rat")
-		state = WAITING
+		state = CAUGHT
 		rat_caught.emit()
 		$Sprite2D.hide()
 		spell_effect.show()

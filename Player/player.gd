@@ -31,30 +31,42 @@ var keyboard_controls : bool = false
 @onready var netsprite = $Net/NetSprite
 @onready var particles = $Net/GPUParticles2D
 @onready var player_sprite = $PlayerAnimatedSprite
+@onready var teleport_in_anim = $TPInAnimation
+@onready var teleport_in_anim_2 = $TPInAnimation2
 var casting_animation : bool = false
+var controllable : bool = false
 #endregion
 
 func _ready():
 	spell_effect.hide()
+	net.hide()
+	player_sprite.hide()
+	teleport_in_anim.show()
+	teleport_in_anim.emitting = true
+	teleport_in_anim_2.show()
+	if Input.get_connected_joypads().size() == 1:
+		keyboard_controls = true
+	
 
 func _physics_process(_delta):
-	velocity = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down") * SPEED
-	animation_handler()
-	if velocity.x != 0:
-		player_sprite.flip_h = velocity.x < 0
-	move_and_slide()
-	#TODO: remove and replace with settings
-	if Input.is_action_just_released("controller switch"):
+	if controllable:
+		velocity = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down") * SPEED
+		animation_handler()
+		if velocity.x != 0:
+			player_sprite.flip_h = velocity.x < 0
+		move_and_slide()
+		#TODO: remove and replace with settings
+		if Input.is_action_just_released("controller switch"):
+			if keyboard_controls:
+				keyboard_controls = false
+				print("mode switched to controller")
+			else:
+				keyboard_controls = true
+				print("mode switched to keyboard controls")
 		if keyboard_controls:
-			keyboard_controls = false
-			print("mode switched to controller")
+			net_spin_keyboard()
 		else:
-			keyboard_controls = true
-			print("mode switched to keyboard controls")
-	if keyboard_controls:
-		net_spin_keyboard()
-	else:
-		controller_angle()
+			controller_angle()
 
 #region Input Handling
 func controller_angle():
@@ -155,3 +167,11 @@ func _on_net_body_entered(body):
 	if body.is_in_group("rat"):
 		if spinning_anticlockwise or spinning_clockwise:
 			rat_capture.emit(body)
+
+func _on_game_start():
+	net.show()
+	player_sprite.show()
+	teleport_in_anim.emitting = false
+	teleport_in_anim_2.hide()
+	controllable = true
+	$TPInAnimPoof.play()

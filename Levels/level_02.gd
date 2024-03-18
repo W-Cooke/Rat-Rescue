@@ -12,7 +12,6 @@ func _ready():
 	pause_screen.hide()
 	level_start_timer.start()
 	UI.timer_seconds = timer_left_seconds
-	
 
 func _process(delta):
 	if Input.is_action_just_released("Pause"):
@@ -34,7 +33,7 @@ func _on_level_failed():
 func _on_level_end_timer_timeout():
 	var path
 	if victory:
-		path = "res://Levels/level_02.tscn"
+		path = "res://Levels/level_03.tscn"
 	else:
 		path = "res://main_menu.tscn"
 	TransitionScreen.transition()
