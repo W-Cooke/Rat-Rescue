@@ -541,7 +541,7 @@ trail_lifetime = 1.07
 scale = Vector2(0.83, 0.83)
 sprite_frames = SubResource("SpriteFrames_w6yj7")
 autoplay = "default"
-frame_progress = 0.166798
+frame_progress = 0.0796986
 
 [node name="TPInAnimation" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_r68j1")

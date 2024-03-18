@@ -174,4 +174,5 @@ func _on_game_start():
 	teleport_in_anim.emitting = false
 	teleport_in_anim_2.hide()
 	controllable = true
+	particles.emitting = false
 	$TPInAnimPoof.play()
