@@ -5,7 +5,6 @@ extends CharacterBody2D
 
 #region Variables
 @export var SPEED : float = 75.00
-signal net_spin
 signal rat_capture
 @onready var magic_sound = $MagicSound
 @onready var spell_effect = $SpellEffect
@@ -102,14 +101,15 @@ func controller_angle():
 
 func net_spin_keyboard():
 	if Input.is_action_pressed("ui_accept"):
+		# rotates net and activates spell effects, emulating analogue stick controls
 		net.rotation = net_rotation
 		net_rotation += rotation_rate
 		if net_rotation > TAU:
 			net_rotation = 0.0
-		#TODO: check if conditional in process has fixed this!
 		handle_bools(CLOCKWISE)
 	if Input.is_action_just_released("ui_accept"):
 		handle_bools(NOT)
+
 # function to handle spinning state of net
 func handle_bools(state):
 	match state:
@@ -152,7 +152,7 @@ func calculate_mean(arr):
 #endregion
 
 func animation_handler():
-	if velocity.x != 0:
+	if velocity.x != 0 or velocity.y != 0:
 		if not casting_animation:
 			player_sprite.play("run")
 		else:
@@ -164,11 +164,13 @@ func animation_handler():
 			player_sprite.play("cast_loop")
 
 func _on_net_body_entered(body):
+	# triggers when the net collision hits a rat while spinning
 	if body.is_in_group("rat"):
 		if spinning_anticlockwise or spinning_clockwise:
 			rat_capture.emit(body)
 
 func _on_game_start():
+	# allows for a ready state before game starts, effects play etc
 	net.show()
 	player_sprite.show()
 	teleport_in_anim.emitting = false
