@@ -1,8 +1,5 @@
 extends CharacterBody2D
 
-#TODO: flair, add idle state for use when game is starting, no sprite, just emitting particles.
-# style similar to Forget Me Not
-
 #region Variables
 @export var SPEED : float = 75.00
 signal rat_capture

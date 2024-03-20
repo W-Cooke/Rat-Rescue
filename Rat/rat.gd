@@ -1,5 +1,9 @@
 extends CharacterBody2D
 
+# This is from an earlier build where rats would use NavigationAgent for movement
+# then follow path2Ds to escape corners. ultimately this was inefficient and required a lot of
+# bespoke coding to get each one working. rat_independence is the more modular, better coded version
+
 #region Variables
 @export var MAX_SPEED : int = 300
 @export var path_speed : float = 0.004

@@ -1,5 +1,8 @@
 extends Node
 
+# This autoload script is used by the rats to either follow or avoid the player by
+# adding velocity incrementally to the current velocity
+
 #region steering
 const DEFAULT_MASS : float = 2.0
 const DEFAULT_MAX_SPEED : float = 400.00

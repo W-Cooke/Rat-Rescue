@@ -274,11 +274,12 @@ func _on_wandering_timer_timeout():
 	
 
 func _on_follow_timer_timeout():
-	# TODO: finish notations
+	# reverts to wandering after moving towards player
 	if state != WANDER or state != RUNNING:
 		state = WANDER
 
 func _on_dash_timer_timeout():
+	# reverts to running state from dash
 	state = RUNNING
 	max_speed = maximum_speed
 	dash_particles.emitting = false
@@ -286,5 +287,6 @@ func _on_dash_timer_timeout():
 	self.set_collision_mask_value(2, true)
 
 func _on_dash_cooldown_timer_timeout():
+	# resets dash cooldown, allowing another dash but preventing too many dashes
 	dash_cooldown = true
 #endregion
