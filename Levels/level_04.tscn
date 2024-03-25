@@ -1,8 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://cvcvgkkb4evgn"]
+[gd_scene load_steps=10 format=3 uid="uid://cvcvgkkb4evgn"]
 
+[ext_resource type="Script" path="res://Levels/level_04.gd" id="1_42e4v"]
 [ext_resource type="LabelSettings" uid="uid://bkud046cx5bw6" path="res://Assets/UI/main_menu.tres" id="1_vkn01"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_7oxp5"]
+[ext_resource type="PackedScene" uid="uid://nx34gp5727mt" path="res://Assets/UI/ui.tscn" id="4_o5b18"]
+[ext_resource type="PackedScene" uid="uid://cnuyvrigk0ryw" path="res://Assets/UI/pause_screen.tscn" id="5_q2j0w"]
+[ext_resource type="Script" path="res://SignalBus.gd" id="6_8lpox"]
+[ext_resource type="TileSet" uid="uid://ba4pi7vawvoog" path="res://Assets/tile_map.tres" id="7_dhsea"]
+[ext_resource type="PackedScene" uid="uid://dqrujxar1ft6l" path="res://Player/player.tscn" id="8_wuibp"]
+[ext_resource type="PackedScene" uid="uid://bvn7cqb6savp0" path="res://Rat/rat_independence.tscn" id="9_hi07s"]
 
 [node name="Level4" type="Node2D"]
+script = ExtResource("1_42e4v")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 257.0
@@ -11,3 +20,58 @@ offset_right = 441.0
 offset_bottom = 353.0
 text = "LEVEL 4"
 label_settings = ExtResource("1_vkn01")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(686, -34)
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+script = ExtResource("3_7oxp5")
+
+[node name="UI" parent="Camera2D" instance=ExtResource("4_o5b18")]
+visible = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseScreen" parent="CanvasLayer" instance=ExtResource("5_q2j0w")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -382.0
+offset_top = 2.0
+offset_right = -382.0
+offset_bottom = 2.0
+
+[node name="SignalBus" type="Node" parent="."]
+script = ExtResource("6_8lpox")
+
+[node name="LevelStartTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="LevelEndTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="TileMap" type="TileMap" parent="."]
+texture_filter = 1
+position = Vector2(-6, -25)
+scale = Vector2(2, 2)
+tile_set = ExtResource("7_dhsea")
+format = 2
+layer_0/name = "Ground"
+layer_1/name = "Buildings"
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "Decoration"
+layer_2/tile_data = PackedInt32Array()
+
+[node name="Player" parent="." instance=ExtResource("8_wuibp")]
+position = Vector2(686, -34)
+scale = Vector2(2, 2)
+SPEED = 300.0
+
+[node name="RatIndependence" parent="." instance=ExtResource("9_hi07s")]
+position = Vector2(399, -226)

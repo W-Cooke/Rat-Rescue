@@ -1,5 +1,7 @@
 extends Node2D
 
+#TODO: reconnect all signals for level 4
+
 @onready var pause_screen = $CanvasLayer/PauseScreen
 @onready var level_start_timer = $LevelStartTimer
 @onready var level_end_timer = $LevelEndTimer
@@ -13,7 +15,7 @@ func _ready():
 	level_start_timer.start()
 	UI.timer_seconds = timer_left_seconds
 
-func _process(_delta):
+func _process(delta):
 	if Input.is_action_just_released("Pause"):
 		pause_screen.pause_game()
 

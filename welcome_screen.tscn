@@ -1,0 +1,148 @@
+[gd_scene load_steps=10 format=3 uid="uid://bs2d7mm1ive6b"]
+
+[ext_resource type="Texture2D" uid="uid://drfn5arnjegib" path="res://Assets/UI/splashscreen.png" id="1_fw07q"]
+[ext_resource type="Script" path="res://welcome_screen.gd" id="1_nrbo6"]
+[ext_resource type="Texture2D" uid="uid://cn4wbsmc2hoek" path="res://Assets/Sprite/PB Logo.png" id="2_yesvn"]
+[ext_resource type="LabelSettings" uid="uid://bkud046cx5bw6" path="res://Assets/UI/main_menu.tres" id="3_2cyqa"]
+[ext_resource type="Texture2D" uid="uid://bxktvveqe8p03" path="res://Assets/UI/UI_Pixelart/Controller_1.png" id="4_x8uo8"]
+
+[sub_resource type="Animation" id="Animation_078tk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_60g1f"]
+resource_name = "Fade-Out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wys5e"]
+resource_name = "Fade_In"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u3r15"]
+_data = {
+"Fade-Out": SubResource("Animation_60g1f"),
+"Fade_In": SubResource("Animation_wys5e"),
+"RESET": SubResource("Animation_078tk")
+}
+
+[node name="WelcomeScreen" type="Node2D"]
+script = ExtResource("1_nrbo6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(357, 365)
+rotation = 3.14159
+scale = Vector2(-5.388, 3.877)
+texture = ExtResource("1_fw07q")
+
+[node name="PbLogo" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(361, 324)
+scale = Vector2(3, 3)
+texture = ExtResource("2_yesvn")
+
+[node name="Label" type="Label" parent="PbLogo"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -134.0
+offset_top = -1.66666
+offset_right = 178.0
+offset_bottom = 58.3333
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.445, 0.445)
+size_flags_horizontal = 4
+text = "Purple Beard"
+label_settings = ExtResource("3_2cyqa")
+
+[node name="Controller1" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(349, 204)
+scale = Vector2(5.04, 5.04)
+texture = ExtResource("4_x8uo8")
+
+[node name="Label" type="Label" parent="Controller1"]
+offset_left = -61.3095
+offset_top = 30.9524
+offset_right = 522.69
+offset_bottom = 153.952
+scale = Vector2(0.215, 0.215)
+text = "This game is made to be 
+played with a controller"
+label_settings = ExtResource("3_2cyqa")
+
+[node name="Label2" type="Label" parent="Controller1"]
+offset_left = -47.4206
+offset_top = 59.7222
+offset_right = 889.579
+offset_bottom = 119.722
+scale = Vector2(0.1, 0.1)
+text = "But can also be played with a keyboard"
+label_settings = ExtResource("3_2cyqa")
+
+[node name="EntryTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="LogoTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="MessageTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.203922, 0.0470588, 0.384314, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+libraries = {
+"": SubResource("AnimationLibrary_u3r15")
+}
+
+[connection signal="timeout" from="EntryTimer" to="." method="_on_entry_timer_timeout"]
+[connection signal="timeout" from="LogoTimer" to="." method="_on_logo_timer_timeout"]
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
