@@ -14,6 +14,7 @@ func _ready():
 	logo.hide()
 	message.hide()
 	anim.play("Fade-Out")
+	logo.frame = randi_range(0, 7)
 
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("Pause"):
