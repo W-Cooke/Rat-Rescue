@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b1icdgxc13mje"]
+[gd_scene load_steps=12 format=3 uid="uid://b1icdgxc13mje"]
 
 [ext_resource type="PackedScene" uid="uid://d0w4dn3rllsuq" path="res://Assets/UI/UI_Background.tscn" id="1_2qmld"]
 [ext_resource type="FontFile" uid="uid://bdn714kv37s2p" path="res://Assets/UI/PixelifySans-VariableFont_wght.ttf" id="1_kklgt"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://b184letr5wfle" path="res://Assets/Sound/select_007.wav" id="7_iqwp0"]
 [ext_resource type="Texture2D" uid="uid://b2pm7matkmaki" path="res://Assets/UI/RR_LOGO_1.png" id="9_5gxb4"]
 [ext_resource type="Texture2D" uid="uid://2q1rssecqts6" path="res://Assets/UI/generic_arrows_horizontal.png" id="10_qli11"]
+[ext_resource type="PackedScene" uid="uid://bm6bkglu4ro36" path="res://UI/credits.tscn" id="11_vkp6r"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -25,7 +26,7 @@ layout_mode = 1
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_dr2t5")
-volume_db = -5.622
+volume_db = -6.0
 autoplay = true
 
 [node name="ConfirmSound" type="AudioStreamPlayer" parent="."]
@@ -160,5 +161,12 @@ offset_right = 561.0
 offset_bottom = 627.0
 scale = Vector2(0.735, 0.735)
 texture = ExtResource("10_qli11")
+
+[node name="Credits" parent="." instance=ExtResource("11_vkp6r")]
+layout_mode = 1
+offset_left = 200.0
+offset_top = 60.0
+offset_right = 200.0
+offset_bottom = 60.0
 
 [connection signal="finished" from="MenuMusic" to="." method="_on_menu_music_finished"]

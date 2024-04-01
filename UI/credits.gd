@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 @onready var file = "res://credits.txt"
 @onready var credits_label = $CreditsLabel

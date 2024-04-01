@@ -4,6 +4,7 @@ extends Control
 @onready var settings_label = $CenterContainer/VBoxContainer/Settings
 @onready var credits_label = $CenterContainer/VBoxContainer/Credits
 @onready var quit_label = $CenterContainer/VBoxContainer/Quit
+@onready var credits = $Credits
 @onready var menu_array : Array = [startgame_label, settings_label, credits_label, quit_label]
 enum {START, SETTINGS, CREDITS, QUIT}
 @onready var main_menu = $CenterContainer
@@ -11,6 +12,7 @@ enum {START, SETTINGS, CREDITS, QUIT}
 @onready var test_level = "res://test_scene.tscn"
 @onready var confirm_sound = $ConfirmSound
 @onready var select_sound = $SelectSound
+@onready var logo = $Logo
 
 
 #region level select
@@ -22,8 +24,10 @@ var level_index : int = 1
 #endregion
 
 var cursor_index : int = 0
+var credits_active : bool = false
 
 func _ready():
+	credits.hide()
 	cursor.global_position = menu_array[cursor_index].global_position
 
 func _process(delta):
@@ -46,7 +50,7 @@ func move_to_scene():
 				1:
 					print("SETTING")
 				2:
-					print("CREDITS")
+					credits_toggle()
 				3:
 					print("QUIT")
 					get_tree().quit()
@@ -64,7 +68,7 @@ func move_to_scene():
 				level_select = false
 
 func ui_manager():
-	if not level_select:
+	if not level_select and not credits_active:
 		if Input.is_action_just_released("ui_up"):
 			cursor_index -= 1
 			select_sound.play()
@@ -101,6 +105,21 @@ func ui_manager():
 			level_index = 5
 		level_select_num.text = "0" + str(level_index)
 
+func credits_toggle():
+	if not credits_active:
+		print("credits should show")
+		credits.show()
+		logo.hide()
+		main_menu.hide()
+		cursor.hide()
+		credits_active = true
+	elif credits_active:
+		print("credits should hide")
+		credits.hide()
+		logo.show()
+		main_menu.show()
+		cursor.show()
+		credits_active = false
 
 func _on_menu_music_finished():
 	$MenuMusic.play()
