@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://cvcvgkkb4evgn"]
+[gd_scene load_steps=10 format=3 uid="uid://cvcvgkkb4evgn"]
 
 [ext_resource type="Script" path="res://Levels/level_04.gd" id="1_42e4v"]
-[ext_resource type="LabelSettings" uid="uid://bkud046cx5bw6" path="res://Assets/UI/main_menu.tres" id="1_vkn01"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_7oxp5"]
 [ext_resource type="PackedScene" uid="uid://nx34gp5727mt" path="res://Assets/UI/ui.tscn" id="4_o5b18"]
 [ext_resource type="PackedScene" uid="uid://cnuyvrigk0ryw" path="res://Assets/UI/pause_screen.tscn" id="5_q2j0w"]
@@ -13,14 +12,6 @@
 
 [node name="Level4" type="Node2D"]
 script = ExtResource("1_42e4v")
-
-[node name="Label" type="Label" parent="."]
-offset_left = 257.0
-offset_top = 293.0
-offset_right = 441.0
-offset_bottom = 353.0
-text = "LEVEL 4"
-label_settings = ExtResource("1_vkn01")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(854, 478)
@@ -75,7 +66,7 @@ scale = Vector2(2, 2)
 SPEED = 300.0
 
 [node name="RatIndependence" parent="." instance=ExtResource("9_hi07s")]
-position = Vector2(1638, 445)
+position = Vector2(1698, 401)
 
 [node name="RatIndependence2" parent="." instance=ExtResource("9_hi07s")]
 position = Vector2(1077, 720)

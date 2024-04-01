@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://bejolwha4cmqj"]
+
+[ext_resource type="LabelSettings" uid="uid://bkud046cx5bw6" path="res://Assets/UI/main_menu.tres" id="1_pg7ns"]
+
+[node name="StoryIntro" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+scale = Vector2(0.665, 0.665)
+text = "'The great wizard Magimagicus has fallen
+ foul of his own magic once again! 
+
+In trying to cast a spell on his experi-
+-mental rats that would give them the gift 
+of super-intelligence, they were given the
+ ability to escape nearly any container 
+(some might say all rats have this skill
+ inherently) 
+
+Magimagicus has been tasked with
+ retrieving all the rats that now run
+ rampant throughout the castle walls and 
+the nearby town.
+
+Thus, with his magical net, Magimagicus 
+will undertake his very own..."
+label_settings = ExtResource("1_pg7ns")

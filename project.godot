@@ -26,7 +26,6 @@ TransitionScreen="*res://net_transition_screen.tscn"
 
 window/size/viewport_width=720
 window/size/viewport_height=720
-window/size/resizable=false
 window/stretch/mode="viewport"
 
 [editor_plugins]
