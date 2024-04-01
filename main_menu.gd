@@ -107,14 +107,12 @@ func ui_manager():
 
 func credits_toggle():
 	if not credits_active:
-		print("credits should show")
 		credits.show()
 		logo.hide()
 		main_menu.hide()
 		cursor.hide()
 		credits_active = true
 	elif credits_active:
-		print("credits should hide")
 		credits.hide()
 		logo.show()
 		main_menu.show()

@@ -4,7 +4,6 @@ extends CharacterBody2D
 @export var SPEED : float = 75.00
 signal rat_capture
 @onready var magic_sound = $MagicSound
-@onready var spell_effect = $SpellEffect
 
 # spinning script variables
 @export_category ("Spin Variables")
@@ -34,7 +33,6 @@ var controllable : bool = false
 #endregion
 
 func _ready():
-	spell_effect.hide()
 	net.hide()
 	player_sprite.hide()
 	teleport_in_anim.show()
@@ -114,8 +112,6 @@ func handle_bools(state):
 			spinning_anticlockwise = false
 			spinning_clockwise = true
 			netsprite.flip_h = false
-			spell_effect.flip_h = true
-			spell_effect.show()
 			particles.emitting = true
 			casting_animation = true
 			if not magic_sound.playing:
@@ -124,8 +120,6 @@ func handle_bools(state):
 			spinning_anticlockwise = true
 			spinning_clockwise = false
 			netsprite.flip_h = true
-			spell_effect.flip_h = false
-			spell_effect.show()
 			particles.emitting = true
 			casting_animation = true
 			if not magic_sound.playing:
@@ -135,7 +129,6 @@ func handle_bools(state):
 			spinning_clockwise = false
 			particles.emitting = false
 			casting_animation = false
-			spell_effect.hide()
 			magic_sound.stop()
 
 # calculates mean, who would've guessed!
