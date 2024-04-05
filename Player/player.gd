@@ -142,12 +142,15 @@ func calculate_mean(arr):
 #endregion
 
 func animation_handler():
+	# decided which animation to play based on criteria
+	# if there is any velocity, running animation will play, unless casting
 	if velocity.x != 0 or velocity.y != 0:
 		if not casting_animation:
 			player_sprite.play("run")
 		else:
 			player_sprite.play("cast_loop")
 	else:
+		# else if there is no movement, animation is stopped unless casting
 		if not casting_animation:
 			player_sprite.stop()
 		else:

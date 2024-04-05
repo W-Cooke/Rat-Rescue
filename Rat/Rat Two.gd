@@ -1,5 +1,9 @@
 extends CharacterBody2D
 
+# this is an older version of the rat that used Godot's built in NavigationAgent for movement
+# ultimately it was not as modular as I wanted, as i had to bruteforce corner escapes through pathfollow2d nodes
+# rat_independence is the latest version
+
 #region Variables
 @export var MAX_SPEED : int = 300
 @export var path_speed : float = 0.002

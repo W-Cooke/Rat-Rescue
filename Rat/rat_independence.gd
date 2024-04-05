@@ -1,5 +1,9 @@
 extends CharacterBody2D
 
+# this is the most up to date rat script, using steering for movement, running away and following
+# the behaviour is state machine based and more extensible than previous versions
+# everything needed for the rat to be functional is in place, bar a few signals that need to be connected
+
 #region variable declaration
 @export var maximum_speed : float = 300.0
 var wander_speed : float = maximum_speed / 2

@@ -1,5 +1,7 @@
 extends Control
 
+# script to take credits from a .txt file and display them 
+
 @onready var file = "res://credits.txt"
 @onready var credits_label = $CreditsLabel
 var screen_size
