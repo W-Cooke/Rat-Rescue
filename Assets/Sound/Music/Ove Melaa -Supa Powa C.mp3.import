@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c7u7t85pbqypv"
+path="res://.godot/imported/Ove Melaa -Supa Powa C.mp3-36cf78351e9b2d80a182ba16ea7f987d.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Music/Ove Melaa -Supa Powa C.mp3"
+dest_files=["res://.godot/imported/Ove Melaa -Supa Powa C.mp3-36cf78351e9b2d80a182ba16ea7f987d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -48,4 +48,4 @@ func move_forward():
 	$CanvasLayer.hide()
 	TransitionScreen.transition()
 	await TransitionScreen.on_transition_finished
-	get_tree().change_scene_to_file("res://main_menu.tscn")
+	get_tree().change_scene_to_file("res://UI/story_intro.tscn")
