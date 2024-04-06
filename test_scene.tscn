@@ -52,6 +52,10 @@ offset_bottom = 362.0
 [node name="SignalBus" type="Node" parent="."]
 script = ExtResource("7_6dmbo")
 
+[node name="LevelStartTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="game_start" from="." to="Player" method="_on_game_start"]
 [connection signal="rat_capture" from="Player" to="RatIndependence" method="_on_player_rat_capture"]
 [connection signal="rat_capture" from="Player" to="RatIndependence2" method="_on_player_rat_capture"]
 [connection signal="rat_capture" from="Player" to="RatIndependence3" method="_on_player_rat_capture"]
@@ -59,3 +63,4 @@ script = ExtResource("7_6dmbo")
 [connection signal="rat_caught" from="RatIndependence2" to="SignalBus" method="_on_rat_independence_rat_caught"]
 [connection signal="rat_caught" from="RatIndependence3" to="SignalBus" method="_on_rat_independence_rat_caught"]
 [connection signal="rat_caught" from="SignalBus" to="UI" method="_on_signal_bus_rat_caught"]
+[connection signal="timeout" from="LevelStartTimer" to="." method="_on_level_start_timer_timeout"]

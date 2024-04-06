@@ -17,6 +17,9 @@ var max_speed : float = maximum_speed
 @onready var raycast_timer = $Timers/RaycastTimer
 @onready var dash_timer = $Timers/DashTimer
 @onready var dash_cooldown_timer = $Timers/DashCooldownTimer
+@onready var emote = $Emote
+@onready var emote_anim = $AnimationPlayer
+@onready var emote_timer =$Timers/EmoteTimer
 @onready var player = get_tree().get_first_node_in_group("player")
 enum {WANDER, RUNNING, FOLLOWING, WAITING, DASH, CAUGHT}
 var state = WANDER
@@ -25,6 +28,15 @@ var state = WANDER
 @onready var capture_sound = $CaptureSound
 @onready var detected_sound = $DetectedSound
 @onready var scratch_sound = $ScratchSound
+#endregion
+
+#region emote frames
+const SURPRISE : int = 17
+const BLANK : int = 12
+const PHEW : int = 27
+const HUH : int = 25
+var is_running : bool = false
+#TODO: add more?
 #endregion
 
 const DISTANCE_THRESHOLD : float = 3.0
@@ -85,6 +97,8 @@ func _ready():
 	spell_effect.hide()
 	# randomise speed a little
 	maximum_speed = randf_range(maximum_speed - 10, maximum_speed + 40.0)
+	#hide emote
+	emote.hide()
 
 func _physics_process(_delta):
 	# state machine 
@@ -119,7 +133,9 @@ func follow_the_player():
 		)
 
 func run_from_player():
-	label.text = "RUN"
+	if not is_running:
+		anim_handler(SURPRISE)
+		is_running = true
 	var target_global_position: Vector2 = player.global_position
 	velocity = Steering.run_away(
 		velocity,
@@ -135,7 +151,7 @@ func wander_around():
 
 func random_pauses():
 	if state == WANDER:
-		label.text = "PAUSE"
+		anim_handler(BLANK)
 		state = WAITING
 		scratch_sound.play()
 		wait_timer.start(randf_range(0.4, 1.5))
@@ -171,6 +187,12 @@ func dash():
 		dash_cooldown = false
 		label.text = "DASH"
 #endregion
+
+func anim_handler(anim_name):
+		emote.show()
+		emote.frame = anim_name
+		emote_anim.play("Sprite_popup")
+		emote_timer.start()
 
 #region Dash Logic
 func check_for_no_movement() -> bool:
@@ -228,9 +250,10 @@ func _on_detection_radius_body_exited(body):
 
 func _on_timer_timeout():
 	# restarts running timer if still in criteria, else rat returns to wandering
-	#TODO: check the added state == DASH works as intended
 	if state == RUNNING or state == DASH:
 		state = WANDER
+		anim_handler(PHEW)
+		is_running = false
 		wandering_timer.start()
 	else:
 		timer.start()
@@ -247,6 +270,8 @@ func _on_player_rat_capture(body):
 		spell_effect.play()
 		label.hide()
 		capture_sound.play()
+		self.set_collision_layer_value(1, false)
+		self.set_collision_mask_value(2, false)
 		await get_tree().create_timer(1.0).timeout
 		queue_free()
 
@@ -267,13 +292,14 @@ func _on_raycast_timer_timeout():
 	if cast_ray():
 		raycast_timer.stop()
 		if state != RUNNING:
-			detected_sound.play()
+			anim_handler(SURPRISE)
 			state = RUNNING
 
 func _on_wandering_timer_timeout():
 	# set to move towards player every now and then
 	if state != RUNNING:
 		state = FOLLOWING
+		anim_handler(HUH)
 		follow_timer.start(randf_range(1.0, 2.0))
 	
 
@@ -293,4 +319,13 @@ func _on_dash_timer_timeout():
 func _on_dash_cooldown_timer_timeout():
 	# resets dash cooldown, allowing another dash but preventing too many dashes
 	dash_cooldown = true
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "Sprite_popup" and state == WAITING:
+		emote_anim.play("Sprite_curious")
+	if anim_name == "Sprite_popdown":
+		emote.hide()
+
+func _on_emote_timer_timeout():
+	emote_anim.play("Sprite_popdown")
 #endregion
