@@ -24,11 +24,13 @@ func _on_level_start_timer_timeout():
 func _on_level_complete():
 	if level_end_timer.is_stopped():
 		level_end_timer.start()
+		$VictorySound.play()
 		victory = true
 
 func _on_level_failed():
 	if level_end_timer.is_stopped():
 		level_end_timer.start()
+		$GameOverSound.play()
 		victory = false
 
 func _on_level_end_timer_timeout():

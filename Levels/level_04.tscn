@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cvcvgkkb4evgn"]
+[gd_scene load_steps=13 format=3 uid="uid://cvcvgkkb4evgn"]
 
 [ext_resource type="Script" path="res://Levels/level_04.gd" id="1_42e4v"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_7oxp5"]
@@ -8,7 +8,10 @@
 [ext_resource type="TileSet" uid="uid://ba4pi7vawvoog" path="res://Assets/tile_map.tres" id="7_dhsea"]
 [ext_resource type="PackedScene" uid="uid://dqrujxar1ft6l" path="res://Player/player.tscn" id="8_wuibp"]
 [ext_resource type="PackedScene" uid="uid://bvn7cqb6savp0" path="res://Rat/rat_independence.tscn" id="9_hi07s"]
+[ext_resource type="AudioStream" uid="uid://bj214noxbc1xh" path="res://Assets/Sound/Music/08 - Overworld.ogg" id="10_884p0"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="10_qcv8a"]
+[ext_resource type="AudioStream" uid="uid://celhgn85ug5gi" path="res://Assets/Sound/Interface/secret3.ogg" id="11_y0urd"]
+[ext_resource type="AudioStream" uid="uid://be4mw3qffe34c" path="res://Assets/Sound/Interface/gameover4.ogg" id="12_5ha0r"]
 
 [node name="Level4" type="Node2D"]
 script = ExtResource("1_42e4v")
@@ -137,6 +140,17 @@ tween_parameters = null
 tween_on_load = true
 inactive_update_mode = 0
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_884p0")
+pitch_scale = 1.3
+autoplay = true
+
+[node name="VictorySound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_y0urd")
+
+[node name="GameOverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_5ha0r")
+
 [connection signal="game_start" from="." to="Player" method="_on_game_start"]
 [connection signal="level_complete" from="Camera2D/UI" to="." method="_on_level_complete"]
 [connection signal="level_failed" from="Camera2D/UI" to="." method="_on_level_failed"]
@@ -168,3 +182,4 @@ inactive_update_mode = 0
 [connection signal="rat_caught" from="RatIndependence10" to="SignalBus" method="_on_rat_independence_rat_caught"]
 [connection signal="rat_caught" from="RatIndependence11" to="SignalBus" method="_on_rat_independence_rat_caught"]
 [connection signal="rat_caught" from="RatIndependence12" to="SignalBus" method="_on_rat_independence_rat_caught"]
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

@@ -28,6 +28,8 @@ func _process(_delta):
 			if text_end_timer.is_stopped():
 				text_end_timer.start()
 		frame_buffer = 0
+	if Input.is_action_just_released("ui_accept"):
+		_on_text_end_timer_timeout()
 
 
 func _on_timer_timeout():

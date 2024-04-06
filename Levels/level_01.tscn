@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cm6slq24g5aix"]
+[gd_scene load_steps=13 format=3 uid="uid://cm6slq24g5aix"]
 
 [ext_resource type="TileSet" uid="uid://ba4pi7vawvoog" path="res://Assets/tile_map.tres" id="1_x6kkh"]
 [ext_resource type="Script" path="res://Levels/level_01.gd" id="1_yohxh"]
@@ -10,6 +10,8 @@
 [ext_resource type="Script" path="res://SignalBus.gd" id="7_7w7n5"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="9_ucv7t"]
 [ext_resource type="AudioStream" uid="uid://bt5vxvsr1ka4t" path="res://Assets/Sound/Music/Retro Comedy.ogg" id="10_jip4p"]
+[ext_resource type="AudioStream" uid="uid://celhgn85ug5gi" path="res://Assets/Sound/Interface/secret3.ogg" id="11_nj48t"]
+[ext_resource type="AudioStream" uid="uid://be4mw3qffe34c" path="res://Assets/Sound/Interface/gameover4.ogg" id="12_ge070"]
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_yohxh")
@@ -113,6 +115,12 @@ inactive_update_mode = 0
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_jip4p")
 autoplay = true
+
+[node name="VictorySound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_nj48t")
+
+[node name="GameOverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_ge070")
 
 [connection signal="game_start" from="." to="Player" method="_on_game_start"]
 [connection signal="level_complete" from="Camera2D/UI" to="." method="_on_level_complete"]

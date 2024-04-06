@@ -108,34 +108,6 @@ animations = [{
 "speed": 16.0
 }]
 
-[sub_resource type="Animation" id="Animation_gl0xm"]
-resource_name = "Sprite_popup"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Emote:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0.08, 0.08), Vector2(0.706, 0.986), Vector2(1.115, 1.115), Vector2(1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Emote:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, -5.97), Vector2(0, -16.708), Vector2(0, -15.33)]
-}
-
 [sub_resource type="Animation" id="Animation_kp3wg"]
 length = 0.001
 tracks/0/type = "value"
@@ -175,6 +147,22 @@ tracks/2/keys = {
 "values": [18]
 }
 
+[sub_resource type="Animation" id="Animation_utkb1"]
+resource_name = "Sprite_curious"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Emote:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [18, 13, 8]
+}
+
 [sub_resource type="Animation" id="Animation_qxome"]
 resource_name = "Sprite_popdown"
 length = 0.2
@@ -203,20 +191,32 @@ tracks/1/keys = {
 "values": [Vector2(0, -15.33), Vector2(0, -6.325)]
 }
 
-[sub_resource type="Animation" id="Animation_utkb1"]
-resource_name = "Sprite_curious"
-length = 0.7
+[sub_resource type="Animation" id="Animation_gl0xm"]
+resource_name = "Sprite_popup"
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Emote:frame")
+tracks/0/path = NodePath("Emote:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.08, 0.08), Vector2(0.706, 0.986), Vector2(1.115, 1.115), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Emote:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [18, 13, 8]
+"update": 0,
+"values": [Vector2(0, -5.97), Vector2(0, -16.708), Vector2(0, -15.33)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7pc6o"]
