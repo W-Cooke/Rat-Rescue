@@ -73,3 +73,5 @@ scale = Vector2(2, 2)
 [connection signal="rat_caught" from="RatIndependence3" to="SignalBus" method="_on_rat_independence_rat_caught"]
 [connection signal="rat_caught" from="SignalBus" to="UI" method="_on_signal_bus_rat_caught"]
 [connection signal="timeout" from="LevelStartTimer" to="." method="_on_level_start_timer_timeout"]
+[connection signal="teleported" from="PortalBlue" to="PortalBlue2" method="_on_portal_blue_teleported"]
+[connection signal="teleported" from="PortalBlue2" to="PortalBlue" method="_on_portal_blue_teleported"]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://88yrmbsxrotl"]
+[gd_scene load_steps=22 format=3 uid="uid://88yrmbsxrotl"]
 
 [ext_resource type="Texture2D" uid="uid://ck7gjaqi2ha8e" path="res://Assets/Sprite/Tilemap/SpellEffects/PortalBlue.png" id="1_25mjb"]
 [ext_resource type="Texture2D" uid="uid://b5tbl7f2v4dgs" path="res://Assets/Sprite/Tilemap/SpellEffects/SparkleBlue.png" id="2_ho8hl"]
 [ext_resource type="Script" path="res://Entities/Portals/portal_blue.gd" id="2_mjgi2"]
+[ext_resource type="AudioStream" uid="uid://datueqhpvkm61" path="res://Assets/Sound/pickup4.ogg" id="4_4ajyw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fwof4"]
 atlas = ExtResource("1_25mjb")
@@ -128,6 +129,7 @@ anim_speed_max = 1.25
 
 [node name="PortalBlue" type="AnimatedSprite2D" groups=["portal_blue"]]
 sprite_frames = SubResource("SpriteFrames_b07nh")
+autoplay = "default"
 frame_progress = 0.882395
 script = ExtResource("2_mjgi2")
 
@@ -159,4 +161,12 @@ explosiveness = 1.0
 trail_sections = 6
 trail_section_subdivisions = 2
 
+[node name="CooldownTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Bwoop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_4ajyw")
+volume_db = -9.322
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
