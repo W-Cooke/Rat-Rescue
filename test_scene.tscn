@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://byv31wb3k77mn"]
+[gd_scene load_steps=9 format=3 uid="uid://byv31wb3k77mn"]
 
 [ext_resource type="TileSet" uid="uid://ba4pi7vawvoog" path="res://Assets/tile_map.tres" id="1_0e2x4"]
 [ext_resource type="Script" path="res://test_scene.gd" id="1_uevvw"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cnuyvrigk0ryw" path="res://Assets/UI/pause_screen.tscn" id="4_1xe3t"]
 [ext_resource type="PackedScene" uid="uid://nx34gp5727mt" path="res://Assets/UI/ui.tscn" id="5_ec1gi"]
 [ext_resource type="Script" path="res://SignalBus.gd" id="7_6dmbo"]
+[ext_resource type="PackedScene" uid="uid://88yrmbsxrotl" path="res://Entities/Portals/portal_blue.tscn" id="8_j80qr"]
 
 [node name="TestScene" type="Node2D"]
 script = ExtResource("1_uevvw")
@@ -54,6 +55,14 @@ script = ExtResource("7_6dmbo")
 
 [node name="LevelStartTimer" type="Timer" parent="."]
 autostart = true
+
+[node name="PortalBlue" parent="." instance=ExtResource("8_j80qr")]
+position = Vector2(291, 284)
+scale = Vector2(2, 2)
+
+[node name="PortalBlue2" parent="." instance=ExtResource("8_j80qr")]
+position = Vector2(290, 527)
+scale = Vector2(2, 2)
 
 [connection signal="game_start" from="." to="Player" method="_on_game_start"]
 [connection signal="rat_capture" from="Player" to="RatIndependence" method="_on_player_rat_capture"]

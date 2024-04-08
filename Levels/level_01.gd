@@ -6,6 +6,7 @@ extends Node2D
 @onready var UI = $Camera2D/UI
 @export var timer_left_seconds = 120
 var victory : bool = false
+var level_end :bool = false
 signal game_start
 
 func _ready():
@@ -24,13 +25,18 @@ func _on_level_start_timer_timeout():
 func _on_level_complete():
 	if level_end_timer.is_stopped():
 		level_end_timer.start()
-		$VictorySound.play()
+		if not level_end:
+			$VictorySound.play()
+			level_end = true
 		victory = true
 
 func _on_level_failed():
 	if level_end_timer.is_stopped():
 		level_end_timer.start()
-		$GameOverSound.play()
+		if not level_end:
+			$GameOverSound.play()
+			level_end = true
+		print("level failed")
 		victory = false
 
 func _on_level_end_timer_timeout():

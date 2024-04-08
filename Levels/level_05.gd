@@ -40,7 +40,8 @@ func _on_level_failed():
 func _on_level_end_timer_timeout():
 	var path
 	if victory:
-		path = "res://Levels/level_03.tscn"
+		path = "res://main_menu.tscn"
+		#TODO: change this to a thank you screen or something
 	else:
 		path = "res://main_menu.tscn"
 	TransitionScreen.transition()
