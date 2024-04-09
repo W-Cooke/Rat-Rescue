@@ -1,12 +1,25 @@
-[gd_scene load_steps=61 format=3 uid="uid://dqrujxar1ft6l"]
+[gd_scene load_steps=65 format=3 uid="uid://dqrujxar1ft6l"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_avsqt"]
 [ext_resource type="Texture2D" uid="uid://c08gv8oqhmaor" path="res://Assets/Sprite/Tilemap/173.png" id="2_22uyy"]
+[ext_resource type="Texture2D" uid="uid://bowrf0axx8nsa" path="res://Assets/Sprite/Tiles/tile_0084.png" id="2_emkl1"]
 [ext_resource type="Texture2D" uid="uid://05eph82rjipj" path="res://Assets/Sprite/Net.png" id="3_5dlip"]
 [ext_resource type="AudioStream" uid="uid://bou413j3p3ast" path="res://Assets/Sound/410259__adrimb86__fairy_sound.wav" id="4_hybtw"]
 [ext_resource type="Texture2D" uid="uid://bp0onx0tip87b" path="res://Assets/Sprite/Wizard_animated.png" id="6_ytly8"]
 [ext_resource type="Texture2D" uid="uid://dkrk3ev0e2wko" path="res://Assets/Sprite/Tilemap/93.png" id="7_5resd"]
 [ext_resource type="Texture2D" uid="uid://cm1uvmev4qjy2" path="res://Assets/Sprite/Tilemap/195.png" id="8_gdrvb"]
+
+[sub_resource type="Gradient" id="Gradient_os6au"]
+offsets = PackedFloat32Array(0, 0.509868)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nbe2k"]
+gradient = SubResource("Gradient_os6au")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_inybn"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_nbe2k")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kiqbs"]
 atlas = ExtResource("2_22uyy")
@@ -393,12 +406,16 @@ collision_layer = 3
 motion_mode = 1
 script = ExtResource("1_avsqt")
 
+[node name="DashParticles" type="GPUParticles2D" parent="."]
+scale = Vector2(2, 2)
+amount = 19
+process_material = SubResource("ParticleProcessMaterial_inybn")
+texture = ExtResource("2_emkl1")
+
 [node name="TPInAnimPoof" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 5)
 scale = Vector2(1.895, 1.895)
 sprite_frames = SubResource("SpriteFrames_op0sg")
-frame = 12
-frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
@@ -408,6 +425,7 @@ shape = SubResource("RectangleShape2D_77txr")
 stream = ExtResource("4_hybtw")
 volume_db = -7.7
 pitch_scale = 0.62
+bus = &"SFX"
 
 [node name="PlayerAnimatedSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -447,4 +465,8 @@ process_material = SubResource("ParticleProcessMaterial_bqg87")
 texture = ExtResource("7_5resd")
 lifetime = 0.2
 
+[node name="PowerupTimer" type="Timer" parent="."]
+wait_time = 3.0
+
 [connection signal="body_entered" from="Net" to="." method="_on_net_body_entered"]
+[connection signal="timeout" from="PowerupTimer" to="." method="_on_powerup_timer_timeout"]

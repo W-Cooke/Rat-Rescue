@@ -68,7 +68,6 @@ layer_2/tile_data = PackedInt32Array(45, 655360, 6, -65490, 655360, 6, 57, 65536
 visible = false
 position = Vector2(361, 274)
 scale = Vector2(2, 2)
-SPEED = 300.0
 
 [node name="RatIndependence" parent="." instance=ExtResource("7_jjhkl")]
 position = Vector2(84, 220)
@@ -101,9 +100,12 @@ inactive_update_mode = 0
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_s5nn3")
 autoplay = true
+bus = &"Music"
 
 [node name="VictorySound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_ovn7t")
+bus = &"SFX"
 
 [node name="GameOverSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_exeo5")
+bus = &"SFX"

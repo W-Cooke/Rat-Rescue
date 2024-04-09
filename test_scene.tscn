@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://byv31wb3k77mn"]
+[gd_scene load_steps=12 format=3 uid="uid://byv31wb3k77mn"]
 
 [ext_resource type="TileSet" uid="uid://ba4pi7vawvoog" path="res://Assets/tile_map.tres" id="1_0e2x4"]
 [ext_resource type="Script" path="res://test_scene.gd" id="1_uevvw"]
@@ -8,6 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://nx34gp5727mt" path="res://Assets/UI/ui.tscn" id="5_ec1gi"]
 [ext_resource type="Script" path="res://SignalBus.gd" id="7_6dmbo"]
 [ext_resource type="PackedScene" uid="uid://88yrmbsxrotl" path="res://Entities/Portals/portal_blue.tscn" id="8_j80qr"]
+[ext_resource type="PackedScene" uid="uid://bg01wap5e5yvw" path="res://Entities/Portals/portal_green.tscn" id="9_qrqr6"]
+[ext_resource type="PackedScene" uid="uid://bkxa2a8mw7pwu" path="res://Entities/Portals/portal_orange.tscn" id="10_madx6"]
+[ext_resource type="PackedScene" uid="uid://ctc462k326p5h" path="res://Entities/go_faster_potion.tscn" id="11_jctk7"]
 
 [node name="TestScene" type="Node2D"]
 script = ExtResource("1_uevvw")
@@ -23,7 +26,6 @@ layer_0/tile_data = PackedInt32Array(65537, 262144, 3, 131073, 0, 4, 196609, 0, 
 [node name="Player" parent="." instance=ExtResource("2_jc2an")]
 position = Vector2(78, 408)
 scale = Vector2(2, 2)
-SPEED = 300.0
 
 [node name="RatIndependence" parent="." instance=ExtResource("2_wjwhy")]
 position = Vector2(394, 260)
@@ -56,13 +58,26 @@ script = ExtResource("7_6dmbo")
 [node name="LevelStartTimer" type="Timer" parent="."]
 autostart = true
 
+[node name="PortalGreen" parent="." instance=ExtResource("9_qrqr6")]
+position = Vector2(96, 284)
+
+[node name="PortalGreen2" parent="." instance=ExtResource("9_qrqr6")]
+position = Vector2(609, 451)
+
 [node name="PortalBlue" parent="." instance=ExtResource("8_j80qr")]
-position = Vector2(291, 284)
-scale = Vector2(2, 2)
+position = Vector2(259, 267)
 
 [node name="PortalBlue2" parent="." instance=ExtResource("8_j80qr")]
-position = Vector2(290, 527)
-scale = Vector2(2, 2)
+position = Vector2(257, 491)
+
+[node name="PortalOrange" parent="." instance=ExtResource("10_madx6")]
+position = Vector2(598, 251)
+
+[node name="PortalOrange2" parent="." instance=ExtResource("10_madx6")]
+position = Vector2(410, 491)
+
+[node name="GoFasterPotion" parent="." instance=ExtResource("11_jctk7")]
+position = Vector2(517, 146)
 
 [connection signal="game_start" from="." to="Player" method="_on_game_start"]
 [connection signal="rat_capture" from="Player" to="RatIndependence" method="_on_player_rat_capture"]
@@ -73,5 +88,10 @@ scale = Vector2(2, 2)
 [connection signal="rat_caught" from="RatIndependence3" to="SignalBus" method="_on_rat_independence_rat_caught"]
 [connection signal="rat_caught" from="SignalBus" to="UI" method="_on_signal_bus_rat_caught"]
 [connection signal="timeout" from="LevelStartTimer" to="." method="_on_level_start_timer_timeout"]
+[connection signal="teleported" from="PortalGreen" to="PortalGreen2" method="_on_portal_green_teleported"]
+[connection signal="teleported" from="PortalGreen2" to="PortalGreen" method="_on_portal_green_teleported"]
 [connection signal="teleported" from="PortalBlue" to="PortalBlue2" method="_on_portal_blue_teleported"]
 [connection signal="teleported" from="PortalBlue2" to="PortalBlue" method="_on_portal_blue_teleported"]
+[connection signal="teleported" from="PortalOrange" to="PortalOrange2" method="_on_portal_orange_teleported"]
+[connection signal="teleported" from="PortalOrange2" to="PortalOrange" method="_on_portal_orange_teleported"]
+[connection signal="picked_up" from="GoFasterPotion" to="Player" method="_on_go_faster_potion_picked_up"]

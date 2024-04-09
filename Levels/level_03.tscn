@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cg6gm5ajgwc0c"]
+[gd_scene load_steps=17 format=3 uid="uid://cg6gm5ajgwc0c"]
 
 [ext_resource type="Script" path="res://Levels/level_03.gd" id="1_0jjxx"]
 [ext_resource type="LabelSettings" uid="uid://bkud046cx5bw6" path="res://Assets/UI/main_menu.tres" id="1_xgttp"]
@@ -13,6 +13,9 @@
 [ext_resource type="AudioStream" uid="uid://calvnjh3e7b2t" path="res://Assets/Sound/Music/13 - Danger.ogg" id="11_ma7og"]
 [ext_resource type="AudioStream" uid="uid://celhgn85ug5gi" path="res://Assets/Sound/Interface/secret3.ogg" id="12_otgf4"]
 [ext_resource type="AudioStream" uid="uid://be4mw3qffe34c" path="res://Assets/Sound/Interface/gameover4.ogg" id="13_fdsye"]
+[ext_resource type="PackedScene" uid="uid://ctc462k326p5h" path="res://Entities/go_faster_potion.tscn" id="14_68ian"]
+[ext_resource type="PackedScene" uid="uid://88yrmbsxrotl" path="res://Entities/Portals/portal_blue.tscn" id="15_2plmj"]
+[ext_resource type="PackedScene" uid="uid://bg01wap5e5yvw" path="res://Entities/Portals/portal_green.tscn" id="16_egwjk"]
 
 [node name="Level3" type="Node2D"]
 script = ExtResource("1_0jjxx")
@@ -76,7 +79,6 @@ layer_2/tile_data = PackedInt32Array(-786409, 458753, 4, -655337, 262145, 6, -78
 [node name="Player" parent="." instance=ExtResource("8_pugbf")]
 position = Vector2(686, -34)
 scale = Vector2(2, 2)
-SPEED = 300.0
 
 [node name="RatIndependence" parent="." instance=ExtResource("9_gdid7")]
 position = Vector2(399, -226)
@@ -145,12 +147,33 @@ inactive_update_mode = 0
 stream = ExtResource("11_ma7og")
 pitch_scale = 1.3
 autoplay = true
+bus = &"Music"
 
 [node name="VictorySound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_otgf4")
+bus = &"SFX"
 
 [node name="GameOverSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_fdsye")
+bus = &"SFX"
+
+[node name="GoFasterPotion" parent="." instance=ExtResource("14_68ian")]
+position = Vector2(-47, -276)
+
+[node name="GoFasterPotion2" parent="." instance=ExtResource("14_68ian")]
+position = Vector2(-1359, -1288)
+
+[node name="PortalBlue" parent="." instance=ExtResource("15_2plmj")]
+position = Vector2(-504, -1220)
+
+[node name="PortalBlue2" parent="." instance=ExtResource("15_2plmj")]
+position = Vector2(-440, 528)
+
+[node name="PortalGreen" parent="." instance=ExtResource("16_egwjk")]
+position = Vector2(545, -320)
+
+[node name="PortalGreen2" parent="." instance=ExtResource("16_egwjk")]
+position = Vector2(-1882, -1530)
 
 [connection signal="game_start" from="." to="Player" method="_on_game_start"]
 [connection signal="level_complete" from="Camera2D/UI" to="." method="_on_level_complete"]
@@ -186,3 +209,9 @@ stream = ExtResource("13_fdsye")
 [connection signal="rat_caught" from="RatIndependence12" to="SignalBus" method="_on_rat_independence_rat_caught"]
 [connection signal="rat_caught" from="RatIndependence13" to="SignalBus" method="_on_rat_independence_rat_caught"]
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]
+[connection signal="picked_up" from="GoFasterPotion" to="Player" method="_on_go_faster_potion_picked_up"]
+[connection signal="picked_up" from="GoFasterPotion2" to="Player" method="_on_go_faster_potion_picked_up"]
+[connection signal="teleported" from="PortalBlue" to="PortalBlue2" method="_on_portal_blue_teleported"]
+[connection signal="teleported" from="PortalBlue2" to="PortalBlue" method="_on_portal_blue_teleported"]
+[connection signal="teleported" from="PortalGreen" to="PortalGreen2" method="_on_portal_green_teleported"]
+[connection signal="teleported" from="PortalGreen2" to="PortalGreen" method="_on_portal_green_teleported"]

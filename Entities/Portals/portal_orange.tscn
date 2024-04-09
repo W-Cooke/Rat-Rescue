@@ -1,96 +1,96 @@
-[gd_scene load_steps=24 format=3 uid="uid://88yrmbsxrotl"]
+[gd_scene load_steps=24 format=3 uid="uid://bkxa2a8mw7pwu"]
 
-[ext_resource type="Texture2D" uid="uid://ck7gjaqi2ha8e" path="res://Assets/Sprite/Tilemap/SpellEffects/PortalBlue.png" id="1_25mjb"]
-[ext_resource type="Texture2D" uid="uid://b5tbl7f2v4dgs" path="res://Assets/Sprite/Tilemap/SpellEffects/SparkleBlue.png" id="2_ho8hl"]
-[ext_resource type="Script" path="res://Entities/Portals/portal_blue.gd" id="2_mjgi2"]
-[ext_resource type="AudioStream" uid="uid://datueqhpvkm61" path="res://Assets/Sound/pickup4.ogg" id="4_4ajyw"]
+[ext_resource type="Texture2D" uid="uid://38l3qyggc0fr" path="res://Assets/Sprite/Tilemap/SpellEffects/PortalOrange.png" id="1_2141x"]
+[ext_resource type="Script" path="res://Entities/Portals/portal_orange.gd" id="2_2tyy3"]
+[ext_resource type="Texture2D" uid="uid://et4uigljkf0j" path="res://Assets/Sprite/Tilemap/SpellEffects/SparkleOrange.png" id="3_25tl4"]
+[ext_resource type="AudioStream" uid="uid://datueqhpvkm61" path="res://Assets/Sound/pickup4.ogg" id="4_23grt"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_oebnh"]
-atlas = ExtResource("1_25mjb")
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xovu"]
+atlas = ExtResource("1_2141x")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3gt5t"]
-atlas = ExtResource("1_25mjb")
+[sub_resource type="AtlasTexture" id="AtlasTexture_djbkg"]
+atlas = ExtResource("1_2141x")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1fuch"]
-atlas = ExtResource("1_25mjb")
+[sub_resource type="AtlasTexture" id="AtlasTexture_5d36a"]
+atlas = ExtResource("1_2141x")
 region = Rect2(64, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ftnae"]
-atlas = ExtResource("1_25mjb")
+[sub_resource type="AtlasTexture" id="AtlasTexture_lycf3"]
+atlas = ExtResource("1_2141x")
 region = Rect2(96, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wdmo3"]
-atlas = ExtResource("1_25mjb")
+[sub_resource type="AtlasTexture" id="AtlasTexture_24rps"]
+atlas = ExtResource("1_2141x")
 region = Rect2(128, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8jcvp"]
-atlas = ExtResource("1_25mjb")
+[sub_resource type="AtlasTexture" id="AtlasTexture_qwoni"]
+atlas = ExtResource("1_2141x")
 region = Rect2(160, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fw5pp"]
-atlas = ExtResource("1_25mjb")
+[sub_resource type="AtlasTexture" id="AtlasTexture_23ma8"]
+atlas = ExtResource("1_2141x")
 region = Rect2(0, 32, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_260wy"]
-atlas = ExtResource("1_25mjb")
+[sub_resource type="AtlasTexture" id="AtlasTexture_bn6e8"]
+atlas = ExtResource("1_2141x")
 region = Rect2(32, 32, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gac8j"]
-atlas = ExtResource("1_25mjb")
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqgui"]
+atlas = ExtResource("1_2141x")
 region = Rect2(64, 32, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_w3wtf"]
-atlas = ExtResource("1_25mjb")
+[sub_resource type="AtlasTexture" id="AtlasTexture_uu3gc"]
+atlas = ExtResource("1_2141x")
 region = Rect2(96, 32, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1yxam"]
-atlas = ExtResource("1_25mjb")
+[sub_resource type="AtlasTexture" id="AtlasTexture_3rgmg"]
+atlas = ExtResource("1_2141x")
 region = Rect2(128, 32, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_c7nlq"]
-atlas = ExtResource("1_25mjb")
+[sub_resource type="AtlasTexture" id="AtlasTexture_uk1yq"]
+atlas = ExtResource("1_2141x")
 region = Rect2(160, 32, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_f8y4y"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_b07nh"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_oebnh")
+"texture": SubResource("AtlasTexture_7xovu")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3gt5t")
+"texture": SubResource("AtlasTexture_djbkg")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1fuch")
+"texture": SubResource("AtlasTexture_5d36a")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ftnae")
+"texture": SubResource("AtlasTexture_lycf3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wdmo3")
+"texture": SubResource("AtlasTexture_24rps")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8jcvp")
+"texture": SubResource("AtlasTexture_qwoni")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fw5pp")
+"texture": SubResource("AtlasTexture_23ma8")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_260wy")
+"texture": SubResource("AtlasTexture_bn6e8")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gac8j")
+"texture": SubResource("AtlasTexture_dqgui")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_w3wtf")
+"texture": SubResource("AtlasTexture_uu3gc")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1yxam")
+"texture": SubResource("AtlasTexture_3rgmg")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_c7nlq")
+"texture": SubResource("AtlasTexture_uk1yq")
 }],
 "loop": true,
 "name": &"default",
@@ -139,11 +139,11 @@ gravity = Vector3(0, 0, 0)
 anim_speed_min = 0.71
 anim_speed_max = 1.25
 
-[node name="PortalBlue" type="AnimatedSprite2D" groups=["portal_blue"]]
-sprite_frames = SubResource("SpriteFrames_f8y4y")
+[node name="PortalOrange" type="AnimatedSprite2D" groups=["portal_orange"]]
+sprite_frames = SubResource("SpriteFrames_b07nh")
 autoplay = "default"
-frame_progress = 0.82171
-script = ExtResource("2_mjgi2")
+frame_progress = 0.653803
+script = ExtResource("2_2tyy3")
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -155,7 +155,7 @@ texture_filter = 1
 material = SubResource("CanvasItemMaterial_yrnpc")
 amount = 40
 process_material = SubResource("ParticleProcessMaterial_s3csy")
-texture = ExtResource("2_ho8hl")
+texture = ExtResource("3_25tl4")
 lifetime = 0.8
 trail_sections = 6
 trail_section_subdivisions = 2
@@ -166,7 +166,7 @@ material = SubResource("CanvasItemMaterial_yrnpc")
 emitting = false
 amount = 40
 process_material = SubResource("ParticleProcessMaterial_tokjc")
-texture = ExtResource("2_ho8hl")
+texture = ExtResource("3_25tl4")
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
@@ -177,7 +177,7 @@ trail_section_subdivisions = 2
 one_shot = true
 
 [node name="Bwoop" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_4ajyw")
+stream = ExtResource("4_23grt")
 volume_db = -9.322
 bus = &"SFX"
 

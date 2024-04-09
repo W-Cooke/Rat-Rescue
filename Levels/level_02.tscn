@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b8ga0acxdfvbh"]
+[gd_scene load_steps=14 format=3 uid="uid://b8ga0acxdfvbh"]
 
 [ext_resource type="Script" path="res://Levels/level_02.gd" id="1_1fxhj"]
 [ext_resource type="Script" path="res://SignalBus.gd" id="2_7bfvc"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://c7u7t85pbqypv" path="res://Assets/Sound/Music/Ove Melaa -Supa Powa C.mp3" id="10_cwgnt"]
 [ext_resource type="AudioStream" uid="uid://celhgn85ug5gi" path="res://Assets/Sound/Interface/secret3.ogg" id="11_kdb0o"]
 [ext_resource type="AudioStream" uid="uid://be4mw3qffe34c" path="res://Assets/Sound/Interface/gameover4.ogg" id="12_5boqu"]
+[ext_resource type="PackedScene" uid="uid://88yrmbsxrotl" path="res://Entities/Portals/portal_blue.tscn" id="13_jdeuo"]
 
 [node name="Level2" type="Node2D"]
 script = ExtResource("1_1fxhj")
@@ -130,12 +131,21 @@ stream = ExtResource("10_cwgnt")
 volume_db = -14.746
 pitch_scale = 1.1
 autoplay = true
+bus = &"Music"
 
 [node name="VictorySound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_kdb0o")
+bus = &"SFX"
 
 [node name="GameOverSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_5boqu")
+bus = &"Music"
+
+[node name="PortalBlue" parent="." instance=ExtResource("13_jdeuo")]
+position = Vector2(916, 219)
+
+[node name="PortalBlue2" parent="." instance=ExtResource("13_jdeuo")]
+position = Vector2(-660, 500)
 
 [connection signal="game_start" from="." to="Player" method="_on_game_start"]
 [connection signal="level_complete" from="Camera2D/UI" to="." method="_on_level_complete"]
@@ -167,3 +177,5 @@ stream = ExtResource("12_5boqu")
 [connection signal="rat_caught" from="RatIndependence10" to="SignalBus" method="_on_rat_independence_rat_caught"]
 [connection signal="rat_caught" from="RatIndependence11" to="SignalBus" method="_on_rat_independence_rat_caught"]
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]
+[connection signal="teleported" from="PortalBlue" to="PortalBlue2" method="_on_portal_blue_teleported"]
+[connection signal="teleported" from="PortalBlue2" to="PortalBlue" method="_on_portal_blue_teleported"]

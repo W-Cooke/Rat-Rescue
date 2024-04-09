@@ -271,12 +271,15 @@ label_settings = SubResource("LabelSettings_prr4m")
 
 [node name="DetectedSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_ovi4j")
+bus = &"SFX"
 
 [node name="CaptureSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_bhrbx")
+bus = &"SFX"
 
 [node name="ScratchSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("12_4d6fe")
+bus = &"SFX"
 
 [node name="RayCastNorth" type="RayCast2D" parent="."]
 scale = Vector2(0.5, 0.5)

@@ -115,12 +115,15 @@ inactive_update_mode = 0
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_jip4p")
 autoplay = true
+bus = &"Music"
 
 [node name="VictorySound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_nj48t")
+bus = &"SFX"
 
 [node name="GameOverSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_ge070")
+bus = &"SFX"
 
 [connection signal="game_start" from="." to="Player" method="_on_game_start"]
 [connection signal="level_complete" from="Camera2D/UI" to="." method="_on_level_complete"]

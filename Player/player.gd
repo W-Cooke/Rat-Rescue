@@ -1,9 +1,12 @@
 extends CharacterBody2D
 
 #region Variables
-@export var SPEED : float = 75.00
+@export var SPEED : float = 300
+var stored_speed = SPEED
 signal rat_capture
 @onready var magic_sound = $MagicSound
+@onready var powerup_timer = $PowerupTimer
+@onready var dash_particles = $DashParticles
 
 # spinning script variables
 @export_category ("Spin Variables")
@@ -34,6 +37,7 @@ var controllable : bool = false
 
 func _ready():
 	net.hide()
+	dash_particles.emitting = false
 	player_sprite.hide()
 	teleport_in_anim.show()
 	teleport_in_anim.emitting = true
@@ -43,6 +47,7 @@ func _ready():
 	
 
 func _physics_process(_delta):
+	print(str(SPEED))
 	if controllable:
 		velocity = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down") * SPEED
 		animation_handler()
@@ -171,3 +176,12 @@ func _on_game_start():
 	controllable = true
 	particles.emitting = false
 	$TPInAnimPoof.play()
+
+func _on_go_faster_potion_picked_up():
+	SPEED *= 2
+	dash_particles.emitting = true
+	powerup_timer.start()
+
+func _on_powerup_timer_timeout():
+	dash_particles.emitting = false
+	SPEED = stored_speed

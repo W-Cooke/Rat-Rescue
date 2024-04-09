@@ -66,7 +66,6 @@ layer_2/tile_data = PackedInt32Array(131097, 720897, 5, 131100, 720897, 5, 65561
 [node name="Player" parent="." instance=ExtResource("8_wuibp")]
 position = Vector2(854, 478)
 scale = Vector2(2, 2)
-SPEED = 300.0
 
 [node name="RatIndependence" parent="." instance=ExtResource("9_hi07s")]
 position = Vector2(1698, 401)
@@ -144,12 +143,15 @@ inactive_update_mode = 0
 stream = ExtResource("10_884p0")
 pitch_scale = 1.3
 autoplay = true
+bus = &"Music"
 
 [node name="VictorySound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_y0urd")
+bus = &"SFX"
 
 [node name="GameOverSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_5ha0r")
+bus = &"SFX"
 
 [connection signal="game_start" from="." to="Player" method="_on_game_start"]
 [connection signal="level_complete" from="Camera2D/UI" to="." method="_on_level_complete"]

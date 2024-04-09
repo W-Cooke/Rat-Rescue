@@ -2,7 +2,7 @@ extends AnimatedSprite2D
 
 @onready var poof_particles = $PoofParticles
 @onready var tp_sound = $Bwoop
-@onready var portals = get_tree().get_nodes_in_group("portal_blue")
+@onready var portals = get_tree().get_nodes_in_group("portal_green")
 var target_portal
 @onready var cooldown_timer = $CooldownTimer
 var tp_cooldown : bool = true
@@ -25,7 +25,7 @@ func _on_area_2d_body_entered(body):
 func _on_cooldown_timer_timeout():
 	tp_cooldown = true
 
-func _on_portal_blue_teleported():
+func _on_portal_green_teleported():
 	tp_sound.play()
 	tp_cooldown = false
 	cooldown_timer.start()
