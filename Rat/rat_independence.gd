@@ -310,7 +310,8 @@ func _on_follow_timer_timeout():
 
 func _on_dash_timer_timeout():
 	# reverts to running state from dash
-	state = RUNNING
+	if state == DASH:
+		state = RUNNING
 	max_speed = maximum_speed
 	dash_particles.emitting = false
 	self.set_collision_layer_value(1, true)
