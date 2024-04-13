@@ -1,0 +1,157 @@
+[gd_scene load_steps=11 format=3 uid="uid://cl4u2mgfnkyrx"]
+
+[ext_resource type="PackedScene" uid="uid://d0w4dn3rllsuq" path="res://Assets/UI/UI_Background.tscn" id="1_1qs21"]
+[ext_resource type="Script" path="res://UI/settings_menu.gd" id="1_5v8sm"]
+[ext_resource type="LabelSettings" uid="uid://bkud046cx5bw6" path="res://Assets/UI/main_menu.tres" id="2_v1osi"]
+[ext_resource type="Texture2D" uid="uid://br3bapqfe81du" path="res://Assets/UI/UI_Pixelart/Checkbox_no.png" id="3_25nyh"]
+[ext_resource type="Texture2D" uid="uid://b2yahlcppa5we" path="res://Assets/UI/UI_Pixelart/Checkbox_yes.png" id="4_1551w"]
+[ext_resource type="Texture2D" uid="uid://bxktvveqe8p03" path="res://Assets/UI/UI_Pixelart/Controller_1.png" id="5_csn34"]
+[ext_resource type="Texture2D" uid="uid://bvhy787onlqk4" path="res://Assets/UI/UI_Pixelart/Keyboard_1.png" id="6_2ecrk"]
+[ext_resource type="Texture2D" uid="uid://dp5w2e5tkshlg" path="res://Assets/UI/generic_arrows_right.png" id="7_gkhbw"]
+[ext_resource type="AudioStream" uid="uid://chgqu4a6fbcpd" path="res://Assets/Sound/Music/381307__adnova__beepbox-3.wav" id="9_wwtdq"]
+[ext_resource type="AudioStream" uid="uid://b184letr5wfle" path="res://Assets/Sound/select_007.wav" id="10_0ws4n"]
+
+[node name="SettingsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5v8sm")
+
+[node name="UI_BG" parent="." instance=ExtResource("1_1qs21")]
+layout_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -148.0
+offset_top = -159.0
+offset_right = 102.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MusicLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "MUSIC: "
+label_settings = ExtResource("2_v1osi")
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="CheckBoxNo" type="Sprite2D" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+position = Vector2(300, 30)
+texture = ExtResource("3_25nyh")
+
+[node name="CheckBoxYes" type="Sprite2D" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+position = Vector2(300, 30)
+texture = ExtResource("4_1551w")
+
+[node name="Separator" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SFXLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "SFX: "
+label_settings = ExtResource("2_v1osi")
+
+[node name="CheckBoxNo" type="Sprite2D" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+position = Vector2(300, 30)
+texture = ExtResource("3_25nyh")
+
+[node name="CheckBoxYes" type="Sprite2D" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+position = Vector2(300, 30)
+texture = ExtResource("4_1551w")
+
+[node name="Separator2" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ControlsLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "CONTROLS: "
+label_settings = ExtResource("2_v1osi")
+
+[node name="ControlsController" type="Sprite2D" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+position = Vector2(300, 30)
+texture = ExtResource("5_csn34")
+
+[node name="ControlsKeyboard" type="Sprite2D" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+position = Vector2(300, 30)
+texture = ExtResource("6_2ecrk")
+
+[node name="Arrow" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("7_gkhbw")
+offset = Vector2(-45, 15)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -279.0
+offset_top = -184.58
+offset_right = 279.0
+offset_bottom = -60.58
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ReturnNoSave" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "RETURN WITHOUT SAVING"
+label_settings = ExtResource("2_v1osi")
+
+[node name="SaveAndReturn" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "SAVE & QUIT"
+label_settings = ExtResource("2_v1osi")
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -162.445
+offset_top = 32.365
+offset_right = 57.5553
+offset_bottom = 92.365
+grow_horizontal = 2
+scale = Vector2(1.61, 1.61)
+text = "SETTINGS"
+label_settings = ExtResource("2_v1osi")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_wwtdq")
+autoplay = true
+bus = &"Music"
+
+[node name="SelectAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_0ws4n")
+bus = &"SFX"
+
+[connection signal="finished" from="MusicPlayer" to="." method="_on_music_player_finished"]

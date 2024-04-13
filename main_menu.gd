@@ -48,7 +48,9 @@ func move_to_scene():
 					level_cursor.show()
 					level_select = true
 				1:
-					print("SETTING")
+					TransitionScreen.transition()
+					await TransitionScreen.on_transition_finished
+					get_tree().change_scene_to_file("res://UI/settings_menu.tscn")
 				2:
 					credits_toggle()
 				3:

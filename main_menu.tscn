@@ -28,12 +28,15 @@ layout_mode = 1
 stream = ExtResource("3_dr2t5")
 volume_db = -6.0
 autoplay = true
+bus = &"Music"
 
 [node name="ConfirmSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_b7qif")
+bus = &"SFX"
 
 [node name="SelectSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_iqwp0")
+bus = &"SFX"
 
 [node name="Cursor" type="NinePatchRect" parent="."]
 texture_filter = 1

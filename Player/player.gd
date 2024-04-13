@@ -47,7 +47,6 @@ func _ready():
 	
 
 func _physics_process(_delta):
-	print(str(SPEED))
 	if controllable:
 		velocity = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down") * SPEED
 		animation_handler()

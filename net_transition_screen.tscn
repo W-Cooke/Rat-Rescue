@@ -85,8 +85,10 @@ libraries = {
 stream = ExtResource("4_2iigx")
 volume_db = -5.0
 pitch_scale = 0.5
+bus = &"SFX"
 
 [node name="FadeOutSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_pr5wt")
 volume_db = -5.0
 pitch_scale = 0.5
+bus = &"SFX"

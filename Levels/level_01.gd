@@ -13,7 +13,6 @@ func _ready():
 	pause_screen.hide()
 	level_start_timer.start()
 	UI.timer_seconds = timer_left_seconds
-	
 
 func _process(delta):
 	if Input.is_action_just_released("Pause"):
@@ -36,7 +35,6 @@ func _on_level_failed():
 		if not level_end:
 			$GameOverSound.play()
 			level_end = true
-		print("level failed")
 		victory = false
 
 func _on_level_end_timer_timeout():
@@ -48,8 +46,6 @@ func _on_level_end_timer_timeout():
 	TransitionScreen.transition()
 	await TransitionScreen.on_transition_finished
 	get_tree().change_scene_to_file(path)
-
-
 
 
 func _on_audio_stream_player_finished():
