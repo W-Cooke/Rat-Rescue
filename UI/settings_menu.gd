@@ -27,6 +27,11 @@ var sfx_is_muted : bool
 
 func _ready():
 	pass
+	#PSEUDOCODE:
+	#TODO:
+	# load from resource
+	# set bools from loaded resource
+	# set sprites to show based off settings
 
 func _process(_delta):
 	menu_controls()
@@ -62,6 +67,7 @@ func _process(_delta):
 				pass
 			3:
 				# quit w/o saving
+				#TODO: revert to settings before initialising
 				TransitionScreen.transition()
 				await TransitionScreen.on_transition_finished
 				get_tree().change_scene_to_file("res://main_menu.tscn")
