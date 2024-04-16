@@ -12,10 +12,3 @@ extends Resource
 @export var music_on : bool
 @export var sfx_on : bool
 @export var controller_used : bool
-
-
-func save_game():
-    pass
-
-func load_game():
-    pass
