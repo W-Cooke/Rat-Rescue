@@ -123,7 +123,6 @@ func _physics_process(_delta):
 #region state methods
 
 func follow_the_player():
-	label.text = "FOLLOW"
 	var target_global_position: Vector2 = player.global_position
 	velocity = Steering.follow(
 		velocity,

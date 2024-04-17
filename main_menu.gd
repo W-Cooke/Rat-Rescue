@@ -1,5 +1,7 @@
 extends Control
 
+#TODO: change level select to move to level select scene
+
 @onready var startgame_label = $CenterContainer/VBoxContainer/StartGame
 @onready var settings_label = $CenterContainer/VBoxContainer/Settings
 @onready var credits_label = $CenterContainer/VBoxContainer/Credits

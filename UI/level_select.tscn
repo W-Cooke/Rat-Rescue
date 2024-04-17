@@ -1,0 +1,80 @@
+[gd_scene load_steps=11 format=3 uid="uid://071yk537pg4v"]
+
+[ext_resource type="PackedScene" uid="uid://d0w4dn3rllsuq" path="res://Assets/UI/UI_Background.tscn" id="1_fgfhp"]
+[ext_resource type="Script" path="res://UI/level_select.gd" id="1_gs80t"]
+[ext_resource type="PackedScene" uid="uid://blkwujc8x7wvx" path="res://UI/level_selector.tscn" id="1_jppxe"]
+[ext_resource type="Texture2D" uid="uid://ba1weq7s6pgwq" path="res://Assets/Level Portraits/level02placeholder.jpeg" id="2_fx8mt"]
+[ext_resource type="Texture2D" uid="uid://dguuw146873u2" path="res://Assets/Level Portraits/level01placehorld.jpeg" id="2_qxogg"]
+[ext_resource type="Texture2D" uid="uid://c3i27rxn7oavw" path="res://Assets/Level Portraits/level03placeholder.jpeg" id="6_5w3q1"]
+[ext_resource type="Texture2D" uid="uid://ciw4gqct20ku3" path="res://Assets/Level Portraits/level04placeholder.jpeg" id="7_qipll"]
+[ext_resource type="Texture2D" uid="uid://dmhlg84vm8h06" path="res://Assets/Level Portraits/level05placeholder.jpeg" id="8_ob4o2"]
+[ext_resource type="Texture2D" uid="uid://bowrf0axx8nsa" path="res://Assets/Sprite/Tiles/tile_0084.png" id="9_8o8r3"]
+[ext_resource type="AudioStream" uid="uid://b184letr5wfle" path="res://Assets/Sound/select_007.wav" id="10_1rslo"]
+
+[node name="LevelSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gs80t")
+
+[node name="UI_BG" parent="." instance=ExtResource("1_fgfhp")]
+layout_mode = 1
+
+[node name="Level1" parent="." instance=ExtResource("1_jppxe")]
+offset_left = 59.0
+offset_top = 388.0
+offset_right = 179.0
+offset_bottom = 508.0
+level_texture = ExtResource("2_qxogg")
+
+[node name="Level2" parent="." instance=ExtResource("1_jppxe")]
+offset_left = 190.0
+offset_top = 230.0
+offset_right = 310.0
+offset_bottom = 350.0
+pivot_offset = Vector2(60, 60)
+level_index = 2
+level_texture = ExtResource("2_fx8mt")
+
+[node name="Level3" parent="." instance=ExtResource("1_jppxe")]
+offset_left = 311.0
+offset_top = 386.0
+offset_right = 431.0
+offset_bottom = 506.0
+pivot_offset = Vector2(60, 60)
+level_index = 3
+level_texture = ExtResource("6_5w3q1")
+
+[node name="Level4" parent="." instance=ExtResource("1_jppxe")]
+offset_left = 443.0
+offset_top = 218.0
+offset_right = 563.0
+offset_bottom = 338.0
+pivot_offset = Vector2(60, 60)
+level_index = 4
+level_texture = ExtResource("7_qipll")
+
+[node name="Level5" parent="." instance=ExtResource("1_jppxe")]
+offset_left = 573.0
+offset_top = 379.0
+offset_right = 693.0
+offset_bottom = 499.0
+pivot_offset = Vector2(60, 60)
+level_index = 5
+level_texture = ExtResource("8_ob4o2")
+
+[node name="PlayerIcon" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 137.0
+offset_top = 193.0
+offset_right = 257.0
+offset_bottom = 313.0
+pivot_offset = Vector2(60, 60)
+texture = ExtResource("9_8o8r3")
+
+[node name="SelectSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_1rslo")

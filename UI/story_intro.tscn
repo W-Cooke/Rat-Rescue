@@ -52,6 +52,7 @@ label_settings = ExtResource("1_pg7ns")
 [node name="TextAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_8wqj0")
 pitch_scale = 3.0
+bus = &"SFX"
 
 [node name="Timer" type="Timer" parent="TextAudio"]
 wait_time = 0.1
@@ -62,6 +63,7 @@ wait_time = 4.0
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_q4jk7")
 autoplay = true
+bus = &"Music"
 
 [connection signal="timeout" from="TextAudio/Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="TextEndTimer" to="." method="_on_text_end_timer_timeout"]

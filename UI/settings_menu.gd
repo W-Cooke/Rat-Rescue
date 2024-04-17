@@ -20,59 +20,48 @@ var menu_index : int = 0
 @onready var controls_controller = $MarginContainer/VBoxContainer/HBoxContainer3/ControlsController
 @onready var controls_keyboard = $MarginContainer/VBoxContainer/HBoxContainer3/ControlsKeyboard
 @onready var select_audio = $SelectAudio
-var controller_controls : bool = true
-var music_is_muted : bool
-var sfx_is_muted : bool
+var controller_used : bool = true
+var music_on : bool
+var sfx_on : bool
 #endregion
 
 func _ready():
-	pass
+	controls_keyboard.hide()
 	#PSEUDOCODE:
 	#TODO:
+	controller_used = GameManager.controller_used
+	music_on = GameManager.music_on
+	sfx_on = GameManager.sfx_on
 	# load from resource
 	# set bools from loaded resource
 	# set sprites to show based off settings
 
 func _process(_delta):
 	menu_controls()
+	sound_manager()
 	arrow.global_position = menu_location_array[menu_index].global_position
+	if Input.is_action_just_released("Pause"):
+		print("game settings reset, levels reset")
+		GameManager.reset_info()
 	if Input.is_action_just_released("ui_accept"):
 		match(menu_index):
 			0:
 				# music
-				if AudioServer.is_bus_mute(2):
-					AudioServer.set_bus_mute(2, false)
-					music_checkbox_yes.show()
-				else:
-					AudioServer.set_bus_mute(2, true)
-					music_checkbox_yes.hide()
+				music_on = !music_on
 			1:
 				# sfx
-				if AudioServer.is_bus_mute(1):
-					AudioServer.set_bus_mute(1, false)
-					sfx_checkbox_yes.show()
-				else:
-					AudioServer.set_bus_mute(1, true)
-					sfx_checkbox_yes.hide()
-				pass
+				sfx_on = !sfx_on
 			2:
 				# controls
-				controller_controls = !controller_controls
-				if controller_controls:
-					controls_keyboard.hide()
-					controls_controller.show()
-				else:
-					controls_keyboard.show()
-					controls_controller.hide()
-				pass
+				controller_used = !controller_used
 			3:
 				# quit w/o saving
-				#TODO: revert to settings before initialising
-				TransitionScreen.transition()
-				await TransitionScreen.on_transition_finished
-				get_tree().change_scene_to_file("res://main_menu.tscn")
+				revert_settings()
+				return_to_main_menu()
 			4:
 				# save & quit
+				save_settings()
+				return_to_main_menu()
 				pass
 
 func menu_controls():
@@ -91,6 +80,41 @@ func menu_controls():
 	else:
 		arrow.offset.x =-45
 
+func sound_manager():
+	if controller_used:
+		controls_keyboard.hide()
+		controls_controller.show()
+	else:
+		controls_keyboard.show()
+		controls_controller.hide()
+	if music_on:
+		AudioServer.set_bus_mute(2, false)
+		music_checkbox_yes.show()
+	else:
+		AudioServer.set_bus_mute(2, true)
+		music_checkbox_yes.hide()
+	if sfx_on:
+		AudioServer.set_bus_mute(1, false)
+		sfx_checkbox_yes.show()
+	else:
+		AudioServer.set_bus_mute(1, true)
+		sfx_checkbox_yes.hide()
+
+func revert_settings():
+	controller_used = GameManager.controller_used
+	music_on = GameManager.music_on
+	sfx_on = GameManager.sfx_on
+
+func save_settings():
+	GameManager.music_on = music_on
+	GameManager.sfx_on = sfx_on
+	GameManager.controller_used = controller_used
+	GameManager.save_game()
+
+func return_to_main_menu():
+	TransitionScreen.transition()
+	await TransitionScreen.on_transition_finished
+	get_tree().change_scene_to_file("res://main_menu.tscn")
 
 func _on_music_player_finished():
 	$MusicPlayer.play()

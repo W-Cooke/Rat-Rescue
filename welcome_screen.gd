@@ -11,6 +11,16 @@ extends Node2D
 # The player can, at any time, press confirm to be taken to the main menu immediately
 
 func _ready():
+	GameManager.load_game()
+	print("game loaded")
+	if !GameManager.sfx_on:
+		print("game sfx off")
+		AudioServer.set_bus_mute(1, true)
+	if !GameManager.music_on:
+		print("game music off")
+		AudioServer.set_bus_mute(2, true)
+	if Input.get_connected_joypads().size() == 1:
+		GameManager.controller_used = false
 	logo.hide()
 	message.hide()
 	anim.play("Fade-Out")
