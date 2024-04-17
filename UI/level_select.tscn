@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dmhlg84vm8h06" path="res://Assets/Level Portraits/level05placeholder.jpeg" id="8_ob4o2"]
 [ext_resource type="Texture2D" uid="uid://bowrf0axx8nsa" path="res://Assets/Sprite/Tiles/tile_0084.png" id="9_8o8r3"]
 [ext_resource type="AudioStream" uid="uid://b184letr5wfle" path="res://Assets/Sound/select_007.wav" id="10_1rslo"]
-[ext_resource type="AudioStream" uid="uid://b0dhoqkregt47" path="res://Assets/Sound/Interface/error_008.ogg" id="11_55rxo"]
+[ext_resource type="AudioStream" uid="uid://2om1u08cosm" path="res://Assets/Sound/Interface/boss2intro_errorbuzz.mp3" id="11_hb4kl"]
 [ext_resource type="LabelSettings" uid="uid://bkud046cx5bw6" path="res://Assets/UI/main_menu.tres" id="12_41sqf"]
 
 [node name="LevelSelect" type="Control"]
@@ -82,8 +82,7 @@ texture = ExtResource("9_8o8r3")
 stream = ExtResource("10_1rslo")
 
 [node name="ErrorSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("11_55rxo")
-pitch_scale = 0.59
+stream = ExtResource("11_hb4kl")
 
 [node name="TitleLabel" type="Label" parent="."]
 layout_mode = 1
