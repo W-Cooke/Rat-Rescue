@@ -10,6 +10,7 @@ extends Control
 @onready var levels : Array = [level_1, level_2, level_3, level_4, level_5]
 var current_level : int = 0
 @onready var player = $PlayerIcon
+@onready var title_label = $TitleLabel
 
 func _ready():
 	player.global_position = levels[current_level].global_position
@@ -23,6 +24,19 @@ func _ready():
 	if GameManager.level_5_complete:
 		level_5.open_level()
 
+func _process(_delta):
+	match(current_level):
+		0:
+			title_label.text = "Castle Dungeon"
+		1:
+			title_label.text = "Courtyard"
+		2:
+			title_label.text = "Castle Town"
+		3:
+			title_label.text = "Moatside Settlement"
+		4:
+			title_label.text = "Royal Palace"
+
 func _input(event):
 	if event.is_action_released("ui_right") and current_level < 4:
 		current_level += 1
@@ -31,3 +45,9 @@ func _input(event):
 		current_level -= 1
 		$SelectSound.play()
 	player.global_position = levels[current_level].global_position
+	if event.is_action_released("ui_accept"):
+		if levels[current_level].playable:
+			print("playable!")
+		else:
+			levels[current_level].shake()
+			$ErrorSound.play()

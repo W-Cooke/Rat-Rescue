@@ -10,6 +10,7 @@ var playable = false
 func _ready():
 	$Label.text = "Level " + str(level_index)
 	$TextureRect.texture = level_texture
+	$Padlock.position = Vector2(90, 80)
 
 func shake():
 	anim.play("shake")

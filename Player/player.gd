@@ -42,7 +42,7 @@ func _ready():
 	teleport_in_anim.show()
 	teleport_in_anim.emitting = true
 	teleport_in_anim_2.show()
-	if Input.get_connected_joypads().size() == 1:
+	if !GameManager.controller_used:
 		keyboard_controls = true
 	
 
