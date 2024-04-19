@@ -43,6 +43,7 @@ func _on_level_end_timer_timeout():
 		path = "res://main_menu.tscn"
 		#TODO: change this to a thank you screen or something
 		GameManager.level_5_complete = true
+		GameManager.game_complete = true
 		GameManager.save_game()
 	else:
 		path = "res://main_menu.tscn"

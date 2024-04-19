@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b1icdgxc13mje"]
+[gd_scene load_steps=13 format=3 uid="uid://b1icdgxc13mje"]
 
 [ext_resource type="PackedScene" uid="uid://d0w4dn3rllsuq" path="res://Assets/UI/UI_Background.tscn" id="1_2qmld"]
 [ext_resource type="FontFile" uid="uid://bdn714kv37s2p" path="res://Assets/UI/PixelifySans-VariableFont_wght.ttf" id="1_kklgt"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://b2pm7matkmaki" path="res://Assets/UI/RR_LOGO_1.png" id="9_5gxb4"]
 [ext_resource type="Texture2D" uid="uid://2q1rssecqts6" path="res://Assets/UI/generic_arrows_horizontal.png" id="10_qli11"]
 [ext_resource type="PackedScene" uid="uid://bm6bkglu4ro36" path="res://UI/credits.tscn" id="11_vkp6r"]
+[ext_resource type="Texture2D" uid="uid://d8mguin6kd15" path="res://Assets/UI/UI_Pixelart/Star - 7.png" id="12_knxfj"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -171,5 +172,15 @@ offset_left = 200.0
 offset_top = 60.0
 offset_right = 200.0
 offset_bottom = 60.0
+
+[node name="CompletionStar" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 642.0
+offset_top = 18.0
+offset_right = 682.0
+offset_bottom = 58.0
+scale = Vector2(1.43, 1.43)
+texture = ExtResource("12_knxfj")
 
 [connection signal="finished" from="MenuMusic" to="." method="_on_menu_music_finished"]

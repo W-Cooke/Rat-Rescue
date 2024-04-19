@@ -8,6 +8,7 @@ var level_4_complete : bool
 var level_5_complete : bool 
 #endregion
 
+var game_complete : bool
 var music_on : bool 
 var sfx_on : bool 
 var controller_used : bool 
@@ -24,6 +25,7 @@ func _ready():
 		music_on = true
 		sfx_on = true
 		controller_used = false
+		game_complete = false
 		save_game()
 
 func save_game():
@@ -37,6 +39,7 @@ func save_game():
 	saved_game.music_on = music_on
 	saved_game.sfx_on = sfx_on
 	saved_game.controller_used = controller_used
+	saved_game.game_complete = game_complete
 	#endregion
 	ResourceSaver.save(saved_game, "user://savedgame.tres")
 
@@ -51,6 +54,7 @@ func load_game():
 	music_on = saved_game.music_on
 	sfx_on = saved_game.sfx_on
 	controller_used = saved_game.controller_used
+	game_complete = saved_game.game_complete
 	#endregion
 
 #debug for resetting save file
@@ -63,4 +67,5 @@ func reset_info():
 	music_on = true
 	sfx_on = true
 	controller_used = false
+	game_complete = false
 	save_game()

@@ -15,6 +15,7 @@ enum {START, SETTINGS, CREDITS, QUIT}
 @onready var confirm_sound = $ConfirmSound
 @onready var select_sound = $SelectSound
 @onready var logo = $Logo
+@onready var completion_star = $CompletionStar
 
 
 #region level select
@@ -30,6 +31,10 @@ var credits_active : bool = false
 
 func _ready():
 	credits.hide()
+	if GameManager.game_complete:
+		completion_star.show()
+	else:
+		completion_star.hide()
 	cursor.global_position = menu_array[cursor_index].global_position
 
 func _process(delta):
