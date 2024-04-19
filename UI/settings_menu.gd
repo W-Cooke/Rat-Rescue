@@ -27,14 +27,11 @@ var sfx_on : bool
 
 func _ready():
 	controls_keyboard.hide()
-	#PSEUDOCODE:
-	#TODO:
+	$MusicPlayer.play(3.0)
 	controller_used = GameManager.controller_used
 	music_on = GameManager.music_on
 	sfx_on = GameManager.sfx_on
-	# load from resource
-	# set bools from loaded resource
-	# set sprites to show based off settings
+	
 
 func _process(_delta):
 	menu_controls()
@@ -79,6 +76,7 @@ func menu_controls():
 		arrow.offset.x = 25
 	else:
 		arrow.offset.x =-45
+	
 
 func sound_manager():
 	if controller_used:

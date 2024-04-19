@@ -43,12 +43,9 @@ func move_to_scene():
 		if not level_select:
 			match(cursor_index):
 				0:
-					print("START GAME")
-					main_menu.hide()
-					level_selector.show()
-					cursor.hide()
-					level_cursor.show()
-					level_select = true
+					TransitionScreen.transition()
+					await TransitionScreen.on_transition_finished
+					get_tree().change_scene_to_file("res://UI/level_select.tscn")
 				1:
 					TransitionScreen.transition()
 					await TransitionScreen.on_transition_finished

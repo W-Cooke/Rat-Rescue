@@ -62,3 +62,4 @@ func _on_start_timer_timeout():
 	game_timer.text = "Time: " + str(timer_seconds)
 	rats_left_container.show()
 	controls_container.show()
+

@@ -11,6 +11,7 @@ extends Control
 var current_level : int = 0
 @onready var player = $PlayerIcon
 @onready var title_label = $TitleLabel
+var move_tween : Tween
 
 func _ready():
 	player.global_position = levels[current_level].global_position
@@ -38,16 +39,35 @@ func _process(_delta):
 			title_label.text = "Royal Palace"
 
 func _input(event):
+	if move_tween and move_tween.is_running():
+		return
 	if event.is_action_released("ui_right") and current_level < 4:
 		current_level += 1
 		$SelectSound.play()
+		tween_player()
 	if event.is_action_released("ui_left") and current_level > 0:
 		current_level -= 1
 		$SelectSound.play()
-	player.global_position = levels[current_level].global_position
+		tween_player()
 	if event.is_action_released("ui_accept"):
 		if levels[current_level].playable:
-			print("playable!")
+			$ConfirmSound.play()
+			var level = current_level + 1
+			var path = "res://Levels/level_0%s.tscn" % level
+			TransitionScreen.transition()
+			await TransitionScreen.on_transition_finished
+			get_tree().change_scene_to_file(path)
 		else:
 			levels[current_level].shake()
 			$ErrorSound.play()
+	if event.is_action_released("ui_cancel"):
+		TransitionScreen.transition()
+		await TransitionScreen.on_transition_finished
+		get_tree().change_scene_to_file("res://main_menu.tscn")
+
+func tween_player():
+	move_tween = get_tree().create_tween()
+	move_tween.tween_property(player, "global_position", levels[current_level].global_position, 0.2).set_trans(Tween.TRANS_SINE)
+
+func _on_music_finished():
+	$music.play()

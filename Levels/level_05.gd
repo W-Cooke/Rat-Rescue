@@ -4,7 +4,7 @@ extends Node2D
 @onready var level_start_timer = $LevelStartTimer
 @onready var level_end_timer = $LevelEndTimer
 @onready var UI = $Camera2D/UI
-@export var timer_left_seconds = 120
+@export var timer_left_seconds = 240
 var victory : bool = false
 var level_end : bool = false
 signal game_start
@@ -42,6 +42,8 @@ func _on_level_end_timer_timeout():
 	if victory:
 		path = "res://main_menu.tscn"
 		#TODO: change this to a thank you screen or something
+		GameManager.level_5_complete = true
+		GameManager.save_game()
 	else:
 		path = "res://main_menu.tscn"
 	TransitionScreen.transition()

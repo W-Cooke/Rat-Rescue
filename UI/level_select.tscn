@@ -1,17 +1,19 @@
-[gd_scene load_steps=13 format=3 uid="uid://071yk537pg4v"]
+[gd_scene load_steps=15 format=3 uid="uid://071yk537pg4v"]
 
 [ext_resource type="PackedScene" uid="uid://d0w4dn3rllsuq" path="res://Assets/UI/UI_Background.tscn" id="1_fgfhp"]
 [ext_resource type="Script" path="res://UI/level_select.gd" id="1_gs80t"]
 [ext_resource type="PackedScene" uid="uid://blkwujc8x7wvx" path="res://UI/level_selector.tscn" id="1_jppxe"]
-[ext_resource type="Texture2D" uid="uid://ba1weq7s6pgwq" path="res://Assets/Level Portraits/level02placeholder.jpeg" id="2_fx8mt"]
-[ext_resource type="Texture2D" uid="uid://dguuw146873u2" path="res://Assets/Level Portraits/level01placehorld.jpeg" id="2_qxogg"]
-[ext_resource type="Texture2D" uid="uid://c3i27rxn7oavw" path="res://Assets/Level Portraits/level03placeholder.jpeg" id="6_5w3q1"]
-[ext_resource type="Texture2D" uid="uid://ciw4gqct20ku3" path="res://Assets/Level Portraits/level04placeholder.jpeg" id="7_qipll"]
-[ext_resource type="Texture2D" uid="uid://dmhlg84vm8h06" path="res://Assets/Level Portraits/level05placeholder.jpeg" id="8_ob4o2"]
+[ext_resource type="Texture2D" uid="uid://j34xn0uig5q8" path="res://Assets/Level Portraits/level1.png" id="4_ucujb"]
+[ext_resource type="Texture2D" uid="uid://bh7sbn8bvet07" path="res://Assets/Level Portraits/level2.png" id="5_mvyiv"]
+[ext_resource type="Texture2D" uid="uid://c8s2acoucvwlf" path="res://Assets/Level Portraits/level3.png" id="6_pqxxg"]
+[ext_resource type="Texture2D" uid="uid://bheh80r1igcvw" path="res://Assets/Level Portraits/level4.png" id="7_xeoig"]
+[ext_resource type="Texture2D" uid="uid://bphlfocddgg15" path="res://Assets/Level Portraits/level5.png" id="8_rnd4y"]
 [ext_resource type="Texture2D" uid="uid://bowrf0axx8nsa" path="res://Assets/Sprite/Tiles/tile_0084.png" id="9_8o8r3"]
 [ext_resource type="AudioStream" uid="uid://b184letr5wfle" path="res://Assets/Sound/select_007.wav" id="10_1rslo"]
 [ext_resource type="AudioStream" uid="uid://2om1u08cosm" path="res://Assets/Sound/Interface/boss2intro_errorbuzz.mp3" id="11_hb4kl"]
 [ext_resource type="LabelSettings" uid="uid://bkud046cx5bw6" path="res://Assets/UI/main_menu.tres" id="12_41sqf"]
+[ext_resource type="AudioStream" uid="uid://d3pj8fffxfyh6" path="res://Assets/Sound/confirmation_002.wav" id="13_a02oe"]
+[ext_resource type="AudioStream" uid="uid://cvtof6rqa6av3" path="res://Assets/Sound/Music/Retro Beat.ogg" id="14_v8gy1"]
 
 [node name="LevelSelect" type="Control"]
 layout_mode = 3
@@ -27,46 +29,46 @@ layout_mode = 1
 
 [node name="Level1" parent="." instance=ExtResource("1_jppxe")]
 offset_left = 33.0
-offset_top = 60.0
+offset_top = 128.0
 offset_right = 153.0
-offset_bottom = 180.0
-level_texture = ExtResource("2_qxogg")
+offset_bottom = 248.0
+level_texture = ExtResource("4_ucujb")
 
 [node name="Level2" parent="." instance=ExtResource("1_jppxe")]
 offset_left = 109.0
-offset_top = 267.0
+offset_top = 335.0
 offset_right = 229.0
-offset_bottom = 387.0
+offset_bottom = 455.0
 pivot_offset = Vector2(60, 60)
 level_index = 2
-level_texture = ExtResource("2_fx8mt")
+level_texture = ExtResource("5_mvyiv")
 
 [node name="Level3" parent="." instance=ExtResource("1_jppxe")]
 offset_left = 278.0
-offset_top = 56.0
+offset_top = 124.0
 offset_right = 398.0
-offset_bottom = 176.0
+offset_bottom = 244.0
 pivot_offset = Vector2(60, 60)
 level_index = 3
-level_texture = ExtResource("6_5w3q1")
+level_texture = ExtResource("6_pqxxg")
 
 [node name="Level4" parent="." instance=ExtResource("1_jppxe")]
 offset_left = 384.0
-offset_top = 270.0
+offset_top = 338.0
 offset_right = 504.0
-offset_bottom = 390.0
+offset_bottom = 458.0
 pivot_offset = Vector2(60, 60)
 level_index = 4
-level_texture = ExtResource("7_qipll")
+level_texture = ExtResource("7_xeoig")
 
 [node name="Level5" parent="." instance=ExtResource("1_jppxe")]
 offset_left = 535.0
-offset_top = 54.0
+offset_top = 122.0
 offset_right = 655.0
-offset_bottom = 174.0
+offset_bottom = 242.0
 pivot_offset = Vector2(60, 60)
 level_index = 5
-level_texture = ExtResource("8_ob4o2")
+level_texture = ExtResource("8_rnd4y")
 
 [node name="PlayerIcon" type="TextureRect" parent="."]
 texture_filter = 1
@@ -100,3 +102,13 @@ grow_vertical = 0
 text = "TITLE"
 label_settings = ExtResource("12_41sqf")
 horizontal_alignment = 1
+
+[node name="ConfirmSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_a02oe")
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_v8gy1")
+volume_db = -6.0
+autoplay = true
+
+[connection signal="finished" from="music" to="." method="_on_music_finished"]
