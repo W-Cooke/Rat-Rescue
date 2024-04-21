@@ -169,10 +169,10 @@ texture = ExtResource("10_qli11")
 
 [node name="Credits" parent="." instance=ExtResource("11_vkp6r")]
 layout_mode = 1
-offset_left = 467.0
-offset_top = 130.0
-offset_right = 467.0
-offset_bottom = 130.0
+offset_left = 469.0
+offset_top = 294.0
+offset_right = 469.0
+offset_bottom = 294.0
 
 [node name="CompletionStar" type="TextureRect" parent="."]
 texture_filter = 1

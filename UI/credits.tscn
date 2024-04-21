@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://bm6bkglu4ro36"]
+[gd_scene load_steps=2 format=3 uid="uid://bm6bkglu4ro36"]
 
-[ext_resource type="Script" path="res://UI/credits.gd" id="1_6pk1x"]
 [ext_resource type="LabelSettings" uid="uid://bkud046cx5bw6" path="res://Assets/UI/main_menu.tres" id="2_lq56l"]
 
 [node name="Credits" type="Control"]
@@ -12,7 +11,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 0
-script = ExtResource("1_6pk1x")
 
 [node name="CreditsLabel" type="Label" parent="."]
 layout_mode = 1
@@ -23,5 +21,36 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.3, 0.3)
 size_flags_horizontal = 4
+text = "Enchant.wav from Spell Sounds Starter Pack
+by P0ss on Opengameart.org
+https://opengameart.org/content/spell-sounds-starter-pack
+
+Fairy_sound.wav
+by AdriMB86 on freesound.org
+https://freesound.org/people/AdriMB86/sounds/410259/
+
+rat sound
+by Zabuhailo's rat from freesound.org
+https://freesound.org/people/Zabuhailo/sounds/143125/
+
+Wave Background provided by loading.io
+https://loading.io/pattern/m-wave
+
+Chiptune Snare by Swedger from freesound.org
+https://freesound.org/people/Swedger/sounds/170634/
+
+beepbox#3 music by ADnova from freesound.org
+https://freesound.org/people/ADnova/sounds/381307/#comments
+
+pixel spell effects from Bdragon1727 on itch.io
+https://bdragon1727.itch.io
+
+Music from Ove's Essential Game Audio Pack Collections on OpenGameArt.org
+https://opengameart.org/content/oves-essential-game-audio-pack-collection-160-files-updated
+
+Everything else is either myself or Kenney.nl
+PURPLEBEARD on Itch.io
+QueeraVulgaris on Twitter
+Purple-Beard on Tumblr"
 label_settings = ExtResource("2_lq56l")
 horizontal_alignment = 1
