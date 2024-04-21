@@ -40,9 +40,7 @@ func _on_level_failed():
 func _on_level_end_timer_timeout():
 	var path
 	if victory:
-		path = "res://main_menu.tscn"
-		#TODO: change this to a thank you screen or something
-		GameManager.level_5_complete = true
+		path = "res://UI/thank_you_screen.tscn"
 		GameManager.game_complete = true
 		GameManager.save_game()
 	else:

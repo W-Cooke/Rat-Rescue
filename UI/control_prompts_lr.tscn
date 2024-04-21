@@ -1,0 +1,160 @@
+[gd_scene load_steps=12 format=3 uid="uid://dp4spmrikbqm2"]
+
+[ext_resource type="Script" path="res://UI/control_prompts.gd" id="1_5xtxs"]
+[ext_resource type="Texture2D" uid="uid://dfp7vupgpp5fj" path="res://Assets/Input Prompts/DpadLR.png" id="1_ab81d"]
+[ext_resource type="LabelSettings" uid="uid://bkud046cx5bw6" path="res://Assets/UI/main_menu.tres" id="2_esxua"]
+[ext_resource type="Texture2D" uid="uid://dfhgji87uvqdg" path="res://Assets/Input Prompts/Fbutton_down.png" id="3_brywt"]
+[ext_resource type="Texture2D" uid="uid://bnw2u6pa02hhy" path="res://Assets/Input Prompts/Fbutton_right.png" id="4_hu0n8"]
+[ext_resource type="Texture2D" uid="uid://p1mnh5lod7gf" path="res://Assets/Input Prompts/KBleft.png" id="6_pmpsb"]
+[ext_resource type="Texture2D" uid="uid://dtlti4tksiqs7" path="res://Assets/Input Prompts/KBright.png" id="7_k5cc1"]
+[ext_resource type="Texture2D" uid="uid://bjof0yytikrk1" path="res://Assets/Input Prompts/Spbar1.png" id="8_r16me"]
+[ext_resource type="Texture2D" uid="uid://bvanqtvccw5se" path="res://Assets/Input Prompts/Spbar2.png" id="9_wjip2"]
+[ext_resource type="Texture2D" uid="uid://cpnoh6h7b4vgh" path="res://Assets/Input Prompts/Spbar3.png" id="10_7mj17"]
+[ext_resource type="Texture2D" uid="uid://cwf2f3vsswc5c" path="res://Assets/Input Prompts/Esc.png" id="11_t1fqj"]
+
+[node name="ControlPromptsLR" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5xtxs")
+
+[node name="Controller" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Controller"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 17.52
+offset_right = 57.52
+offset_bottom = 40.0
+texture = ExtResource("1_ab81d")
+
+[node name="Label" type="Label" parent="Controller/TextureRect"]
+layout_mode = 0
+offset_left = 44.405
+offset_right = 217.405
+offset_bottom = 60.0
+scale = Vector2(0.75, 0.75)
+text = "SELECT"
+label_settings = ExtResource("2_esxua")
+
+[node name="TextureRect2" type="TextureRect" parent="Controller"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 324.42
+offset_right = 364.42
+offset_bottom = 40.0
+texture = ExtResource("3_brywt")
+
+[node name="Label" type="Label" parent="Controller/TextureRect2"]
+layout_mode = 0
+offset_left = 44.405
+offset_right = 217.405
+offset_bottom = 60.0
+scale = Vector2(0.75, 0.75)
+text = "CONFIRM"
+label_settings = ExtResource("2_esxua")
+
+[node name="TextureRect3" type="TextureRect" parent="Controller"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 536.74
+offset_right = 576.74
+offset_bottom = 40.0
+texture = ExtResource("4_hu0n8")
+
+[node name="Label" type="Label" parent="Controller/TextureRect3"]
+layout_mode = 0
+offset_left = 44.405
+offset_right = 217.405
+offset_bottom = 60.0
+scale = Vector2(0.75, 0.75)
+text = "CANCEL
+"
+label_settings = ExtResource("2_esxua")
+
+[node name="PC" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="PC"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 28.47
+offset_right = 68.47
+offset_bottom = 40.0
+texture = ExtResource("6_pmpsb")
+
+[node name="TextureRect4" type="TextureRect" parent="PC/TextureRect"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 39.335
+offset_right = 79.335
+offset_bottom = 40.0
+texture = ExtResource("7_k5cc1")
+
+[node name="Label" type="Label" parent="PC/TextureRect"]
+layout_mode = 0
+offset_left = 84.525
+offset_right = 257.525
+offset_bottom = 60.0
+scale = Vector2(0.75, 0.75)
+text = "SELECT"
+label_settings = ExtResource("2_esxua")
+
+[node name="TextureRect2" type="TextureRect" parent="PC"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 281.095
+offset_right = 321.095
+offset_bottom = 40.0
+texture = ExtResource("8_r16me")
+
+[node name="TextureRect4" type="TextureRect" parent="PC/TextureRect2"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 16.0
+offset_right = 56.0
+offset_bottom = 40.0
+texture = ExtResource("9_wjip2")
+
+[node name="TextureRect5" type="TextureRect" parent="PC/TextureRect2"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 32.0
+offset_right = 72.0
+offset_bottom = 40.0
+texture = ExtResource("10_7mj17")
+
+[node name="Label" type="Label" parent="PC/TextureRect2/TextureRect5"]
+layout_mode = 0
+offset_left = 44.405
+offset_right = 217.405
+offset_bottom = 60.0
+scale = Vector2(0.75, 0.75)
+text = "CONFIRM"
+label_settings = ExtResource("2_esxua")
+
+[node name="TextureRect3" type="TextureRect" parent="PC"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 536.74
+offset_right = 576.74
+offset_bottom = 40.0
+texture = ExtResource("11_t1fqj")
+
+[node name="Label" type="Label" parent="PC/TextureRect3"]
+layout_mode = 0
+offset_left = 44.405
+offset_right = 217.405
+offset_bottom = 60.0
+scale = Vector2(0.75, 0.75)
+text = "CANCEL
+"
+label_settings = ExtResource("2_esxua")

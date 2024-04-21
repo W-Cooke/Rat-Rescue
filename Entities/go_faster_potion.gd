@@ -8,9 +8,7 @@ signal picked_up
 
 
 func _on_area_2d_body_entered(body):
-	print("body entered!")
 	if body == player:
-		print("player it is!")
 		picked_up.emit()
 		sprite.hide()
 		poof.emitting = true

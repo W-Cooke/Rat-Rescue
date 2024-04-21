@@ -41,6 +41,7 @@ func _on_level_end_timer_timeout():
 	var path
 	if victory:
 		GameManager.level_2_complete = true
+		GameManager.level_3_complete = true
 		GameManager.save_game()
 		path = "res://Levels/level_03.tscn"
 	else:

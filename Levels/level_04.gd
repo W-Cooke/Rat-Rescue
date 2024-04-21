@@ -42,6 +42,7 @@ func _on_level_end_timer_timeout():
 	if victory:
 		path = "res://Levels/level_05.tscn"
 		GameManager.level_4_complete = true
+		GameManager.level_5_complete = true
 		GameManager.save_game()
 	else:
 		path = "res://main_menu.tscn"

@@ -48,9 +48,14 @@ func move_to_scene():
 		if not level_select:
 			match(cursor_index):
 				0:
-					TransitionScreen.transition()
-					await TransitionScreen.on_transition_finished
-					get_tree().change_scene_to_file("res://UI/level_select.tscn")
+					if GameManager.tutorial_done:
+						TransitionScreen.transition()
+						await TransitionScreen.on_transition_finished
+						get_tree().change_scene_to_file("res://UI/level_select.tscn")
+					else:
+						TransitionScreen.transition()
+						await TransitionScreen.on_transition_finished
+						get_tree().change_scene_to_file("res://Levels/tutorial_level.tscn")
 				1:
 					TransitionScreen.transition()
 					await TransitionScreen.on_transition_finished

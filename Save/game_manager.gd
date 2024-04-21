@@ -1,6 +1,7 @@
 extends Node
 
 #region variable declaration
+var tutorial_done : bool
 var level_1_complete : bool 
 var level_2_complete : bool 
 var level_3_complete : bool 
@@ -17,6 +18,7 @@ func _ready():
 	if FileAccess.file_exists("user://savedgame.tres"):
 		load_game()
 	else:
+		tutorial_done = false
 		level_1_complete = false
 		level_2_complete = false
 		level_3_complete = false
@@ -31,6 +33,7 @@ func _ready():
 func save_game():
 	var saved_game : SavedGame = SavedGame.new()
 	#region variables
+	saved_game.tutorial_done = tutorial_done
 	saved_game.level_1_complete = level_1_complete
 	saved_game.level_2_complete = level_2_complete
 	saved_game.level_3_complete = level_3_complete
@@ -46,6 +49,7 @@ func save_game():
 func load_game():
 	var saved_game :SavedGame = load("user://savedgame.tres") as SavedGame
 	#region variables
+	tutorial_done = saved_game.tutorial_done
 	level_1_complete = saved_game.level_1_complete
 	level_2_complete = saved_game.level_2_complete
 	level_3_complete = saved_game.level_3_complete
@@ -59,6 +63,7 @@ func load_game():
 
 #debug for resetting save file
 func reset_info():
+	tutorial_done = false
 	level_1_complete = false
 	level_2_complete = false
 	level_3_complete = false

@@ -3,6 +3,7 @@ extends Resource
 
 # TODO: finish this, integrate with, first the settings, then the general game
 
+@export var tutorial_done : bool
 @export var level_1_complete : bool
 @export var level_2_complete : bool
 @export var level_3_complete : bool

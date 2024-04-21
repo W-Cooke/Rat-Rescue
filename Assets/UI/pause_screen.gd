@@ -27,6 +27,8 @@ func _process(_delta):
 				0:
 					resume_game()
 				1:
+					$CenterContainer.hide()
+					cursor.hide()
 					confirm_sound.play()
 					await confirm_sound.finished
 					get_tree().paused = false

@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://cnuyvrigk0ryw"]
+[gd_scene load_steps=12 format=3 uid="uid://cnuyvrigk0ryw"]
 
 [ext_resource type="Script" path="res://Assets/UI/pause_screen.gd" id="1_5kb2c"]
 [ext_resource type="Shader" path="res://Assets/UI/pause_screen.gdshader" id="1_5kpjv"]
 [ext_resource type="Texture2D" uid="uid://cc8yyxx1j3f5g" path="res://Assets/UI/generic_arrows_diagonal_all.png" id="1_kl3hg"]
 [ext_resource type="FontFile" uid="uid://bdn714kv37s2p" path="res://Assets/UI/PixelifySans-VariableFont_wght.ttf" id="2_o3g50"]
+[ext_resource type="PackedScene" uid="uid://v6q0h7o4tsvg" path="res://UI/control_prompts_ud.tscn" id="3_k54rw"]
 [ext_resource type="LabelSettings" uid="uid://bkud046cx5bw6" path="res://Assets/UI/main_menu.tres" id="3_x0g1m"]
 [ext_resource type="AudioStream" uid="uid://b184letr5wfle" path="res://Assets/Sound/select_007.wav" id="6_a2dcm"]
 [ext_resource type="AudioStream" uid="uid://d3pj8fffxfyh6" path="res://Assets/Sound/confirmation_002.wav" id="7_h0n3h"]
@@ -32,6 +33,13 @@ offset_top = -402.0
 offset_right = 354.0
 offset_bottom = 318.0
 scale = Vector2(2, 2)
+
+[node name="ControlPromptsUD" parent="." instance=ExtResource("3_k54rw")]
+layout_mode = 1
+offset_left = -6.0
+offset_top = 639.0
+offset_right = -6.0
+offset_bottom = 639.0
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1

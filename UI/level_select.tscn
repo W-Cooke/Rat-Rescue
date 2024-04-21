@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://071yk537pg4v"]
+[gd_scene load_steps=16 format=3 uid="uid://071yk537pg4v"]
 
 [ext_resource type="PackedScene" uid="uid://d0w4dn3rllsuq" path="res://Assets/UI/UI_Background.tscn" id="1_fgfhp"]
 [ext_resource type="Script" path="res://UI/level_select.gd" id="1_gs80t"]
@@ -14,6 +14,7 @@
 [ext_resource type="LabelSettings" uid="uid://bkud046cx5bw6" path="res://Assets/UI/main_menu.tres" id="12_41sqf"]
 [ext_resource type="AudioStream" uid="uid://d3pj8fffxfyh6" path="res://Assets/Sound/confirmation_002.wav" id="13_a02oe"]
 [ext_resource type="AudioStream" uid="uid://cvtof6rqa6av3" path="res://Assets/Sound/Music/Retro Beat.ogg" id="14_v8gy1"]
+[ext_resource type="PackedScene" uid="uid://dp4spmrikbqm2" path="res://UI/control_prompts_lr.tscn" id="15_07jub"]
 
 [node name="LevelSelect" type="Control"]
 layout_mode = 3
@@ -93,10 +94,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -68.0
-offset_top = -136.865
-offset_right = 68.0
-offset_bottom = -76.865
+offset_left = -75.0
+offset_top = -161.0
+offset_right = 61.0
+offset_bottom = -101.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "TITLE"
@@ -110,5 +111,12 @@ stream = ExtResource("13_a02oe")
 stream = ExtResource("14_v8gy1")
 volume_db = -6.0
 autoplay = true
+
+[node name="ControlPromptsLR" parent="." instance=ExtResource("15_07jub")]
+layout_mode = 1
+offset_left = -1.0
+offset_top = 650.0
+offset_right = -1.0
+offset_bottom = 650.0
 
 [connection signal="finished" from="music" to="." method="_on_music_finished"]

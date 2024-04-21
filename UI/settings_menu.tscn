@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://cl4u2mgfnkyrx"]
+[gd_scene load_steps=12 format=3 uid="uid://cl4u2mgfnkyrx"]
 
 [ext_resource type="PackedScene" uid="uid://d0w4dn3rllsuq" path="res://Assets/UI/UI_Background.tscn" id="1_1qs21"]
 [ext_resource type="Script" path="res://UI/settings_menu.gd" id="1_5v8sm"]
 [ext_resource type="LabelSettings" uid="uid://bkud046cx5bw6" path="res://Assets/UI/main_menu.tres" id="2_v1osi"]
 [ext_resource type="Texture2D" uid="uid://br3bapqfe81du" path="res://Assets/UI/UI_Pixelart/Checkbox_no.png" id="3_25nyh"]
+[ext_resource type="PackedScene" uid="uid://v6q0h7o4tsvg" path="res://UI/control_prompts_ud.tscn" id="3_plkty"]
 [ext_resource type="Texture2D" uid="uid://b2yahlcppa5we" path="res://Assets/UI/UI_Pixelart/Checkbox_yes.png" id="4_1551w"]
 [ext_resource type="Texture2D" uid="uid://bxktvveqe8p03" path="res://Assets/UI/UI_Pixelart/Controller_1.png" id="5_csn34"]
 [ext_resource type="Texture2D" uid="uid://bvhy787onlqk4" path="res://Assets/UI/UI_Pixelart/Keyboard_1.png" id="6_2ecrk"]
@@ -22,6 +23,13 @@ script = ExtResource("1_5v8sm")
 
 [node name="UI_BG" parent="." instance=ExtResource("1_1qs21")]
 layout_mode = 1
+
+[node name="ControlPromptsUD" parent="." instance=ExtResource("3_plkty")]
+layout_mode = 1
+offset_left = -4.0
+offset_top = 666.0
+offset_right = -4.0
+offset_bottom = 666.0
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1

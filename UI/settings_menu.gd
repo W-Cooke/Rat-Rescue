@@ -37,7 +37,7 @@ func _process(_delta):
 	menu_controls()
 	sound_manager()
 	arrow.global_position = menu_location_array[menu_index].global_position
-	if Input.is_action_just_released("Pause"):
+	if Input.is_action_just_released("controller switch"):
 		print("game settings reset, levels reset")
 		GameManager.reset_info()
 	if Input.is_action_just_released("ui_accept"):
@@ -59,7 +59,9 @@ func _process(_delta):
 				# save & quit
 				save_settings()
 				return_to_main_menu()
-				pass
+	if Input.is_action_just_pressed("ui_cancel"):
+		revert_settings()
+		return_to_main_menu()
 
 func menu_controls():
 	if Input.is_action_just_pressed("ui_down"):
