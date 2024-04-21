@@ -9,13 +9,13 @@
 [ext_resource type="PackedScene" uid="uid://dqrujxar1ft6l" path="res://Player/player.tscn" id="6_fw81n"]
 [ext_resource type="PackedScene" uid="uid://bvn7cqb6savp0" path="res://Rat/rat_independence.tscn" id="7_jjhkl"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="8_7qc4g"]
-[ext_resource type="AudioStream" uid="uid://bt5vxvsr1ka4t" path="res://Assets/Sound/Music/Retro Comedy.ogg" id="9_s5nn3"]
 [ext_resource type="AudioStream" uid="uid://celhgn85ug5gi" path="res://Assets/Sound/Interface/secret3.ogg" id="10_ovn7t"]
 [ext_resource type="PackedScene" uid="uid://ctc462k326p5h" path="res://Entities/go_faster_potion.tscn" id="10_xj6en"]
 [ext_resource type="AudioStream" uid="uid://be4mw3qffe34c" path="res://Assets/Sound/Interface/gameover4.ogg" id="11_exeo5"]
 [ext_resource type="PackedScene" uid="uid://88yrmbsxrotl" path="res://Entities/Portals/portal_blue.tscn" id="11_vpyfr"]
 [ext_resource type="PackedScene" uid="uid://bg01wap5e5yvw" path="res://Entities/Portals/portal_green.tscn" id="12_dbxma"]
 [ext_resource type="PackedScene" uid="uid://bkxa2a8mw7pwu" path="res://Entities/Portals/portal_orange.tscn" id="13_txfr3"]
+[ext_resource type="AudioStream" uid="uid://calvnjh3e7b2t" path="res://Assets/Sound/Music/13 - Danger.ogg" id="14_8r133"]
 
 [node name="Level5" type="Node2D"]
 script = ExtResource("1_r1xre")
@@ -226,7 +226,7 @@ scale = Vector2(2.09, 2.09)
 position = Vector2(415, 509)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_s5nn3")
+stream = ExtResource("14_8r133")
 autoplay = true
 bus = &"Music"
 
@@ -319,3 +319,4 @@ bus = &"SFX"
 [connection signal="teleported" from="PortalGreen2" to="PortalGreen" method="_on_portal_green_teleported"]
 [connection signal="teleported" from="PortalOrange" to="PortalOrange2" method="_on_portal_orange_teleported"]
 [connection signal="teleported" from="PortalOrange2" to="PortalOrange" method="_on_portal_orange_teleported"]
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]
